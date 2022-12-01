@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 
 function Header() {
-  return <div>header</div>
+  return <></>
 }
 
 export default Header

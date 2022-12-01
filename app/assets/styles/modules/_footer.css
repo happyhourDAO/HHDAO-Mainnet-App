@@ -1,0 +1,10 @@
+footer {
+  position: absolute;
+  bottom: 10;
+  left: 10;
+
+  @mixin atLarge {
+    bottom: 60;
+    left: 45vw;
+  }
+}

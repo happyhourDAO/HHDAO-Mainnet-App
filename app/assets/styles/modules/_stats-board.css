@@ -1,0 +1,25 @@
+.stats-board {
+  &__description {
+    flex: 3;
+    margin: 2px;
+    background-color: slategray;
+  }
+
+  &__index {
+    flex: 1;
+    margin: 2px;
+    background-color: slategray;
+  }
+
+  &__contracts {
+    flex: 2;
+    margin: 2px;
+    background-color: slategray;
+  }
+
+  &__rates {
+    flex: 2;
+    margin: 2px;
+    background-color: slategray;
+  }
+}

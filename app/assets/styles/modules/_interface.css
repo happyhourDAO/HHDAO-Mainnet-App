@@ -1,0 +1,66 @@
+.interface {
+  &__top {
+    flex: 1;
+    background-color: #131a2a;
+    margin: 2px;
+    border-radius: 20px;
+    border: 1px solid $mainColor;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  &__bottom {
+    flex: 2;
+    background-color: #131a2a;
+    margin: 5px 2px 2px 2px;
+    border-radius: 20px;
+    border: 1px solid $mainColor;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  &__function-nav {
+    flex: 1;
+    border-bottom: 3px solid white;
+    margin: 1px;
+  }
+
+  &__function-description {
+    flex: 2;
+    margin: 1px;
+  }
+
+  &__function-title {
+    flex: 1;
+    margin: 1px;
+    border-bottom: 3px solid white;
+  }
+
+  &__function-field {
+    flex: 4;
+    margin: 1px;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+li {
+  color: white;
+  width: 100%;
+  display: inline-block;
+  background-color: darkblue;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 21px;
+  text-align: center;
+}
+
+li:last-child {
+  margin-right: 0;
+}

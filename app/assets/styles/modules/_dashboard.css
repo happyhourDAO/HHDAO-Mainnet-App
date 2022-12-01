@@ -1,0 +1,51 @@
+.dashboard {
+  width: 100vw;
+  height: 570px;
+  display: flex;
+
+  &__left-module {
+    width: 100%;
+    margin: 0 5px 0 5px;
+    display: flex;
+    flex-direction: column;
+
+    @mixin atMedium {
+      width: 60%;
+    }
+
+    @mixin atLarge {
+      width: 66%;
+    }
+  }
+
+  &__right-module {
+    display: none;
+
+    @mixin atMedium {
+      display: flex;
+      width: 40%;
+      margin: 5px;
+      flex-direction: column;
+    }
+
+    @mixin atLarge {
+      display: flex;
+      width: 34%;
+      margin: 5px;
+      flex-direction: column;
+    }
+  }
+
+  @mixin atSmall {
+    width: 400px;
+  }
+
+  @mixin atMedium {
+    width: 570px;
+  }
+
+  @mixin atLarge {
+    width: 700px;
+    transform: translateX(5vw) translateY(-3vh);
+  }
+}

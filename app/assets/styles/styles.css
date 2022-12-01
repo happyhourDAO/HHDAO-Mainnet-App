@@ -3,3 +3,8 @@
 @import "base/_mixins";
 @import "base/_global";
 @import "modules/_hero.css";
+@import "modules/_dashboard.css";
+@import "modules/_container.css";
+@import "modules/_footer.css";
+@import "modules/_stats-board.css";
+@import "modules/_interface.css";
