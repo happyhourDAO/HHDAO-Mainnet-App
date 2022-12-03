@@ -1,4 +1,6 @@
 .interface {
+  font-size: 0.8rem;
+
   &__top {
     flex: 1;
     background-color: #131a2a;
@@ -29,38 +31,53 @@
 
   &__function-description {
     flex: 2;
-    margin: 1px;
+    color: white;
+    line-height: 1.1rem;
+    padding: 10px 1px 5px 1px;
   }
 
   &__function-title {
+    font-family: $label;
     flex: 1;
     margin: 1px;
     border-bottom: 3px solid white;
+    font-size: 2.5rem;
+    position: relative;
+
+    p {
+      position: absolute;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    @mixin atLarge {
+      font-size: 3rem;
+    }
   }
 
   &__function-field {
     flex: 4;
     margin: 1px;
+    padding-top: 10px;
+
+    input {
+      width: 100%;
+      height: 40px;
+      margin: 13px 0 13px 0;
+      padding-left: 20px;
+      border: 1px solid white;
+      border-radius: 13px;
+      background-color: darkblue;
+      color: $mainColor;
+    }
+  }
+
+  @mixin atSmall {
+    font-size: 1rem;
   }
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-}
-
-li {
-  color: white;
-  width: 100%;
-  display: inline-block;
-  background-color: darkblue;
-  margin-right: 10px;
-  padding: 10px;
-  border: 1px solid white;
-  border-radius: 21px;
-  text-align: center;
-}
-
-li:last-child {
-  margin-right: 0;
+.non-visible {
+  display: none;
 }

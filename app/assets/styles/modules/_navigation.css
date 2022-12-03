@@ -1,0 +1,37 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  overflow: scroll;
+
+  @mixin atLarge {
+    overflow: visible;
+  }
+}
+
+li {
+  color: white;
+  width: 100%;
+  display: inline-block;
+  background-color: darkblue;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 21px;
+  text-align: center;
+  cursor: pointer;
+}
+
+li:last-child {
+  margin-right: 0;
+}
+
+li:hover,
+li:focus {
+  background-color: gray;
+  color: black;
+}
+
+.active-tab {
+  background-color: white;
+  color: black;
+}
