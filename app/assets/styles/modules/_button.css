@@ -1,0 +1,21 @@
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 20px;
+  height: 40px;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: #35486b;
+  border: none;
+  color: rgba(255, 255, 255, 0.401);
+  border-radius: 20px;
+  letter-spacing: 2px;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+button:hover {
+  color: white;
+  border-radius: 13px;
+}

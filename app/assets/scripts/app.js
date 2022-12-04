@@ -1,6 +1,6 @@
 import "../styles/styles.css"
 
-// Importing React dependecies
+// Import React dependecies
 
 import React from "react"
 import ReactDOM from "react-dom"

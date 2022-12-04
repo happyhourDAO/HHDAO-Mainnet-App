@@ -11,36 +11,78 @@ function InterfaceBottom() {
       <div className={"interface__function-title " + (appState.functionIndex == 1 ? "" : "non-visible")}>
         <p>Onboard PDE.</p>
       </div>
-      <div className={"interface__function-field " + (appState.functionIndex == 1 ? "" : "non-visible")}>
-        <input type="text" placeholder="name" />
-        <input type="text" placeholder="location" />
-        <input type="text" placeholder="address" />
-        <input type="text" placeholder="access code" />
-      </div>
+      <form className={"interface__function-field interface__function-field--overflow " + (appState.functionIndex == 1 ? "" : "non-visible")}>
+        <div className="input-box">
+          <input type="text" required />
+          <span>name</span>
+        </div>
+        <div className="input-box">
+          <input type="text" required />
+          <span>location</span>
+        </div>
+        <div className="input-box">
+          <input type="text" required />
+          <span>address</span>
+        </div>
+        <div className="input-box">
+          <input type="text" required />
+          <span>access code</span>
+        </div>
+        <div className="input-box">
+          <button>button</button>
+        </div>
+      </form>
 
       <div className={"interface__function-title " + (appState.functionIndex == 2 ? "" : "non-visible")}>
         <p>Start $HOUR.</p>
       </div>
-      <div className={"interface__function-field " + (appState.functionIndex == 2 ? "" : "non-visible")}>
-        <input type="text" placeholder="ID of PDE" />
-        <input type="text" placeholder="access code" />
-      </div>
+      <form className={"interface__function-field " + (appState.functionIndex == 2 ? "" : "non-visible")}>
+        <div className="input-box">
+          <input type="text" required />
+          <span>ID of PDE</span>
+        </div>
+        <div className="input-box">
+          <input type="text" required />
+          <span>access code</span>
+        </div>
+        <div className="input-box">
+          <button>button</button>
+        </div>
+      </form>
 
       <div className={"interface__function-title " + (appState.functionIndex == 3 ? "" : "non-visible")}>
         <p>End $HOUR.</p>
       </div>
-      <div className={"interface__function-field " + (appState.functionIndex == 3 ? "" : "non-visible")}>
-        <input type="text" placeholder="drinker address" />
-      </div>
+      <form className={"interface__function-field " + (appState.functionIndex == 3 ? "" : "non-visible")}>
+        <div className="input-box">
+          <input type="text" required />
+          <span>drinker address</span>
+        </div>
+        <div className="input-box">
+          <button>button</button>
+        </div>
+      </form>
 
       <div className={"interface__function-title " + (appState.functionIndex == 4 ? "" : "non-visible")}>
         <p>Mint $DRNK.</p>
       </div>
-      <div className={"interface__function-field " + (appState.functionIndex == 4 ? "" : "non-visible")}>
-        <input type="text" placeholder="$DRNK contract address" />
-        <input type="text" placeholder="to" />
-        <input type="text" placeholder="burn amount" />
-      </div>
+      <form className={"interface__function-field " + (appState.functionIndex == 4 ? "" : "non-visible")}>
+        <div className="input-box">
+          <input type="text" required />
+          <span>$DRNK contract address</span>
+        </div>
+        <div className="input-box">
+          <input type="text" required />
+          <span>to</span>
+        </div>
+        <div className="input-box">
+          <input type="text" required />
+          <span>$HOUR burn amount</span>
+        </div>
+        <div className="input-box">
+          <button>button</button>
+        </div>
+      </form>
     </>
   )
 }
