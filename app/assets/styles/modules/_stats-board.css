@@ -2,24 +2,63 @@
   &__description {
     flex: 3;
     margin: 2px;
-    background-color: slategray;
+    color: white;
   }
 
   &__index {
+    font-family: $data;
     flex: 1;
     margin: 2px;
-    background-color: slategray;
+    color: white;
+    border-bottom: 1px solid rgb(172, 172, 172);
+    font-size: 0.8rem;
+
+    &--larger {
+      font-weight: 1000;
+      font-size: 1rem;
+    }
+
+    &--dark-purple {
+      color: rgb(118, 59, 212);
+    }
   }
 
   &__contracts {
     flex: 2;
     margin: 2px;
-    background-color: slategray;
+    font-size: 0.6rem;
+    color: white;
+    border-bottom: 1px solid rgb(172, 172, 172);
+
+    &--link-styling {
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      color: blue;
+    }
   }
 
   &__rates {
     flex: 2;
     margin: 2px;
-    background-color: slategray;
+    color: white;
+    font-size: 0.7rem;
+  }
+
+  &--no-margin {
+    margin: 0;
+
+    &-bottom {
+      margin-bottom: 0;
+    }
+  }
+
+  &--gray-color {
+    color: rgb(151, 151, 151);
+  }
+
+  &--label-font {
+    font-family: $label;
+    letter-spacing: 4px;
   }
 }
