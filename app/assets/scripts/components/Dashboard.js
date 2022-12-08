@@ -23,15 +23,19 @@ function Dashboard() {
           </div>
           <div className="dashboard__right-module">
             <section className="stats-board__description">
+              <img className="stats-board__description-icon" src="./assets/images/Settings-Icon.svg" alt="Settings-Icon" />
+
               <h3 className="stats-board--no-margin stats-board--label-font">About</h3>
               <p className="stats-board--gray-color">The happyhourDAO will be powered by the Happy Hour Protocol Engine, which is the heart and soul of the whole ecosystem. This is what will glue together the drinkers, Participating Drinking Establishments &#40;PDEs&#41;, devs, investors, and other stakeholders.</p>
             </section>
             <section className="stats-board__index">
-              <p className="">
+              <p className="stats-board__index-container">
+                <img className="stats-board__index-icon" src="./assets/images/PDE-Icon.svg" alt="PDE-Icon" />
                 <span className="stats-board__index--larger stats-board__index--dark-purple">69</span>
                 <span className="stats-board--gray-color">PDEs</span>
               </p>
-              <p className="">
+              <p className="stats-board__index-container">
+                <img className="stats-board__index-icon" src="./assets/images/Drinker-Icon.svg" alt="Drinker-Icon" />
                 <span className="stats-board__index--larger stats-board__index--dark-purple">420</span>
                 <span className="stats-board--gray-color">Drinkers</span>
               </p>

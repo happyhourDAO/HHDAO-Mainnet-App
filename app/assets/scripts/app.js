@@ -18,7 +18,7 @@ import Hero from "./components/Hero"
 
 function Main() {
   const initialState = {
-    functionIndex: 1
+    functionIndex: 2
   }
 
   function ourReducer(draft, action) {
