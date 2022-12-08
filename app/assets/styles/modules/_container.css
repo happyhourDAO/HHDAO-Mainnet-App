@@ -5,5 +5,17 @@
   align-items: center;
   display: flex;
   position: relative;
-  background-color: black;
+  background-size: 300%;
+  background-image: linear-gradient(45deg, black, rgb(5, 5, 48), rgb(8, 68, 65), #00002b);
+  animation: bg-animation 30s infinite alternate;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-position: left;
+  }
+
+  100% {
+    background-position: right;
+  }
 }
