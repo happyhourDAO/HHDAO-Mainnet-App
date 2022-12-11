@@ -31,12 +31,12 @@ function Dashboard() {
             <section className="stats-board__index">
               <p className="stats-board__index-container">
                 <img className="stats-board__index-icon" src="./assets/images/PDE-Icon.svg" alt="PDE-Icon" />
-                <span className="stats-board__index--larger stats-board__index--dark-purple">69</span>
+                <span className="stats-board__index--larger stats-board__index--dark-purple stats-board__index--flashing">69</span>
                 <span className="stats-board--gray-color">PDEs</span>
               </p>
               <p className="stats-board__index-container">
                 <img className="stats-board__index-icon" src="./assets/images/Drinker-Icon.svg" alt="Drinker-Icon" />
-                <span className="stats-board__index--larger stats-board__index--dark-purple">420</span>
+                <span className="stats-board__index--larger stats-board__index--dark-purple stats-board__index--flashing">420</span>
                 <span className="stats-board--gray-color">Drinkers</span>
               </p>
             </section>
@@ -53,11 +53,21 @@ function Dashboard() {
             </section>
             <section className="stats-board__rates">
               <h3 className="stats-board--label-font">Live Rates</h3>
-              <p className="stats-board--gray-color stats-board--no-margin">$HOUR / hour = 100</p>
-              <p className="stats-board--gray-color stats-board--no-margin">Happy Hour Fee = 0.01 ETH</p>
-              <p className="stats-board--gray-color stats-board--no-margin">HOUR burn minimum = 2000 $HOUR</p>
-              <p className="stats-board--gray-color stats-board--no-margin">PDE commission = 10%</p>
-              <p className="stats-board--gray-color stats-board--no-margin">$HOUR / $DRNK = 1 / 10</p>
+              <p className="stats-board--gray-color stats-board--no-margin">
+                $HOUR / hour = <span className="stats-board__rates--flashing">100</span>
+              </p>
+              <p className="stats-board--gray-color stats-board--no-margin">
+                Happy Hour Fee = <span className="stats-board__rates--flashing">0.01</span> ETH
+              </p>
+              <p className="stats-board--gray-color stats-board--no-margin">
+                HOUR burn minimum = <span className="stats-board__rates--flashing">2000</span> $HOUR
+              </p>
+              <p className="stats-board--gray-color stats-board--no-margin">
+                PDE commission = <span className="stats-board__rates--flashing">10%</span>
+              </p>
+              <p className="stats-board--gray-color stats-board--no-margin">
+                $HOUR / $DRNK = <span className="stats-board__rates--flashing">1 / 10</span>
+              </p>
             </section>
           </div>
         </div>

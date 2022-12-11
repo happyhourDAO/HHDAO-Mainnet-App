@@ -39,6 +39,24 @@
       color: rgb(118, 59, 212);
     }
 
+    &--flashing {
+      animation: flashing 5s linear infinite;
+    }
+
+    @keyframes flashing {
+      0% {
+        color: rgb(118, 59, 212);
+      }
+
+      1% {
+        color: white;
+      }
+
+      10% {
+        color: rgb(118, 59, 212);
+      }
+    }
+
     &-icon {
       display: inline-block;
       transform: translateY(8px);
@@ -66,6 +84,24 @@
     margin: 2px;
     color: white;
     font-size: 0.7rem;
+
+    &--flashing {
+      animation: flashing 5s linear infinite;
+    }
+
+    @keyframes flashing {
+      0% {
+        color: rgb(151, 151, 151);
+      }
+
+      1% {
+        color: white;
+      }
+
+      10% {
+        color: rgb(151, 151, 151);
+      }
+    }
   }
 
   &--no-margin {
