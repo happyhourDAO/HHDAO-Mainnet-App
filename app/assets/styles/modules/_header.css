@@ -1,0 +1,74 @@
+header {
+  position: absolute;
+  width: 90vw;
+  height: 80px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  padding-top: 20px;
+}
+
+.menu-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+
+  .connect-wallet-btn {
+    order: 2;
+  }
+
+  .header-nav {
+    &__links {
+      position: relative;
+      color: rgb(129, 129, 129);
+      display: inline-block;
+      margin-right: 35px;
+      padding: 10px;
+      width: 80px;
+      font-family: $text;
+      font-size: 1.2rem;
+      text-align: center;
+      transition: color 300ms ease-in-out;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background-color: white;
+        transform: scaleX(0);
+        transition: transform 300ms ease-in-out;
+      }
+
+      &:hover::before,
+      &:focus::before {
+        transform: scaleX(1);
+      }
+
+      &:last-child {
+        margin-right: 30px;
+      }
+
+      &:hover,
+      &:focus {
+        cursor: pointer;
+        color: white;
+      }
+    }
+  }
+}
+
+.logo {
+  &__version-text {
+    margin-left: 20px;
+    font-family: $smooch;
+    font-size: 5rem;
+  }
+}
