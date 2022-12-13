@@ -10,6 +10,14 @@ header {
   padding-top: 20px;
 }
 
+.logo {
+  &__version-text {
+    margin-left: 20px;
+    font-family: $smooch;
+    font-size: 5rem;
+  }
+}
+
 .menu-content {
   position: absolute;
   top: 0;
@@ -33,6 +41,7 @@ header {
       font-family: $text;
       font-size: 1.2rem;
       text-align: center;
+      text-decoration: none;
       transition: color 300ms ease-in-out;
 
       &::before {
@@ -52,23 +61,15 @@ header {
         transform: scaleX(1);
       }
 
-      &:last-child {
-        margin-right: 30px;
-      }
-
       &:hover,
       &:focus {
         cursor: pointer;
         color: white;
       }
-    }
-  }
-}
 
-.logo {
-  &__version-text {
-    margin-left: 20px;
-    font-family: $smooch;
-    font-size: 5rem;
+      &--active {
+        color: $mainColor;
+      }
+    }
   }
 }

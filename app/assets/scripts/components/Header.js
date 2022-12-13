@@ -1,7 +1,9 @@
 import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 function Header() {
+  let activeClassName = "header-nav__links--active"
+
   return (
     <>
       <header>
@@ -12,13 +14,21 @@ function Header() {
         </div>
 
         <div className="menu-content">
-          <button className="connect-wallet-btn">Connect Wallet</button>
+          <button className="connect-wallet-btn">Connect</button>
 
           <nav className="header-nav">
-            <a className="header-nav__links">Home</a>
-            <a className="header-nav__links">About</a>
-            <a className="header-nav__links">Source</a>
-            <a className="header-nav__links">More</a>
+            <NavLink to="/" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+              Home
+            </NavLink>
+            <NavLink to="/dashboard" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+              App
+            </NavLink>
+            <NavLink to="/source" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+              Source
+            </NavLink>
+            <NavLink to="/about" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+              About
+            </NavLink>
           </nav>
         </div>
       </header>

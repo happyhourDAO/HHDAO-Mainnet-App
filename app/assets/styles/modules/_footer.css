@@ -6,6 +6,7 @@ footer {
 
   @mixin atLarge {
     bottom: 60;
-    left: 45vw;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

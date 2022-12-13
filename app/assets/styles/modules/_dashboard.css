@@ -46,6 +46,6 @@
 
   @mixin atLarge {
     width: 700px;
-    transform: translateX(5vw) translateY(-3vh);
+    transform: translateX(5vw);
   }
 }
