@@ -5,7 +5,7 @@ header {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 19;
   display: flex;
   padding-top: 20px;
 }
@@ -90,11 +90,6 @@ header {
       }
     }
 
-    &--expanded {
-      display: block;
-      font-size: 4rem;
-    }
-
     @mixin atLarge {
       display: block;
     }
@@ -108,7 +103,7 @@ header {
     cursor: pointer;
 
     &--active {
-      z-index: 12;
+      z-index: 20;
     }
 
     @mixin atSmall {

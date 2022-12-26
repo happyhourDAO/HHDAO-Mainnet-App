@@ -20,13 +20,20 @@ import About from "./components/About"
 
 function Main() {
   const initialState = {
-    functionIndex: 2
+    functionIndex: 2,
+    isMobileMenuOpen: false
   }
 
   function ourReducer(draft, action) {
     switch (action.type) {
       case "changeFunctionIndex":
         draft.functionIndex = action.value
+        return
+      case "openMobileMenu":
+        draft.isMobileMenuOpen = true
+        return
+      case "closeMobileMenu":
+        draft.isMobileMenuOpen = false
         return
     }
   }

@@ -1,9 +1,16 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState, useContext } from "react"
 import { NavLink } from "react-router-dom"
 import { FaBars, FaTimes } from "react-icons/fa"
 import { IconContext } from "react-icons"
+import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
+import MobileMenu from "./MobileMenu"
+import { CSSTransition } from "react-transition-group"
 
 function Header() {
+  const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
+
   const [isOpen, setOpen] = useState(false)
   const menuIconRef = useRef()
   const headerNavRef = useRef()
@@ -12,6 +19,12 @@ function Header() {
     setOpen(!isOpen)
     menuIconRef.current.classList.toggle("menu-content__menu-icon--active")
     headerNavRef.current.classList.toggle("header-nav--expanded")
+
+    if (appState.isMobileMenuOpen == false) {
+      appDispatch({ type: "openMobileMenu" })
+    } else {
+      appDispatch({ type: "closeMobileMenu" })
+    }
   }
 
   return (
@@ -48,6 +61,9 @@ function Header() {
           </IconContext.Provider>
         </div>
       </header>
+      <CSSTransition timeout={330} in={appState.isMobileMenuOpen} classNames="mobile-menu" unmountOnExit>
+        <MobileMenu toggleMenu={toggleMenu} />
+      </CSSTransition>
     </>
   )
 }
