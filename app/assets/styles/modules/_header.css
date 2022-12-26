@@ -11,10 +11,26 @@ header {
 }
 
 .logo {
+  transform: translateY(-15px);
+
   &__version-text {
     margin-left: 20px;
     font-family: $smooch;
     font-size: 5rem;
+    display: none;
+    transform: translateY(-7px);
+
+    @mixin atSmall {
+      display: inline-block;
+    }
+
+    @mixin atLarge {
+      transform: translateY(0);
+    }
+  }
+
+  @mixin atLarge {
+    transform: translateY(0);
   }
 }
 
@@ -31,6 +47,8 @@ header {
   }
 
   .header-nav {
+    display: none;
+
     &__links {
       position: relative;
       color: rgb(129, 129, 129);
@@ -70,6 +88,35 @@ header {
       &--active {
         color: $mainColor;
       }
+    }
+
+    &--expanded {
+      display: block;
+      font-size: 4rem;
+    }
+
+    @mixin atLarge {
+      display: block;
+    }
+  }
+
+  &__menu-icon {
+    order: 3;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    &--active {
+      z-index: 12;
+    }
+
+    @mixin atSmall {
+      margin-left: 40px;
+    }
+
+    @mixin atLarge {
+      display: none;
     }
   }
 }

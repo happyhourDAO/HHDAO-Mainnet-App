@@ -1,8 +1,18 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
+import { FaBars, FaTimes } from "react-icons/fa"
+import { IconContext } from "react-icons"
 
 function Header() {
-  let activeClassName = "header-nav__links--active"
+  const [isOpen, setOpen] = useState(false)
+  const menuIconRef = useRef()
+  const headerNavRef = useRef()
+
+  function toggleMenu() {
+    setOpen(!isOpen)
+    menuIconRef.current.classList.toggle("menu-content__menu-icon--active")
+    headerNavRef.current.classList.toggle("header-nav--expanded")
+  }
 
   return (
     <>
@@ -16,7 +26,7 @@ function Header() {
         <div className="menu-content">
           <button className="connect-wallet-btn">Connect</button>
 
-          <nav className="header-nav">
+          <nav ref={headerNavRef} className="header-nav">
             <NavLink to="/" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
               Home
             </NavLink>
@@ -30,6 +40,12 @@ function Header() {
               About
             </NavLink>
           </nav>
+
+          <IconContext.Provider value={{ size: "2.5rem" }}>
+            <div ref={menuIconRef} onClick={() => toggleMenu()} className="menu-content__menu-icon">
+              {isOpen ? <FaTimes /> : <FaBars />}
+            </div>
+          </IconContext.Provider>
         </div>
       </header>
     </>
