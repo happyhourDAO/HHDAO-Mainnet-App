@@ -3,10 +3,43 @@ footer {
   position: absolute;
   bottom: 10;
   left: 10;
+  text-align: center;
 
   @mixin atLarge {
-    bottom: 60;
+    bottom: 40;
     left: 50%;
     transform: translateX(-50%);
+  }
+}
+
+.social-media-icons {
+  margin-top: 10px;
+  display: none;
+
+  &__link {
+    color: rgb(97, 97, 97);
+    margin-right: 12px;
+    cursor: pointer;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &__mirror {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-image: url("assets/images/Mirror-Icon-Grouped.svg");
+    transition: background-position 300ms ease-in-out;
+
+    &:hover {
+      background-position: 0 -20px;
+    }
+  }
+
+  @mixin atLarge {
+    display: inline-block;
   }
 }
