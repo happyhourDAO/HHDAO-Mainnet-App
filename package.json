@@ -36,6 +36,9 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@web3modal/ethereum": "^2.0.0-rc.1",
+    "@web3modal/react": "^2.0.0-rc.1",
+    "ethers": "^5.7.2",
     "immer": "^9.0.16",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
@@ -43,6 +46,7 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.4.3",
     "react-transition-group": "^4.4.5",
-    "use-immer": "^0.8.1"
+    "use-immer": "^0.8.1",
+    "wagmi": "^0.10.3"
   }
 }

@@ -6,10 +6,15 @@ import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import MobileMenu from "./MobileMenu"
 import { CSSTransition } from "react-transition-group"
+import { Web3Button } from "@web3modal/react"
+import { useWeb3ModalTheme } from "@web3modal/react"
 
 function Header() {
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
+
+  const { theme, setTheme } = useWeb3ModalTheme()
+  setTheme({ themeColor: "teal", themeMode: "dark", themeBackground: "gradient" })
 
   const [isOpen, setOpen] = useState(false)
   const menuIconRef = useRef()
@@ -37,7 +42,7 @@ function Header() {
         </div>
 
         <div className="menu-content">
-          <button className="connect-wallet-btn">Connect</button>
+          {/* <button className="connect-wallet-btn">Connect</button> */}
 
           <nav ref={headerNavRef} className="header-nav">
             <NavLink to="/" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
@@ -53,6 +58,8 @@ function Header() {
               About
             </NavLink>
           </nav>
+
+          <Web3Button />
 
           <IconContext.Provider value={{ size: "2.5rem" }}>
             <div ref={menuIconRef} onClick={() => toggleMenu()} className="menu-content__menu-icon">

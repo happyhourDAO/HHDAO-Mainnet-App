@@ -1,0 +1,18 @@
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(173, 216, 230, 0.466);
+  z-index: 99;
+}
+
+.modal-card {
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  background-color: #131a2a;
+  width: 300px;
+  height: 300px;
+  z-index: 100;
+  border: 1px solid $mainColor;
+  border-radius: 20px;
+}
