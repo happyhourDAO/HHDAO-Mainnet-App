@@ -46,12 +46,14 @@ function Main() {
       address: null,
       amountHOUR: null,
       amountDRNK: null,
-      currentDrinkingID: null,
+      currentDrinkingID: 0,
+      drinkingID_to_PDEid: 0,
       isPDEowner: false
     },
     PDEownership: {
-      indexArray: null,
-      structArray: null
+      indexArray: [],
+      structArray: [],
+      commissionArray: []
     },
     HOURnetwork: {
       totalPDE: null,
@@ -83,6 +85,9 @@ function Main() {
       case "setDrinkingID":
         draft.account.currentDrinkingID = action.value
         return
+      case "setDrinkingID_to_PDEid":
+        draft.account.drinkingID_to_PDEid = action.value
+        return
       case "setIsPDEowner":
         draft.account.isPDEowner = true
         return
@@ -91,6 +96,9 @@ function Main() {
         return
       case "set_PDEownership_structArray":
         draft.PDEownership.structArray = action.data
+        return
+      case "set_PDEownership_commissionArray":
+        draft.PDEownership.commissionArray = action.data
         return
       case "setHOURnetworkStats":
         draft.HOURnetwork.totalPDE = action.data[0].toNumber()

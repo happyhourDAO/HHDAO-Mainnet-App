@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react"
+import React, { useEffect, useContext, useState, useMemo } from "react"
 import Footer from "./Footer"
 import InterfaceTop from "./InterfaceTop"
 import InterfaceBottom from "./InterfaceBottom"
@@ -28,14 +28,18 @@ function Dashboard(props) {
 
   function toggleSettings() {
     setOpen(!open)
-    console.log(appState.account.address, appState.account.amountHOUR, appState.account.isPDEowner, appState.PDEownership.indexArray, appState.PDEownership.structArray, appState.HOURnetwork.totalPDE)
   }
 
   // Retrieve account data from WAGMI
-  const { address } = useAccount()
+  const { address, status } = useAccount({
+    onConnect({ address }) {
+      console.log("useAccount hook RAN!", address)
+    }
+  })
 
   useEffect(() => {
     appDispatch({ type: "setAccountAddress", value: address })
+    console.log("useEffect to set address RAN!")
   }, [address])
 
   const { data, isLoading } = useBalance({
@@ -43,7 +47,7 @@ function Dashboard(props) {
     token: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
     watch: false,
     onSettled(data, error) {
-      // console.log("Settled", { data, error })
+      console.log("useBalance HOUR hook RAN!", { data, error })
       appDispatch({ type: "setAmountHOUR", value: data.value / 10 ** 18 })
     }
   })
@@ -53,7 +57,8 @@ function Dashboard(props) {
     token: "0x89f1a702EEcFB47cF9289B3481349e1f38367C44",
     watch: false,
     onSettled(data, error) {
-      // console.log("Settled", { data, error })
+      console.log("useBalance DRNK hook RAN!", { data, error })
+
       appDispatch({ type: "setAmountDRNK", value: data.value / 10 ** 18 })
     }
   })
@@ -68,15 +73,31 @@ function Dashboard(props) {
 
   // CONTRACT READ METHODS
 
-  // const HOURcontractREAD_TotalPDE = useContractRead({
-  //   address: HOURcontract.address,
-  //   abi: HOURcontract.interface,
-  //   functionName: "PDEtoOwner",
-  //   watch: false,
-  //   onSettled(data, error) {
-  //     console.log("Settled", { data, error })
-  //   }
-  // })
+  const getPoolDrinkingId = useContractRead({
+    address: HOURcontract.address,
+    abi: HOURcontract.interface,
+    functionName: "getPoolDrinkingId",
+    overrides: { from: address },
+    watch: false,
+    onSettled(data, error) {
+      console.log("getPoolDrinkingId hook RAN!", { data, error })
+      console.log(parseInt(data.toString().slice(-7)))
+      appDispatch({ type: "setDrinkingID", value: data })
+    }
+  })
+
+  const getDrinkingID_to_PDEid = useContractRead({
+    address: HOURcontract.address,
+    abi: HOURcontract.interface,
+    functionName: "drinkingIDtoPDEid",
+    args: [appState.account.currentDrinkingID],
+    watch: false,
+    onSettled(data, error) {
+      console.log("getDrinkingID_to_PDEid hook RAN!", { data, error })
+      console.log(parseInt(data.toString().slice(-7)))
+      appDispatch({ type: "setDrinkingID_to_PDEid", value: data })
+    }
+  })
 
   const HOURcontract_multipleREAD = useContractReads({
     contracts: [
@@ -94,20 +115,13 @@ function Dashboard(props) {
         address: HOURcontract.address,
         abi: HOURcontract.interface,
         functionName: "totalSupply"
-      },
-      {
-        address: HOURcontract.address,
-        abi: HOURcontract.interface,
-        functionName: "getPoolDrinkingId"
       }
     ],
     allowFailure: true,
     watch: false,
     onSettled(data) {
       appDispatch({ type: "setHOURnetworkStats", data: data })
-      appDispatch({ type: "setDrinkingID", value: data[3].toNumber() })
-      // console.log(data[3].toNumber())
-      // console.log(data[2] / 10 ** 18)
+      console.log("useContractReads hook RAN!", data)
     }
   })
 
@@ -150,69 +164,112 @@ function Dashboard(props) {
         if (!res.length) {
           null
         } else {
-          window.sessionStorage.setItem("isPDEowner", JSON.stringify(true))
-          window.sessionStorage.setItem("PDEownership_indexArray", JSON.stringify(res))
           appDispatch({ type: "setIsPDEowner" })
           appDispatch({ type: "set_PDEownership_indexArray", data: res })
         }
       })
       .catch(console.error)
 
-    console.log("useEffect for address dependency RAN!")
-  }, [appState.account.address])
-
-  useEffect(() => {
-    const sessionStorage_value_1 = JSON.parse(window.sessionStorage.getItem("isPDEowner"))
-    const sessionStorage_value_2 = JSON.parse(window.sessionStorage.getItem("PDEownership_indexArray"))
-
-    if (sessionStorage_value_1) {
-      appDispatch({ type: "setIsPDEowner" })
-    }
-
-    appDispatch({ type: "set_PDEownership_indexArray", data: sessionStorage_value_2 })
-
-    console.log(appState.account.isPDEowner, appState.PDEownership.indexArray)
-
-    console.log("useEffect on page refresh RAN!")
-  }, [])
+    console.log("useEffect for verifyPDEownership RAN!")
+  }, [appState.account.address, appState.HOURnetwork.totalPDE])
 
   async function PDEdetails_mapping() {
-    let array = appState.PDEownership.indexArray.map(async function (index) {
-      let retrieved_name = null
-      let retrieved_location = null
-      let retrieved_address = null
-      let retrieved_accessCode = null
-      let retrieved_PDEid = null
+    let promiseArray = []
 
-      await HOURcontract.pdes(index).then(res => {
-        retrieved_name = res["_name"]
-        retrieved_location = res["_location"]
-        retrieved_address = res["_address"]
-        retrieved_accessCode = res["_accessCode"]
-        retrieved_PDEid = res["_PDEid"]
+    if (appState.PDEownership.indexArray.length) {
+      let array = appState.PDEownership.indexArray.map(async function (index) {
+        let retrieved_name = null
+        let retrieved_location = null
+        let retrieved_address = null
+        let retrieved_accessCode = null
+        let retrieved_PDEid = null
+
+        await HOURcontract.pdes(index).then(res => {
+          retrieved_name = res["_name"]
+          retrieved_location = res["_location"]
+          retrieved_address = res["_address"]
+          retrieved_accessCode = res["_accessCode"]
+          retrieved_PDEid = res["_PDEid"]
+        })
+
+        return {
+          PDEname: retrieved_name,
+          PDElocation: retrieved_location,
+          PDEaddress: retrieved_address,
+          PDEaccessCode: retrieved_accessCode,
+          PDEid: retrieved_PDEid
+        }
       })
 
-      return {
-        PDEname: retrieved_name,
-        PDElocation: retrieved_location,
-        PDEaddress: retrieved_address,
-        PDEaccessCode: retrieved_accessCode,
-        PDEid: retrieved_PDEid
-      }
-    })
-
-    let promiseArray = await Promise.all(array)
+      promiseArray = await Promise.all(array)
+    }
 
     return promiseArray
   }
 
-  if (appState.account.isPDEowner == true) {
+  async function retrieve_historical_PDE_commission(PDE_i) {
+    let historical_HOUR_commission_earned = 0
+
+    let array = await HOURcontract.queryFilter("endHOURresults", undefined, undefined).then().catch(console.error)
+
+    let filteredArray = await array.filter(function (eventObject) {
+      let PDEindex = eventObject.args[3].toNumber()
+
+      return PDEindex == PDE_i
+    })
+
+    let mappedArray = await filteredArray.map(function (filteredArrayObject) {
+      historical_HOUR_commission_earned += filteredArrayObject.args[2] / 10 ** 18
+
+      return {
+        blockNumber: filteredArrayObject.blockNumber,
+        HOURcommissionEarned: filteredArrayObject.args[2] / 10 ** 18
+      }
+    })
+
+    return {
+      a: mappedArray,
+      b: historical_HOUR_commission_earned
+    }
+  }
+
+  async function retrieve_historical_PDE_commission_array() {
+    let completed_histCommissionArray = []
+
+    if (appState.PDEownership.indexArray.length) {
+      let histCommissionArray = appState.PDEownership.indexArray.map(async function (i) {
+        let index_historical_commission
+
+        await retrieve_historical_PDE_commission(i)
+          .then(res => (index_historical_commission = res))
+          .catch(console.error)
+
+        return index_historical_commission
+      })
+
+      completed_histCommissionArray = await Promise.all(histCommissionArray)
+    }
+
+    return completed_histCommissionArray
+  }
+
+  useEffect(() => {
     PDEdetails_mapping()
       .then(res => {
+        console.log("PDEownership.structArray", res)
         appDispatch({ type: "set_PDEownership_structArray", data: res })
       })
       .catch(console.error)
-  }
+
+    retrieve_historical_PDE_commission_array()
+      .then(res => {
+        console.log("PDEownership.commissionArray", res)
+        appDispatch({ type: "set_PDEownership_commissionArray", data: res })
+      })
+      .catch(console.error)
+
+    console.log("useEffect for PDEdetails_mapping & historical_PDE_commission RAN!")
+  }, [appState.account.isPDEowner == true])
 
   return (
     <>
