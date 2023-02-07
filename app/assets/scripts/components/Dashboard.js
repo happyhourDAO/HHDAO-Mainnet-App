@@ -4,7 +4,6 @@ import InterfaceTop from "./InterfaceTop"
 import InterfaceBottom from "./InterfaceBottom"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
-import SettingsModal from "./SettingsModal"
 import { ethers } from "ethers"
 
 // IMPORTING WAGMI REACT HOOKS
@@ -15,6 +14,10 @@ import { useContractRead } from "wagmi"
 import { useContractReads } from "wagmi"
 import { useContractInfiniteReads, paginatedIndexesConfig } from "wagmi"
 import { BigNumber } from "ethers"
+
+// IMPORTING COMPONENTS
+import SideHooks from "./SideHooks"
+import SettingsModal from "./SettingsModal"
 
 // IMPORTING OF HOURv3 & DRNKv3 CONTRACT ABI
 const HOURabi = require("../contracts/HOURv3.json")
@@ -65,82 +68,42 @@ function Dashboard(props) {
 
   // RETRIEVE CONTRACT DATA VIA WAGMI
 
-  const HOURcontract = useContract({
-    address: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
-    abi: HOURabi,
-    signerOrProvider: props.provider
-  })
+  // const HOURcontract = useContract({
+  //   address: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
+  //   abi: HOURabi,
+  //   signerOrProvider: props.provider
+  // })
+
+  // useEffect(() => {
+  //   appDispatch({ type: "setHOURcontract", data: HOURcontract })
+  //   console.log("useEffect for setting HOUR contract RAN!")
+  // }, [HOURcontract])
 
   // CONTRACT READ METHODS
 
-  const getPoolDrinkingId = useContractRead({
-    address: HOURcontract.address,
-    abi: HOURcontract.interface,
-    functionName: "getPoolDrinkingId",
-    overrides: { from: address },
-    watch: false,
-    onSettled(data, error) {
-      console.log("getPoolDrinkingId hook RAN!", { data, error })
-      console.log(parseInt(data.toString().slice(-7)))
-      appDispatch({ type: "setDrinkingID", value: data })
-    }
-  })
-
-  const getDrinkingID_to_PDEid = useContractRead({
-    address: HOURcontract.address,
-    abi: HOURcontract.interface,
-    functionName: "drinkingIDtoPDEid",
-    args: [appState.account.currentDrinkingID],
-    watch: false,
-    onSettled(data, error) {
-      console.log("getDrinkingID_to_PDEid hook RAN!", { data, error })
-      console.log(parseInt(data.toString().slice(-7)))
-      appDispatch({ type: "setDrinkingID_to_PDEid", value: data })
-    }
-  })
-
-  const HOURcontract_multipleREAD = useContractReads({
-    contracts: [
-      {
-        address: HOURcontract.address,
-        abi: HOURcontract.interface,
-        functionName: "totalPDE"
-      },
-      {
-        address: HOURcontract.address,
-        abi: HOURcontract.interface,
-        functionName: "getNumberOfCurrentDrinkers"
-      },
-      {
-        address: HOURcontract.address,
-        abi: HOURcontract.interface,
-        functionName: "totalSupply"
-      }
-    ],
-    allowFailure: true,
-    watch: false,
-    onSettled(data) {
-      appDispatch({ type: "setHOURnetworkStats", data: data })
-      console.log("useContractReads hook RAN!", data)
-    }
-  })
-
-  // const PDEownership_array = useContractInfiniteReads({
-  //   cacheKey: "ownedPDEarray_16",
-  //   contracts(param = 0) {
-  //     const args = [BigNumber.from(param)]
-  //     return [
-  //       {
-  //         address: HOURcontract.address,
-  //         abi: HOURcontract.interface,
-  //         functionName: "PDEtoOwner",
-  //         args
-  //       }
-  //     ]
-  //   },
-
+  // const HOURcontract_multipleREAD = useContractReads({
+  //   contracts: [
+  //     {
+  //       address: HOURcontract.address,
+  //       abi: HOURcontract.interface,
+  //       functionName: "totalPDE"
+  //     },
+  //     {
+  //       address: HOURcontract.address,
+  //       abi: HOURcontract.interface,
+  //       functionName: "getNumberOfCurrentDrinkers"
+  //     },
+  //     {
+  //       address: HOURcontract.address,
+  //       abi: HOURcontract.interface,
+  //       functionName: "totalSupply"
+  //     }
+  //   ],
+  //   allowFailure: true,
+  //   watch: false,
   //   onSettled(data) {
-  //     console.log(data)
+  //     appDispatch({ type: "setHOURnetworkStats", data: data })
+  //     console.log("useContractReads hook RAN!", data)
   //   }
   // })
 
@@ -158,20 +121,20 @@ function Dashboard(props) {
     return array
   }
 
-  useEffect(() => {
-    verifyPDEownership()
-      .then(res => {
-        if (!res.length) {
-          null
-        } else {
-          appDispatch({ type: "setIsPDEowner" })
-          appDispatch({ type: "set_PDEownership_indexArray", data: res })
-        }
-      })
-      .catch(console.error)
+  // useEffect(() => {
+  //   verifyPDEownership()
+  //     .then(res => {
+  //       if (!res.length) {
+  //         null
+  //       } else {
+  //         appDispatch({ type: "setIsPDEowner" })
+  //         appDispatch({ type: "set_PDEownership_indexArray", data: res })
+  //       }
+  //     })
+  //     .catch(console.error)
 
-    console.log("useEffect for verifyPDEownership RAN!")
-  }, [appState.account.address, appState.HOURnetwork.totalPDE])
+  //   console.log("useEffect for verifyPDEownership RAN!")
+  // }, [appState.account.address, appState.HOURnetwork.totalPDE])
 
   async function PDEdetails_mapping() {
     let promiseArray = []
@@ -253,30 +216,31 @@ function Dashboard(props) {
     return completed_histCommissionArray
   }
 
-  useEffect(() => {
-    PDEdetails_mapping()
-      .then(res => {
-        console.log("PDEownership.structArray", res)
-        appDispatch({ type: "set_PDEownership_structArray", data: res })
-      })
-      .catch(console.error)
+  // useEffect(() => {
+  //   PDEdetails_mapping()
+  //     .then(res => {
+  //       console.log("PDEownership.structArray", res)
+  //       appDispatch({ type: "set_PDEownership_structArray", data: res })
+  //     })
+  //     .catch(console.error)
 
-    retrieve_historical_PDE_commission_array()
-      .then(res => {
-        console.log("PDEownership.commissionArray", res)
-        appDispatch({ type: "set_PDEownership_commissionArray", data: res })
-      })
-      .catch(console.error)
+  //   retrieve_historical_PDE_commission_array()
+  //     .then(res => {
+  //       console.log("PDEownership.commissionArray", res)
+  //       appDispatch({ type: "set_PDEownership_commissionArray", data: res })
+  //     })
+  //     .catch(console.error)
 
-    console.log("useEffect for PDEdetails_mapping & historical_PDE_commission RAN!")
-  }, [appState.account.isPDEowner == true])
+  //   console.log("useEffect for PDEdetails_mapping & historical_PDE_commission RAN!")
+  // }, [appState.account.isPDEowner == true])
 
   return (
     <>
+      {appState.account.address ? <SideHooks /> : null}
       <div className="container">
-        {open ? <SettingsModal toggleSettings={toggleSettings} /> : ""}
-
         <div className="dashboard">
+          {open ? <SettingsModal toggleSettings={toggleSettings} /> : ""}
+
           <div className="dashboard__left-module">
             <section className="interface interface__top">
               <InterfaceTop />

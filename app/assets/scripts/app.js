@@ -43,7 +43,7 @@ function Main() {
     functionIndex: 2,
     isMobileMenuOpen: false,
     account: {
-      address: null,
+      address: "",
       amountHOUR: null,
       amountDRNK: null,
       currentDrinkingID: 0,
@@ -56,6 +56,7 @@ function Main() {
       commissionArray: []
     },
     HOURnetwork: {
+      contractObject: null,
       totalPDE: null,
       totalCurrentDrinkers: null,
       totalSupply: null
@@ -99,6 +100,9 @@ function Main() {
         return
       case "set_PDEownership_commissionArray":
         draft.PDEownership.commissionArray = action.data
+        return
+      case "setHOURcontract":
+        draft.HOURnetwork.contractObject = action.data
         return
       case "setHOURnetworkStats":
         draft.HOURnetwork.totalPDE = action.data[0].toNumber()
