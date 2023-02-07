@@ -8,5 +8,45 @@
   z-index: 100;
   border: 1px solid $mainColor;
   border-radius: 20px;
-  box-shadow: 8px 15px 3px 10px rgba(0, 0, 0, 0.253);
+  box-shadow: -8px 15px 3px 10px rgba(0, 0, 0, 0.253);
+  padding: 15px;
+  display: grid;
+  grid-template-rows: 0.6fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
+
+  &__row {
+    border-bottom: 1px solid white;
+    display: flex;
+    flex-direction: column;
+
+    &-top {
+      flex: 1;
+      font-family: $label;
+      font-size: 2.1rem;
+      color: white;
+
+      &--smaller-font {
+        font-size: 1.5rem;
+      }
+    }
+
+    &-bottom {
+      flex: 0.8;
+      font-family: $text;
+      font-size: 1.5rem;
+      color: #9e63ff;
+    }
+
+    &-1 {
+      font-family: $label;
+      align-self: center;
+      border-bottom: none;
+      color: gray;
+    }
+
+    &-5 {
+      border-bottom: none;
+    }
+  }
 }

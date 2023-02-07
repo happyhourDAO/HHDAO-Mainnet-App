@@ -27,7 +27,7 @@ function Dashboard(props) {
   const appState = useContext(StateContext)
 
   // Settings Modal Operation
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
 
   function toggleSettings() {
     setOpen(!open)
