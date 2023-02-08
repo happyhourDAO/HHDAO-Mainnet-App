@@ -18,10 +18,49 @@ import Hero from "./components/Hero"
 import Source from "./components/Source"
 import About from "./components/About"
 
+// WEB3MODAL & OTHER ETHEREUM LIBRARIES
+import { EthereumClient, modalConnectors, walletConnectProvider } from "@web3modal/ethereum"
+import { Web3Modal } from "@web3modal/react"
+import { configureChains, createClient, WagmiConfig } from "wagmi"
+import { arbitrum, mainnet, polygon, goerli, bsc, optimism, sepolia } from "wagmi/chains"
+
+// CONFIGURE WAGMI & WEB3MODAL
+const chains = [goerli]
+
+// wagmi client
+const { provider } = configureChains(chains, [walletConnectProvider({ projectId: "b611d14b3c75661ee3a2d0bd6fa02451" })])
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: modalConnectors({ appName: "web3Modal", chains }),
+  provider
+})
+
+// web3Modal Ethereum Client
+const ethereumClient = new EthereumClient(wagmiClient, chains)
+
 function Main() {
   const initialState = {
     functionIndex: 2,
-    isMobileMenuOpen: false
+    isMobileMenuOpen: false,
+    account: {
+      address: "",
+      amountHOUR: null,
+      amountDRNK: null,
+      currentDrinkingID: 0,
+      drinkingID_to_PDEid: 0,
+      isPDEowner: false
+    },
+    PDEownership: {
+      indexArray: [],
+      structArray: [],
+      commissionArray: []
+    },
+    HOURnetwork: {
+      contractObject: null,
+      totalPDE: null,
+      totalCurrentDrinkers: null,
+      totalSupply: null
+    }
   }
 
   function ourReducer(draft, action) {
@@ -35,26 +74,66 @@ function Main() {
       case "closeMobileMenu":
         draft.isMobileMenuOpen = false
         return
+      case "setAccountAddress":
+        draft.account.address = action.value
+        return
+      case "setAmountHOUR":
+        draft.account.amountHOUR = action.value
+        return
+      case "setAmountDRNK":
+        draft.account.amountDRNK = action.value
+        return
+      case "setDrinkingID":
+        draft.account.currentDrinkingID = action.value
+        return
+      case "setDrinkingID_to_PDEid":
+        draft.account.drinkingID_to_PDEid = action.value
+        return
+      case "setIsPDEowner":
+        draft.account.isPDEowner = true
+        return
+      case "set_PDEownership_indexArray":
+        draft.PDEownership.indexArray = action.data
+        return
+      case "set_PDEownership_structArray":
+        draft.PDEownership.structArray = action.data
+        return
+      case "set_PDEownership_commissionArray":
+        draft.PDEownership.commissionArray = action.data
+        return
+      case "setHOURcontract":
+        draft.HOURnetwork.contractObject = action.data
+        return
+      case "setHOURnetworkStats":
+        draft.HOURnetwork.totalPDE = action.data[0].toNumber()
+        draft.HOURnetwork.totalCurrentDrinkers = action.data[1].toNumber()
+        draft.HOURnetwork.totalSupply = action.data[2] / 10 ** 18
+        return
     }
   }
 
   const [state, dispatch] = useImmerReducer(ourReducer, initialState)
 
   return (
-    <StateContext.Provider value={state}>
-      <DispatchContext.Provider value={dispatch}>
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/source" element={<Source />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </DispatchContext.Provider>
-    </StateContext.Provider>
+    <>
+      <WagmiConfig client={wagmiClient}>
+        <StateContext.Provider value={state}>
+          <DispatchContext.Provider value={dispatch}>
+            <BrowserRouter>
+              <Header />
+              <Routes>
+                <Route path="/" element={<Hero />} />
+                <Route path="/dashboard" element={<Dashboard provider={wagmiClient.provider} />} />
+                <Route path="/source" element={<Source />} />
+                <Route path="/about" element={<About />} />
+              </Routes>
+              <Footer />
+            </BrowserRouter>
+          </DispatchContext.Provider>
+        </StateContext.Provider>
+      </WagmiConfig>
+      <Web3Modal projectId="b611d14b3c75661ee3a2d0bd6fa02451" ethereumClient={ethereumClient} />
+    </>
   )
 }
 
