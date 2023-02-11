@@ -11,12 +11,12 @@
   box-shadow: -8px 15px 3px 10px rgba(0, 0, 0, 0.253);
   padding: 15px;
   display: grid;
-  grid-template-rows: 0.6fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 0.8fr 0.8fr;
   grid-template-columns: 1fr;
-  row-gap: 10px;
+  row-gap: 11px;
 
   &__row {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.342);
     display: flex;
     flex-direction: column;
 
@@ -25,9 +25,11 @@
       font-family: $label;
       font-size: 2.1rem;
       color: white;
+      display: flex;
+      position: relative;
 
-      &--smaller-font {
-        font-size: 1.5rem;
+      &--small-font {
+        font-size: 1.9rem;
       }
     }
 
@@ -43,10 +45,67 @@
       align-self: center;
       border-bottom: none;
       color: gray;
+      display: inline;
     }
 
     &-5 {
       border-bottom: none;
     }
+  }
+}
+
+.connectivity-label {
+  &--off {
+    color: red;
+    font-size: 0.8em;
+  }
+
+  &--on {
+    color: green;
+  }
+}
+
+.icon {
+  &-more {
+    transform: translateX(5px) translateY(8px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+  }
+
+  &-add {
+    position: absolute;
+    right: 0;
+    transform: translateY(8px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+  }
+
+  &-next {
+    position: absolute;
+    right: 0;
+    transform: translateY(8px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+
+    &-row1 {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: 0;
+      transform: translateY(-11px);
+    }
+  }
+
+  &-back {
+    width: 40px;
+    height: 40px;
+    transform: rotate(-180deg) translateY(11px) translateX(7px);
+    position: absolute;
+    right: 20px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: white;
   }
 }

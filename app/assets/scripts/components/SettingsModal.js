@@ -1,27 +1,16 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import YourProfile from "./YourProfile"
+import PDE_Pagination from "./PDE_Pagination"
+import HOUR_Commission_Pagination from "./HOUR_Commission_Pagination"
 
 function SettingsModal(props) {
+  const isPDEowner = true
+  const [viewingStruct, setViewingStruct] = useState(false)
+  const [viewingCommission, setViewingCommission] = useState(false)
+
   return (
     <>
-      <div className="modal-card">
-        <div className="modal-card__row modal-card__row-1">Your Profile</div>
-        <div className="modal-card__row modal-card__row-2">
-          <div className="modal-card__row-top">$HOUR</div>
-          <div className="modal-card__row-bottom">Balance:</div>
-        </div>
-        <div className="modal-card__row modal-card__row-3">
-          <div className="modal-card__row-top">$DRNK</div>
-          <div className="modal-card__row-bottom">Balance:</div>
-        </div>
-        <div className="modal-card__row modal-card__row-4">
-          <div className="modal-card__row-top">PDEs Owned</div>
-          <div className="modal-card__row-bottom">Units:</div>
-        </div>
-        <div className="modal-card__row modal-card__row-5">
-          <div className="modal-card__row-top modal-card__row-top--smaller-font">Current Drinking ID</div>
-          <div className="modal-card__row-bottom">ID:</div>
-        </div>
-      </div>
+      <div className="modal-card">{viewingStruct ? <PDE_Pagination viewingCommission={viewingCommission} setViewingCommission={setViewingCommission} setViewingStruct={setViewingStruct} /> : <YourProfile isPDEowner={isPDEowner} setViewingStruct={setViewingStruct} />}</div>
     </>
   )
 }
