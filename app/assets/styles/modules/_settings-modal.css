@@ -38,6 +38,10 @@
       font-family: $text;
       font-size: 1.5rem;
       color: #9e63ff;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 268px;
     }
 
     &-1 {
@@ -61,7 +65,8 @@
   }
 
   &--on {
-    color: green;
+    color: greenyellow;
+    font-size: 0.8em;
   }
 }
 
@@ -102,6 +107,13 @@
     transform: rotate(-180deg) translateY(11px) translateX(7px);
     position: absolute;
     right: 20px;
+  }
+
+  &-copy {
+    margin-left: 10px;
+    transform: translateY(7px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
   }
 
   &:hover {

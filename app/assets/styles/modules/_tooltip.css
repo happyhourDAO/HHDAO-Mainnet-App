@@ -1,0 +1,9 @@
+.modal-card__row .tooltipExtra {
+  width: 210px;
+  font-size: 0.8rem;
+  text-align: justify;
+
+  &__arrow {
+    background-color: $mainColor;
+  }
+}

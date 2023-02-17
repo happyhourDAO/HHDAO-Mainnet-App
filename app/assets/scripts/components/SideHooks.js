@@ -18,7 +18,7 @@ function SideHooks() {
     onSettled(data, error) {
       console.log("getPoolDrinkingId hook RAN!", { data, error })
       console.log(parseInt(data.toString().slice(-7)))
-      appDispatch({ type: "setDrinkingID", value: data })
+      appDispatch({ type: "setDrinkingID", value: data.toString() })
     }
   })
 
@@ -31,7 +31,8 @@ function SideHooks() {
     onSettled(data, error) {
       console.log("getDrinkingID_to_PDEid hook RAN!", { data, error })
       console.log(parseInt(data.toString().slice(-7)))
-      appDispatch({ type: "setDrinkingID_to_PDEid", value: data })
+
+      appDispatch({ type: "setDrinkingID_to_PDEid", value: data.toString() })
     }
   })
 

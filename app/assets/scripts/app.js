@@ -6,6 +6,7 @@ import React from "react"
 import ReactDOM from "react-dom/client"
 import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import "react-tooltip/dist/react-tooltip.css"
 
 // Import React components
 
