@@ -114,10 +114,40 @@
     transform: translateY(7px);
     color: rgb(97, 97, 97);
     transition: color 200ms ease-out;
+
+    &--active {
+      color: $mainColor;
+
+      &:hover {
+        cursor: pointer;
+        color: $mainColor;
+      }
+    }
   }
 
   &:hover {
     cursor: pointer;
     color: white;
+  }
+}
+
+.copied-popup {
+  position: relative;
+
+  &::before {
+    content: "Copied!";
+    display: flex;
+    position: absolute;
+    bottom: 100%;
+    left: -13;
+    right: 0;
+    width: 70px;
+    height: 30px;
+    background-color: black;
+    font-size: 1rem;
+    justify-content: center;
+    align-items: center;
+    color: $mainColor;
+    border-radius: 10px;
   }
 }

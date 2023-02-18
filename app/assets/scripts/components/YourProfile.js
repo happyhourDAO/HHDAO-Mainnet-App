@@ -11,7 +11,17 @@ function YourProfile(props) {
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
-  const [copied, setCopied] = useState(false)
+  function copiedPopup() {
+    document.querySelector(".icon-copy").classList.toggle("icon")
+    document.querySelector(".icon-copy").classList.toggle("icon-copy--active")
+    document.querySelector("#copiedElement").classList.toggle("copied-popup")
+
+    setTimeout(() => {
+      document.querySelector(".icon-copy").classList.toggle("icon")
+      document.querySelector(".icon-copy").classList.toggle("icon-copy--active")
+      document.querySelector("#copiedElement").classList.toggle("copied-popup")
+    }, 1000)
+  }
 
   return (
     <>
@@ -51,8 +61,10 @@ function YourProfile(props) {
             Drinking ID
             <AiOutlineQuestionCircle className="icon icon-more" id="DrinkingID-info" />
             <Tooltip anchorId="DrinkingID-info" place="top" className="tooltipExtra" classNameArrow="tooltipExtra__arrow" content="If you are currently getting LITT, you are assigned a Drinking ID that is tied to a PDE ID." />
-            <CopyToClipboard text={appState.account.currentDrinkingID} onCopy={() => setCopied(true)}>
-              <MdCopyAll className="icon icon-copy" />
+            <CopyToClipboard text={appState.account.currentDrinkingID} onCopy={copiedPopup}>
+              <span id="copiedElement">
+                <MdCopyAll className="icon icon-copy" />
+              </span>
             </CopyToClipboard>
             <AiOutlineMore className="icon icon-next" />
           </div>

@@ -24,6 +24,18 @@ function PDE_Card({ index, setViewingStruct, setViewingCommission, total, PDEnam
     setViewingCommission(true)
   }
 
+  function copiedPopup() {
+    document.querySelector(".icon-copy").classList.toggle("icon")
+    document.querySelector(".icon-copy").classList.toggle("icon-copy--active")
+    document.querySelector("#copiedElement").classList.toggle("copied-popup")
+
+    setTimeout(() => {
+      document.querySelector(".icon-copy").classList.toggle("icon")
+      document.querySelector(".icon-copy").classList.toggle("icon-copy--active")
+      document.querySelector("#copiedElement").classList.toggle("copied-popup")
+    }, 1000)
+  }
+
   return (
     <>
       <IconContext.Provider value={{ size: "0.6em" }}>
@@ -65,8 +77,10 @@ function PDE_Card({ index, setViewingStruct, setViewingCommission, total, PDEnam
             PDE ID
             <AiOutlineQuestionCircle className="icon icon-more" id="pdeID-info" />
             <Tooltip anchorId="pdeID-info" place="top" className="tooltipExtra" classNameArrow="tooltipExtra__arrow" content="The PDE ID is the official identifier of your PDE. It is an unaltered keccak256 hash of your PDE name, PDE location, and PDE address created at the time of the onboarding of your PDE." />
-            <CopyToClipboard text={PDEid} onCopy={() => setCopied(true)}>
-              <MdCopyAll className="icon icon-copy" />
+            <CopyToClipboard text={PDEid} onCopy={copiedPopup}>
+              <span id="copiedElement">
+                <MdCopyAll className="icon icon-copy" />
+              </span>
             </CopyToClipboard>
             <AiOutlineMore className="icon icon-next" />
           </div>
