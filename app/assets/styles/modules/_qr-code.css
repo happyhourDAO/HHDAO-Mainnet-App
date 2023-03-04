@@ -1,0 +1,38 @@
+.qr-code__wrapper {
+  position: relative;
+
+  &__container {
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    background-color: #d9d9d9;
+    transform: translateX(-42px) translateY(-145px);
+    border-radius: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__reader-container {
+    position: absolute;
+    width: 345px;
+    height: 270px;
+    background-color: #d9d9d98f;
+    transform: translateX(70px) translateY(-280px);
+    border-radius: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.qr-code-reader {
+  position: absolute;
+  z-index: 1000;
+  width: 300px;
+  height: 300px;
+}

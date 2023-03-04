@@ -1,0 +1,134 @@
+.icon {
+  &-more {
+    transform: translateX(5px) translateY(8px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+  }
+
+  &-qrCode {
+    margin-left: 5px;
+    transform: translateX(5px) translateY(8px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+
+    &--open {
+      color: white;
+    }
+
+    &-reader {
+      position: absolute;
+      right: 20;
+      top: 2;
+    }
+  }
+
+  &-add {
+    position: absolute;
+    right: 0;
+    transform: translateY(8px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+  }
+
+  &-next {
+    position: absolute;
+    right: 0;
+    transform: translateY(8px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+
+    &-row1 {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: 0;
+      transform: translateY(-11px);
+    }
+  }
+
+  &-back {
+    width: 40px;
+    height: 40px;
+    transform: rotate(-180deg) translateY(11px) translateX(7px);
+    position: absolute;
+    right: 20px;
+  }
+
+  &-copy {
+    margin-left: 10px;
+    transform: translateY(7px);
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+
+    &--active {
+      color: $mainColor;
+
+      &:hover {
+        cursor: pointer;
+        color: $mainColor;
+      }
+    }
+  }
+
+  &-read {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: rgb(97, 97, 97);
+    transition: color 200ms ease-out;
+  }
+
+  &-share {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: blue;
+    transition: color 200ms ease-out;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+.copied-popup {
+  position: relative;
+
+  &::before {
+    content: "Copied!";
+    display: flex;
+    position: absolute;
+    bottom: 100%;
+    left: -13;
+    right: 0;
+    width: 70px;
+    height: 30px;
+    background-color: black;
+    font-size: 1rem;
+    justify-content: center;
+    align-items: center;
+    color: $mainColor;
+    border-radius: 10px;
+  }
+}
+
+.qr-copied-popup {
+  position: relative;
+
+  &::before {
+    content: "Copied!";
+    display: flex;
+    position: absolute;
+    top: 50;
+    left: 28;
+    width: 70px;
+    height: 30px;
+    background-color: black;
+    font-size: 1rem;
+    justify-content: center;
+    align-items: center;
+    color: $mainColor;
+    border-radius: 10px;
+  }
+}

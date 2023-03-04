@@ -13,4 +13,7 @@
 @import "modules/_header.css";
 @import "modules/_mobile-menu.css";
 @import "modules/_settings-modal.css";
+@import "modules/_icon.css";
 @import "modules/_tooltip.css";
+@import "modules/_loadingDots.css";
+@import "modules/_qr-code.css";

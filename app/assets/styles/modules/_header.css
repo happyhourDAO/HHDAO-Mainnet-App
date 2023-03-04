@@ -22,10 +22,18 @@ header {
 
     @mixin atSmall {
       display: inline-block;
+      margin-left: 5px;
+      transform: translateY(-20px);
+    }
+
+    @mixin atMedium {
+      margin-left: 5px;
+      transform: translateY(-20px);
     }
 
     @mixin atLarge {
-      transform: translateY(0);
+      margin-left: 5px;
+      transform: translateY(-20px);
     }
   }
 

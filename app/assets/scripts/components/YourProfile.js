@@ -1,15 +1,20 @@
 import React, { useEffect, useContext, useState } from "react"
 import { AiOutlineQuestionCircle, AiOutlinePlus, AiOutlineMore } from "react-icons/ai"
 import { IconContext } from "react-icons"
-import { MdCopyAll } from "react-icons/md"
+import { MdCopyAll, MdQrCodeScanner } from "react-icons/md"
 import { Tooltip } from "react-tooltip"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import { CopyToClipboard } from "react-copy-to-clipboard"
+import QRcodePopup from "./QRcodePopup"
 
 function YourProfile(props) {
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
+
+  // QR Code Popup
+  const [openHOURcontract_QRcode, setOpenHOURcontract_QRcode] = useState(false)
+  const [openDRNKcontract_QRcode, setOpenDRNKcontract_QRcode] = useState(false)
 
   function copiedPopup() {
     document.querySelector(".icon-copy").classList.toggle("icon")
@@ -34,6 +39,10 @@ function YourProfile(props) {
             $HOUR
             <AiOutlineQuestionCircle className="icon icon-more" id="HOUR-info" />
             <Tooltip anchorId="HOUR-info" place="top" className="tooltipExtra" classNameArrow="tooltipExtra__arrow" content="The $HOUR token is the earned utility token from the completion of a session initialization with a PDE." />
+            <div className="qr-code__wrapper">
+              <MdQrCodeScanner onClick={() => setOpenHOURcontract_QRcode(!openHOURcontract_QRcode)} className={"icon icon-qrCode " + (openHOURcontract_QRcode ? "icon-qrCode--open" : "")} />
+              {openHOURcontract_QRcode ? <QRcodePopup value={appState.HOURnetwork.contractObject.address} /> : ""}
+            </div>
             <AiOutlinePlus className="icon icon-add" />
           </div>
           <div className="modal-card__row-bottom">Balance: {appState.account.amountHOUR ? appState.account.amountHOUR : 0}</div>
@@ -43,9 +52,13 @@ function YourProfile(props) {
             $DRNK
             <AiOutlineQuestionCircle className="icon icon-more" id="DRNK-info" />
             <Tooltip anchorId="DRNK-info" place="top" className="tooltipExtra" classNameArrow="tooltipExtra__arrow" content="The $DRNK token is the official governance token of the happyhourDAO. Burn $HOUR to mint $DRNK." />
+            <div className="qr-code__wrapper">
+              <MdQrCodeScanner onClick={() => setOpenDRNKcontract_QRcode(!openDRNKcontract_QRcode)} className={"icon icon-qrCode " + (openDRNKcontract_QRcode ? "icon-qrCode--open" : "")} />
+              {openDRNKcontract_QRcode ? <QRcodePopup value={appState.DRNKnetwork.contractAddress} /> : ""}
+            </div>
             <AiOutlinePlus className="icon icon-add" />
           </div>
-          <div className="modal-card__row-bottom">Balance: {appState.account.amountDRNK ? appState.account.amountHOUR : 0}</div>
+          <div className="modal-card__row-bottom">Balance: {appState.account.amountDRNK ? appState.account.amountDRNK : 0}</div>
         </div>
         <div className="modal-card__row modal-card__row-4">
           <div className="modal-card__row-top modal-card__row-top--small-font">

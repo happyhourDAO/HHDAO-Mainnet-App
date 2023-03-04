@@ -19,3 +19,7 @@ button:hover {
   color: white;
   border-radius: 13px;
 }
+
+.button--disabled {
+  background: #1d293f;
+}

@@ -1,12 +1,15 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { AiOutlineQuestionCircle, AiOutlineMore } from "react-icons/ai"
-import { MdCopyAll } from "react-icons/md"
+import { MdCopyAll, MdQrCodeScanner } from "react-icons/md"
 import { IconContext } from "react-icons"
 import { Tooltip } from "react-tooltip"
 import CopyToClipboard from "react-copy-to-clipboard"
+import QRcodePopup from "./QRcodePopup"
 
 function PDE_Card({ index, setViewingStruct, setViewingCommission, total, PDEname, PDElocation, PDEaccesscode, PDEid, currentPage, setCurrentPage }) {
   const [copied, setCopied] = useState(false)
+
+  const [openPDEid_QRcode, setOpenPDEid_QRcode] = useState(false)
 
   function handleNextPage() {
     setCurrentPage(prev => prev + 1)
@@ -82,6 +85,10 @@ function PDE_Card({ index, setViewingStruct, setViewingCommission, total, PDEnam
                 <MdCopyAll className="icon icon-copy" />
               </span>
             </CopyToClipboard>
+            <div className="qr-code__wrapper">
+              <MdQrCodeScanner onClick={() => setOpenPDEid_QRcode(!openPDEid_QRcode)} className={"icon icon-qrCode " + (openPDEid_QRcode ? "icon-qrCode--open" : "")} />
+              {openPDEid_QRcode ? <QRcodePopup value={PDEid} /> : ""}
+            </div>
             <AiOutlineMore className="icon icon-next" />
           </div>
           <div className="modal-card__row-bottom">{PDEid}</div>

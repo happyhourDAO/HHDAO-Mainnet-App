@@ -13,6 +13,7 @@
   }
 
   &__bottom {
+    max-height: 361px;
     flex: 2;
     background-color: #131a2a;
     margin: 5px 2px 2px 2px;
@@ -63,7 +64,39 @@
     padding-top: 25px;
 
     &--overflow {
-      overflow-y: auto;
+      overflow-y: scroll;
+    }
+
+    &__results-row {
+      width: 100%;
+      height: 60px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid rgb(97, 97, 97);
+
+      &-top {
+        flex: 1;
+        font-family: $label;
+        color: #9e63ff;
+        position: relative;
+      }
+
+      &-bottom {
+        flex: 1;
+        font-family: $data;
+        color: white;
+
+        &--ellipsis {
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
     .input-box {
@@ -115,4 +148,11 @@
 
 .non-visible {
   display: none;
+}
+
+.usePrepare-error {
+  margin-top: 10px;
+  margin-left: 10px;
+  color: red;
+  font-size: 0.5rem;
 }

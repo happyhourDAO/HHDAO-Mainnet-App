@@ -34,7 +34,7 @@ function Dashboard(props) {
   }
 
   // Retrieve account data from WAGMI
-  const { address, status } = useAccount({
+  const { address, connector, status } = useAccount({
     onConnect({ address }) {
       console.log("useAccount hook RAN!", address)
     }
@@ -281,19 +281,19 @@ function Dashboard(props) {
             <section className="stats-board__rates">
               <h3 className="stats-board--label-font">Live Rates</h3>
               <p className="stats-board--gray-color stats-board--no-margin">
-                $HOUR / hour = <span className="stats-board__rates--flashing">100</span>
+                $HOUR / hour = <span className="stats-board__rates--flashing">{appState.HOURnetwork.HOURperhour}</span>
               </p>
               <p className="stats-board--gray-color stats-board--no-margin">
-                Happy Hour Fee = <span className="stats-board__rates--flashing">0.01</span> ETH
+                Happy Hour Fee = <span className="stats-board__rates--flashing">{appState.HOURnetwork.HappyHourFee}</span> ETH
               </p>
               <p className="stats-board--gray-color stats-board--no-margin">
-                HOUR burn minimum = <span className="stats-board__rates--flashing">2000</span> $HOUR
+                $HOUR burn minimum = <span className="stats-board__rates--flashing">{appState.HOURnetwork.HOUR2DRNKburnMinimum}</span> $HOUR
               </p>
               <p className="stats-board--gray-color stats-board--no-margin">
-                PDE commission = <span className="stats-board__rates--flashing">10%</span>
+                PDE commission = <span className="stats-board__rates--flashing">{Number(appState.HOURnetwork.PDEcommission).toLocaleString(undefined, { style: "percent", minimumFractionDigits: 0 })}</span>
               </p>
               <p className="stats-board--gray-color stats-board--no-margin">
-                $HOUR / $DRNK = <span className="stats-board__rates--flashing">1 / 10</span>
+                $HOUR / $DRNK = <span className="stats-board__rates--flashing">{appState.HOURnetwork.HOUR2DRNKratio}</span>
               </p>
             </section>
           </div>

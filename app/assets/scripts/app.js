@@ -60,7 +60,15 @@ function Main() {
       contractObject: null,
       totalPDE: null,
       totalCurrentDrinkers: null,
-      totalSupply: null
+      totalSupply: null,
+      HOUR2DRNKburnMinimum: 2000,
+      HOURperhour: 100,
+      HappyHourFee: 1 / 100,
+      PDEcommission: 10 / 100,
+      HOUR2DRNKratio: 1 / 10
+    },
+    DRNKnetwork: {
+      contractAddress: "0x89f1a702EEcFB47cF9289B3481349e1f38367C44"
     }
   }
 

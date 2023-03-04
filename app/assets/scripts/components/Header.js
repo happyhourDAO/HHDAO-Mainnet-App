@@ -36,7 +36,7 @@ function Header() {
     <>
       <header>
         <div className="logo">
-          <img src="./assets/images/happyhourDAO-logo-icon.svg" width="60" height="60" alt="Logo-Icon" />
+          <img src="./assets/images/happyhourDAO-logo-icon.svg" width="100" height="100" alt="Logo-Icon" />
 
           <span className="logo__version-text">v3.</span>
         </div>
