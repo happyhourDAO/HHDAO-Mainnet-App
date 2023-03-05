@@ -83,7 +83,11 @@ function OnboardPDE({ HOURabi }) {
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Event Result
-              <MdShare className="icon icon-share" />
+              <div className="icon-twitter">
+                <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Come%20spend%20your%20next%20happy%20hour%20at%20my%20PDE!&via=happyhourDAO">
+                  <MdShare className="icon icon-share" />
+                </a>
+              </div>
             </div>
             <div className="interface__function-field__results-row-bottom">You are a PDE owner!</div>
           </div>

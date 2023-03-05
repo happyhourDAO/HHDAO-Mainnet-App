@@ -61,7 +61,11 @@ function EndLITT({ HOURabi }) {
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Event Result
-              <MdShare className="icon icon-share" />
+              <div className="icon-twitter">
+                <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=I%20earned%20$HOUR%20by%20the%20hour!&via=happyhourDAO">
+                  <MdShare className="icon icon-share" />
+                </a>
+              </div>
             </div>
             <div className="interface__function-field__results-row-bottom">{hoursSpentDrinking ? "You just spent " + hoursSpentDrinking + " hours getting LITT!" : "Loading..."}</div>
           </div>

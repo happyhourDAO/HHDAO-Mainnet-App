@@ -62,7 +62,11 @@ function MintDRNK({ HOURabi }) {
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Event Result
-              <MdShare className="icon icon-share" />
+              <div className="icon-twitter">
+                <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Got%20$DRNK%20&via=happyhourDAO">
+                  <MdShare className="icon icon-share" />
+                </a>
+              </div>
             </div>
             <div className="interface__function-field__results-row-bottom">{HOURburned ? "You just burned " + HOURburned + " $HOUR." : "Burning..."}</div>
           </div>

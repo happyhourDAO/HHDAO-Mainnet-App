@@ -4,6 +4,7 @@ import { QrReader } from "react-qr-reader"
 function QRreaderPopup(props) {
   async function handleScannedResult(result, error) {
     if (result) {
+      props.setPDEid(result?.text)
       props.setScannedValue(result?.text)
       props.setOpenQRreader(!props.openQRreader)
     }

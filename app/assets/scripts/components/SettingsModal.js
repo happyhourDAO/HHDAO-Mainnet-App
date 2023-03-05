@@ -14,7 +14,7 @@ function SettingsModal(props) {
 
   return (
     <>
-      <div className="modal-card">{viewingStruct ? <PDE_Pagination viewingCommission={viewingCommission} setViewingCommission={setViewingCommission} setViewingStruct={setViewingStruct} /> : <YourProfile setViewingStruct={setViewingStruct} />}</div>
+      <div className="modal-card">{viewingStruct ? <PDE_Pagination viewingCommission={viewingCommission} setViewingCommission={setViewingCommission} setViewingStruct={setViewingStruct} /> : <YourProfile setViewingStruct={setViewingStruct} provider={props.provider} />}</div>
     </>
   )
 }

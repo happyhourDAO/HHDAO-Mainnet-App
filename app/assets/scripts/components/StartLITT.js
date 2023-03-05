@@ -89,7 +89,11 @@ function StartLITT({ HOURabi }) {
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Event Result
-              <MdShare className="icon icon-share" />
+              <div className="icon-twitter">
+                <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=I%20just%20started%20getting%20LITT!&via=happyhourDAO">
+                  <MdShare className="icon icon-share" />
+                </a>
+              </div>
             </div>
             <div className="interface__function-field__results-row-bottom">You are getting LITT!</div>
           </div>
@@ -128,7 +132,7 @@ function StartLITT({ HOURabi }) {
             <span>ID of PDE</span>
             <div className="qr-code__wrapper">
               <MdQrCodeScanner onClick={() => setOpenQRreader(!openQRreader)} className={"icon icon-qrCode icon-qrCode-reader " + (openQRreader ? "icon-qrCode--open" : "")} />
-              {openQRreader ? <QRreaderPopup setScannedValue={setScannedValue} openQRreader={openQRreader} setOpenQRreader={setOpenQRreader} /> : ""}
+              {openQRreader ? <QRreaderPopup setPDEid={setPDEid} setScannedValue={setScannedValue} openQRreader={openQRreader} setOpenQRreader={setOpenQRreader} /> : ""}
             </div>
           </div>
           <div className="input-box">

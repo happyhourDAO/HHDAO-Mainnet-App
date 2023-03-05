@@ -86,6 +86,12 @@
     transition: color 200ms ease-out;
   }
 
+  &-twitter {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   &:hover {
     cursor: pointer;
     color: white;

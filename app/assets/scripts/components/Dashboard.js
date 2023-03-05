@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState, useMemo } from "react"
+import React, { useEffect, useContext, useState, useMemo, useRef } from "react"
 import Footer from "./Footer"
 import InterfaceTop from "./InterfaceTop"
 import InterfaceBottom from "./InterfaceBottom"
@@ -32,6 +32,22 @@ function Dashboard(props) {
   function toggleSettings() {
     setOpen(!open)
   }
+
+  const settingsModalRef = useRef()
+
+  useEffect(() => {
+    let handler = e => {
+      if (!settingsModalRef.current.contains(e.target)) {
+        toggleSettings()
+      }
+    }
+
+    document.addEventListener("mousedown", handler)
+
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
+  })
 
   // Retrieve account data from WAGMI
   const { address, connector, status } = useAccount({
@@ -239,8 +255,13 @@ function Dashboard(props) {
       {appState.account.address ? <SideHooks /> : null}
       <div className="container">
         <div className="dashboard">
-          {open ? <SettingsModal toggleSettings={toggleSettings} /> : ""}
-
+          {open ? (
+            <div ref={settingsModalRef}>
+              <SettingsModal provider={props.provider} />
+            </div>
+          ) : (
+            ""
+          )}
           <div className="dashboard__left-module">
             <section className="interface interface__top">
               <InterfaceTop />
