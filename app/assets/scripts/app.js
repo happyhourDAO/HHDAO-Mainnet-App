@@ -57,6 +57,7 @@ function Main() {
       commissionArray: []
     },
     HOURnetwork: {
+      contractAddress: "",
       contractObject: null,
       totalPDE: null,
       totalCurrentDrinkers: null,
@@ -112,6 +113,9 @@ function Main() {
         return
       case "setHOURcontract":
         draft.HOURnetwork.contractObject = action.data
+        return
+      case "setHOURcontractAddress":
+        draft.HOURnetwork.contractAddress = action.data
         return
       case "setHOURnetworkStats":
         draft.HOURnetwork.totalPDE = action.data[0].toNumber()

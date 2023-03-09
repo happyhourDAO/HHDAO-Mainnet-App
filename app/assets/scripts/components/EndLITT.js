@@ -47,7 +47,7 @@ function EndLITT({ HOURabi }) {
   return (
     <>
       <div className={"interface__function-title " + (appState.functionIndex == 3 ? "" : "non-visible")}>
-        <p>End $HOUR.</p>
+        <p>End LITT.</p>
       </div>
 
       {isLoading ? (

@@ -35,6 +35,14 @@
     color: white;
     line-height: 1.1rem;
     padding: 10px 1px 5px 1px;
+
+    @mixin atSmall {
+      font-size: 0.8rem;
+    }
+
+    @mixin atLarge {
+      font-size: 1rem;
+    }
   }
 
   &__function-title {

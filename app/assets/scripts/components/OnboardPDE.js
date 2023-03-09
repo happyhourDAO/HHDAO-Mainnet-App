@@ -107,7 +107,9 @@ function OnboardPDE({ HOURabi }) {
                   <MdCopyAll className="icon icon-copy" />
                 </span>
               </CopyToClipboard>
-              <MdReadMore className="icon icon-read" />
+              <a href="https://mirror.xyz/0x2b776aa3C2389D6a3B7b11cd99Fdb94190bAF75b/l1ZcyqpInuxp_4WpkVCGFINWhXHpcmIRwBK-QQCZ4hU" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{PDEid ? PDEid : "Generating PDE ID..."}</div>
           </div>
@@ -123,7 +125,9 @@ function OnboardPDE({ HOURabi }) {
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Notes
-              <MdReadMore className="icon icon-read" />
+              <a href="https://mirror.xyz/0x2b776aa3C2389D6a3B7b11cd99Fdb94190bAF75b/l1ZcyqpInuxp_4WpkVCGFINWhXHpcmIRwBK-QQCZ4hU" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom">As a PDE owner, you are eligible to earn commission on $HOUR earned by Drinkers.</div>
           </div>

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import { SiTwitter, SiGithub, SiDiscord, SiGitbook } from "react-icons/si"
 import { IconContext } from "react-icons"
-import { Link } from "react-router-dom"
 
 function Footer() {
   return (

@@ -105,14 +105,18 @@ function StartLITT({ HOURabi }) {
                   <MdCopyAll className="icon icon-copy" />
                 </span>
               </CopyToClipboard>
-              <MdReadMore className="icon icon-read" />
+              <a href="https://mirror.xyz/0x2b776aa3C2389D6a3B7b11cd99Fdb94190bAF75b/Xd9MdUjalXfpZmKzPPWAQ60V3-RvziU7L62gfNRGNOo" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{appState.account.currentDrinkingID > 1 ? appState.account.currentDrinkingID : "Serving your Drinking ID..."}</div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Notes
-              <MdReadMore className="icon icon-read" />
+              <a href="https://mirror.xyz/0x2b776aa3C2389D6a3B7b11cd99Fdb94190bAF75b/Xd9MdUjalXfpZmKzPPWAQ60V3-RvziU7L62gfNRGNOo" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom">LITT Sessions are only valid for 8 hours. You'll need to end your LITT session before 8 hours. Drink responsibly.</div>
           </div>

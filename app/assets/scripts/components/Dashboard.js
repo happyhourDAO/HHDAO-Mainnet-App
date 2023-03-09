@@ -5,6 +5,7 @@ import InterfaceBottom from "./InterfaceBottom"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import { ethers } from "ethers"
+import { Link } from "react-router-dom"
 
 // IMPORTING WAGMI REACT HOOKS
 import { useBalance } from "wagmi"
@@ -92,6 +93,7 @@ function Dashboard(props) {
 
   useEffect(() => {
     appDispatch({ type: "setHOURcontract", data: HOURcontract })
+    appDispatch({ type: "setHOURcontractAddress", data: HOURcontract.address })
     console.log("useEffect for setting HOUR contract RAN!")
   }, [HOURcontract])
 
@@ -274,7 +276,9 @@ function Dashboard(props) {
             <section className="stats-board__description">
               <img onClick={toggleSettings} className="stats-board__description-icon" src="./assets/images/Settings-Icon.svg" alt="Settings-Icon" />
               <h3 className="stats-board--no-margin stats-board--label-font">About</h3>
-              <p className="stats-board--gray-color">The happyhourDAO will be powered by the Happy Hour Protocol Engine, which is the heart and soul of the whole ecosystem. This is what will glue together the drinkers, Participating Drinking Establishments &#40;PDEs&#41;, devs, investors, and other stakeholders.</p>
+              <p style={{ fontSize: ".9em" }} className="stats-board--gray-color">
+                The happyhourDAO Dashboard is your virtual interface with the Happy Hour Protocol Engine. This will allow you to interact with the HOURv3 smart contract to onboard as a PDE, start & end a LITT session, and to burn $HOUR for $DRNK. Click the settings gear icon &#40;on the top right&#41; to view your current status in the ecosystem.
+              </p>
             </section>
             <section className="stats-board__index">
               <p className="stats-board__index-container">
@@ -291,12 +295,12 @@ function Dashboard(props) {
             <section className="stats-board__contracts">
               <h3 className="stats-board--label-font">Deployed Contracts</h3>
               <p className="stats-board--gray-color stats-board--no-margin">HappyHourProtocolv3:</p>
-              <a href="" className="stats-board__contracts--link-styling">
-                0x6e164B660fc4e6bB0298bAE28D62622E47C2C834
+              <a href={"https://goerli.etherscan.io/address/" + (appState.HOURnetwork.contractAddress ? appState.HOURnetwork.contractAddress : "")} target="_blank" className="stats-board__contracts--link-styling">
+                {appState.HOURnetwork.contractAddress ? appState.HOURnetwork.contractAddress : "Loading..."}
               </a>
               <p className="stats-board--gray-color stats-board--no-margin-bottom">DRNKgovernance:</p>
-              <a href="" className="stats-board__contracts--link-styling">
-                0x89f1a702eecfb47cf9289b3481349e1f38367c44
+              <a href={"https://goerli.etherscan.io/address/" + appState.DRNKnetwork.contractAddress} target="_blank" className="stats-board__contracts--link-styling">
+                {appState.DRNKnetwork.contractAddress}
               </a>
             </section>
             <section className="stats-board__rates">
