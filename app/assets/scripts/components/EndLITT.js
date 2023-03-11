@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
-import { useDebounce } from "use-debounce"
 import { MdReadMore, MdShare } from "react-icons/md"
 
 // IMPORTING WAGMI REACT HOOKS
@@ -19,7 +18,7 @@ function EndLITT({ HOURabi }) {
   const iface = new ethers.utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
+    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
     abi: HOURabi,
     functionName: "endHOUR",
     args: [appState.account.address],
@@ -35,7 +34,7 @@ function EndLITT({ HOURabi }) {
       const eventResults = iface.parseLog({ data, topics })
       console.log(eventResults)
       setHoursSpentDrinking(eventResults.args[0].toString())
-      setHOURearned(eventResults.args[1].toString())
+      setHOURearned(parseInt(eventResults.args[1].toString()) / 10 ** 18)
       appDispatch({ type: "setDrinkingID", value: 0 })
     }
   }
@@ -72,14 +71,18 @@ function EndLITT({ HOURabi }) {
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Total $HOUR Earned
-              <MdReadMore className="icon icon-read" />
+              <a href="https://happy-hour-1.gitbook.io/happyhourdao/the-happyhourdao/usdhour-tokenomics" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{HOURearned ? "You just earned " + HOURearned + " $HOUR tokens." : "Loading..."}</div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Notes
-              <MdReadMore className="icon icon-read" />
+              <a href="https://happy-hour-1.gitbook.io/happyhourdao/the-happyhourdao/usdhour-tokenomics" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom">Use your $HOUR tokens to gain rewards or burn them to mint the $DRNK governance token.</div>
           </div>

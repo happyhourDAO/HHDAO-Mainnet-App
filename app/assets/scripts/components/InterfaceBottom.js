@@ -1,6 +1,4 @@
-import React, { useEffect, useContext } from "react"
-import DispatchContext from "../DispatchContext"
-import StateContext from "../StateContext"
+import React from "react"
 import { IconContext } from "react-icons"
 
 // IMPORTING REACT COMPONENTS
@@ -13,9 +11,6 @@ import MintDRNK from "./MintDRNK"
 const HOURabi = require("../contracts/HOURv3.json")
 
 function InterfaceBottom() {
-  const appDispatch = useContext(DispatchContext)
-  const appState = useContext(StateContext)
-
   return (
     <>
       <IconContext.Provider value={{ size: "1.2em" }}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useContext } from "react"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 

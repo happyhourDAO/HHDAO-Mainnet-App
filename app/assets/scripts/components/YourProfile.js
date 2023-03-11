@@ -1,16 +1,14 @@
-import React, { useEffect, useContext, useState } from "react"
+import React, { useContext, useState } from "react"
 import { AiOutlineQuestionCircle, AiOutlinePlus, AiOutlineMore } from "react-icons/ai"
 import { IconContext } from "react-icons"
 import { MdCopyAll, MdQrCodeScanner } from "react-icons/md"
 import { Tooltip } from "react-tooltip"
-import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import QRcodePopup from "./QRcodePopup"
 import ViewDrinkingLocation_Card from "./ViewDrinkingLocation_Card"
 
 function YourProfile(props) {
-  const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
   // Viewing Drinking Location if currentDrinkingID == true

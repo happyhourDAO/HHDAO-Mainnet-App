@@ -23,10 +23,10 @@ import About from "./components/About"
 import { EthereumClient, modalConnectors, walletConnectProvider } from "@web3modal/ethereum"
 import { Web3Modal } from "@web3modal/react"
 import { configureChains, createClient, WagmiConfig } from "wagmi"
-import { arbitrum, mainnet, polygon, goerli, bsc, optimism, sepolia } from "wagmi/chains"
+import { mainnet } from "wagmi/chains"
 
 // CONFIGURE WAGMI & WEB3MODAL
-const chains = [goerli]
+const chains = [mainnet]
 
 // wagmi client
 const { provider } = configureChains(chains, [walletConnectProvider({ projectId: "b611d14b3c75661ee3a2d0bd6fa02451" })])
@@ -69,7 +69,7 @@ function Main() {
       HOUR2DRNKratio: 1 / 10
     },
     DRNKnetwork: {
-      contractAddress: "0x89f1a702EEcFB47cF9289B3481349e1f38367C44"
+      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0"
     }
   }
 

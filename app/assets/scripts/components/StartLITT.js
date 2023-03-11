@@ -26,7 +26,7 @@ function StartLITT({ HOURabi }) {
   const iface = new ethers.utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
+    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
     abi: HOURabi,
     functionName: "startHOUR",
     args: [PDEid_debounced, accessCode_debounced],
@@ -132,7 +132,7 @@ function StartLITT({ HOURabi }) {
           className={"interface__function-field " + (appState.functionIndex == 2 ? "" : "non-visible")}
         >
           <div className="input-box">
-            <input type="text" value={scannedValue ? scannedValue : ""} onChange={e => setPDEid(e.target.value)} required />
+            <input type="text" value={scannedValue ? scannedValue : undefined} onChange={e => setPDEid(e.target.value)} required />
             <span>ID of PDE</span>
             <div className="qr-code__wrapper">
               <MdQrCodeScanner onClick={() => setOpenQRreader(!openQRreader)} className={"icon icon-qrCode icon-qrCode-reader " + (openQRreader ? "icon-qrCode--open" : "")} />

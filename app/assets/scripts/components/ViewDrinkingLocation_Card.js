@@ -4,9 +4,6 @@ import { IconContext } from "react-icons"
 import { Tooltip } from "react-tooltip"
 import StateContext from "../StateContext"
 
-// IMPORTING OF HOURv3 & DRNKv3 CONTRACT ABI
-const HOURabi = require("../contracts/HOURv3.json")
-
 function ViewDrinkingLocation_Card(props) {
   const appState = useContext(StateContext)
 

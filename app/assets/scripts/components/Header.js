@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useContext } from "react"
+import React, { useRef, useState, useContext } from "react"
 import { NavLink } from "react-router-dom"
 import { FaBars, FaTimes } from "react-icons/fa"
 import { IconContext } from "react-icons"
@@ -36,14 +36,13 @@ function Header() {
     <>
       <header>
         <div className="logo">
-          <img src="./assets/images/happyhourDAO-logo-icon.svg" width="100" height="100" alt="Logo-Icon" />
-
+          <NavLink to="/">
+            <img src="./assets/images/happyhourDAO-logo-icon.svg" width="100" height="100" className="logo-icon" alt="Logo-Icon" />
+          </NavLink>
           <span className="logo__version-text">v3.</span>
         </div>
 
         <div className="menu-content">
-          {/* <button className="connect-wallet-btn">Connect</button> */}
-
           <nav ref={headerNavRef} className="header-nav">
             <NavLink to="/" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
               Home

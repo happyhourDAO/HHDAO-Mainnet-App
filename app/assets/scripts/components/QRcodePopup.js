@@ -1,11 +1,8 @@
-import React, { useEffect, useContext } from "react"
+import React from "react"
 import QRCode from "react-qr-code"
-import StateContext from "../StateContext"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 
 function QRcodePopup(props) {
-  const appState = useContext(StateContext)
-
   function QRcopiedPopup() {
     document.querySelector(".qr-code__wrapper__container").classList.toggle("qr-copied-popup")
 

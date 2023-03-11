@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react"
-import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import { useDebounce } from "use-debounce"
 import { CopyToClipboard } from "react-copy-to-clipboard"
@@ -11,7 +10,6 @@ import { useContractWrite } from "wagmi"
 import { ethers } from "ethers"
 
 function OnboardPDE({ HOURabi }) {
-  const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
   const [name, setName] = useState("")
@@ -27,7 +25,7 @@ function OnboardPDE({ HOURabi }) {
   const iface = new ethers.utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
+    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
     abi: HOURabi,
     functionName: "onboardPDE",
     args: [name_debounced, location_debounced, appState.account.address, accessCode_debounced],

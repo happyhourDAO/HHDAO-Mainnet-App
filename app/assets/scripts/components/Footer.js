@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { SiTwitter, SiGithub, SiDiscord, SiGitbook } from "react-icons/si"
 import { IconContext } from "react-icons"
 

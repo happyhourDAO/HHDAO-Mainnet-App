@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react"
-import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import { useDebounce } from "use-debounce"
 import { MdReadMore, MdShare } from "react-icons/md"
@@ -10,7 +9,6 @@ import { useContractWrite } from "wagmi"
 import { ethers } from "ethers"
 
 function MintDRNK({ HOURabi }) {
-  const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
   const [burnAmount, setBurnAmount] = useState(0)
@@ -22,10 +20,10 @@ function MintDRNK({ HOURabi }) {
   const iface = new ethers.utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
+    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
     abi: HOURabi,
     functionName: "mintyDRNK",
-    args: ["0x89f1a702EEcFB47cF9289B3481349e1f38367C44", appState.account.address, burnAmount_debounced],
+    args: ["0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0", appState.account.address, burnAmount_debounced],
     enabled: burnAmount_debounced
   })
 
@@ -73,14 +71,18 @@ function MintDRNK({ HOURabi }) {
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Total $DRNK Minted
-              <MdReadMore className="icon icon-read" />
+              <a href="https://happy-hour-1.gitbook.io/happyhourdao/the-happyhourdao/usddrnk-governance-tokenomics" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{DRNKminted ? "You just minted " + DRNKminted + " $DRNK." : "Minting..."}</div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
               Notes
-              <MdReadMore className="icon icon-read" />
+              <a href="https://happy-hour-1.gitbook.io/happyhourdao/the-happyhourdao/usddrnk-governance-tokenomics" target="_blank">
+                <MdReadMore className="icon icon-read" />
+              </a>
             </div>
             <div className="interface__function-field__results-row-bottom">Use your $DRNK governance tokens to participate in the happyhourDAO ecosystem.</div>
           </div>

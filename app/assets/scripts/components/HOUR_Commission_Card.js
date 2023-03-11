@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { AiOutlineQuestionCircle, AiOutlineMore } from "react-icons/ai"
+import React, { useState } from "react"
+import { AiOutlineQuestionCircle } from "react-icons/ai"
 import { IconContext } from "react-icons"
 import { Tooltip } from "react-tooltip"
 

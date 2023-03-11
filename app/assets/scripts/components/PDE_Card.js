@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { AiOutlineQuestionCircle, AiOutlineMore } from "react-icons/ai"
 import { MdCopyAll, MdQrCodeScanner } from "react-icons/md"
 import { IconContext } from "react-icons"
@@ -7,8 +7,6 @@ import CopyToClipboard from "react-copy-to-clipboard"
 import QRcodePopup from "./QRcodePopup"
 
 function PDE_Card({ index, setViewingStruct, setViewingCommission, total, PDEname, PDElocation, PDEaccesscode, PDEid, currentPage, setCurrentPage }) {
-  const [copied, setCopied] = useState(false)
-
   const [openPDEid_QRcode, setOpenPDEid_QRcode] = useState(false)
 
   function handleNextPage() {

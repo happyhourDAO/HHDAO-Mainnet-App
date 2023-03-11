@@ -1,32 +1,9 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useState, useContext } from "react"
 import HOUR_Commission_Pagination from "./HOUR_Commission_Pagination"
 import PDE_Card from "./PDE_Card"
-import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 
-// const structArray = [
-//   {
-//     PDEname: "test1PDE",
-//     PDElocation: "test1Location",
-//     PDEaccesscode: 69,
-//     PDEid: "0xab58fd74ff68be1d3d2f8316d73eff1cb94ec21c2c308908a2a214aea2a16dc7"
-//   },
-//   {
-//     PDEname: "test2PDE",
-//     PDElocation: "test2Location",
-//     PDEaccesscode: 123,
-//     PDEid: "0xab58fd74ff68be1d3d2f8316d73eff1cb94ec21c2c308908a2a214aea2a16dc7"
-//   },
-//   {
-//     PDEname: "test3PDE",
-//     PDElocation: "test3Location",
-//     PDEaccesscode: 666,
-//     PDEid: "0xab58fd74ff68be1d3d2f8316d73eff1cb94ec21c2c308908a2a214aea2a16dc7"
-//   }
-// ]
-
 function PDE_Pagination({ viewingCommission, setViewingStruct, setViewingCommission }) {
-  const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
   const [currentPage, setCurrentPage] = useState(1)

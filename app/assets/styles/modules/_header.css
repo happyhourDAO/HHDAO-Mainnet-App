@@ -13,6 +13,12 @@ header {
 .logo {
   transform: translateY(-15px);
 
+  &-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__version-text {
     margin-left: 20px;
     font-family: $smooch;

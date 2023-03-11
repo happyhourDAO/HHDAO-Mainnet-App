@@ -1,20 +1,15 @@
-import React, { useEffect, useContext, useState, useMemo, useRef } from "react"
+import React, { useEffect, useContext, useState, useRef } from "react"
 import Footer from "./Footer"
 import InterfaceTop from "./InterfaceTop"
 import InterfaceBottom from "./InterfaceBottom"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
-import { ethers } from "ethers"
-import { Link } from "react-router-dom"
 
 // IMPORTING WAGMI REACT HOOKS
 import { useBalance } from "wagmi"
 import { useAccount } from "wagmi"
 import { useContract } from "wagmi"
-import { useContractRead } from "wagmi"
 import { useContractReads } from "wagmi"
-import { useContractInfiniteReads, paginatedIndexesConfig } from "wagmi"
-import { BigNumber } from "ethers"
 
 // IMPORTING COMPONENTS
 import SideHooks from "./SideHooks"
@@ -50,7 +45,8 @@ function Dashboard(props) {
     }
   })
 
-  // Retrieve account data from WAGMI
+  // RETRIEVE ACCOUNT ADDRESS
+
   const { address, connector, status } = useAccount({
     onConnect({ address }) {
       console.log("useAccount hook RAN!", address)
@@ -62,10 +58,12 @@ function Dashboard(props) {
     console.log("useEffect to set address RAN!")
   }, [address])
 
+  // RETRIEVE ACCOUNT $HOUR & $DRNK BALANCES
+
   const { data, isLoading } = useBalance({
     address,
-    token: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
-    watch: false,
+    token: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
+    watch: true,
     onSettled(data, error) {
       console.log("useBalance HOUR hook RAN!", { data, error })
       appDispatch({ type: "setAmountHOUR", value: data.formatted })
@@ -74,8 +72,8 @@ function Dashboard(props) {
 
   const { dataDRNK, isLoadingDRNK } = useBalance({
     address,
-    token: "0x89f1a702EEcFB47cF9289B3481349e1f38367C44",
-    watch: false,
+    token: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0",
+    watch: true,
     onSettled(data, error) {
       console.log("useBalance DRNK hook RAN!", { data, error })
 
@@ -86,7 +84,7 @@ function Dashboard(props) {
   // RETRIEVE CONTRACT DATA VIA WAGMI
 
   const HOURcontract = useContract({
-    address: "0x6e164B660fc4e6bB0298bAE28D62622E47C2C834",
+    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
     abi: HOURabi,
     signerOrProvider: props.provider
   })
@@ -97,7 +95,7 @@ function Dashboard(props) {
     console.log("useEffect for setting HOUR contract RAN!")
   }, [HOURcontract])
 
-  // CONTRACT READ METHODS
+  // RETRIEVE happyhourDAO NETWORK STATS
 
   const HOURcontract_multipleREAD = useContractReads({
     contracts: [
@@ -118,12 +116,14 @@ function Dashboard(props) {
       }
     ],
     allowFailure: true,
-    watch: false,
+    watch: true,
     onSettled(data) {
       appDispatch({ type: "setHOURnetworkStats", data: data })
       console.log("useContractReads hook RAN!", data)
     }
   })
+
+  // VERIFY PDE OWNERSHIP & INDEX ARRAY
 
   async function verifyPDEownership() {
     let array = []
@@ -153,6 +153,8 @@ function Dashboard(props) {
 
     console.log("useEffect for verifyPDEownership RAN!")
   }, [appState.account.address, appState.HOURnetwork.totalPDE])
+
+  // RETRIEVE PDE DETAILS ARRAY
 
   async function PDEdetails_mapping() {
     let promiseArray = []
@@ -187,6 +189,8 @@ function Dashboard(props) {
 
     return promiseArray
   }
+
+  // RETRIEVE HISTORICAL PDE COMMISSION AMOUNTS
 
   async function retrieve_historical_PDE_commission(PDE_i) {
     let historical_HOUR_commission_earned = 0
@@ -264,6 +268,7 @@ function Dashboard(props) {
           ) : (
             ""
           )}
+
           <div className="dashboard__left-module">
             <section className="interface interface__top">
               <InterfaceTop />
@@ -295,11 +300,11 @@ function Dashboard(props) {
             <section className="stats-board__contracts">
               <h3 className="stats-board--label-font">Deployed Contracts</h3>
               <p className="stats-board--gray-color stats-board--no-margin">HappyHourProtocolv3:</p>
-              <a href={"https://goerli.etherscan.io/address/" + (appState.HOURnetwork.contractAddress ? appState.HOURnetwork.contractAddress : "")} target="_blank" className="stats-board__contracts--link-styling">
+              <a href={"https://etherscan.io/address/" + (appState.HOURnetwork.contractAddress ? appState.HOURnetwork.contractAddress : "")} target="_blank" className="stats-board__contracts--link-styling">
                 {appState.HOURnetwork.contractAddress ? appState.HOURnetwork.contractAddress : "Loading..."}
               </a>
               <p className="stats-board--gray-color stats-board--no-margin-bottom">DRNKgovernance:</p>
-              <a href={"https://goerli.etherscan.io/address/" + appState.DRNKnetwork.contractAddress} target="_blank" className="stats-board__contracts--link-styling">
+              <a href={"https://etherscan.io/address/" + appState.DRNKnetwork.contractAddress} target="_blank" className="stats-board__contracts--link-styling">
                 {appState.DRNKnetwork.contractAddress}
               </a>
             </section>
