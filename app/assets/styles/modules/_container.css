@@ -24,10 +24,39 @@
   width: 100%;
   min-height: 100vh;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
+  flex-direction: column;
   position: relative;
   background-size: 300%;
   background-image: linear-gradient(45deg, black, rgb(5, 5, 48));
   animation: bg-animation 30s infinite alternate;
+  font-family: $data;
+  font-size: 3rem;
+  padding-left: 7vw;
+  color: white;
+
+  &__line {
+    margin-top: 4vh;
+  }
+
+  @mixin atLargest {
+    font-size: 4rem;
+  }
+}
+
+.gradient-hover {
+  background-image: linear-gradient(45deg, #845ec2, #d65db1, #ff6f91, #ff9671, #ffc75f, #f9f871);
+  background-size: 300%;
+  background-position: left;
+  transition: background-position 1s, border-radius 500ms;
+  border-radius: 21px;
+  padding: 7px;
+
+  &:hover,
+  &:focus {
+    background-position: right;
+    cursor: pointer;
+    border-radius: 0px;
+  }
 }
