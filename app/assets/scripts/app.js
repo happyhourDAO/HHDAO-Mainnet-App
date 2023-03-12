@@ -140,7 +140,6 @@ function Main() {
                 <Route path="/source" element={<Source />} />
                 <Route path="/about" element={<About />} />
               </Routes>
-              <Footer />
             </BrowserRouter>
           </DispatchContext.Provider>
         </StateContext.Provider>

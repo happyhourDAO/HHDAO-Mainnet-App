@@ -19,3 +19,15 @@
     background-position: right;
   }
 }
+
+.container__hero-component-2 {
+  width: 100%;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  background-size: 300%;
+  background-image: linear-gradient(45deg, black, rgb(5, 5, 48));
+  animation: bg-animation 30s infinite alternate;
+}

@@ -1,5 +1,6 @@
 .hero {
-  &_title {
+  &__title {
+    font-family: $data;
     font-size: 1rem;
 
     @mixin atSmall {
@@ -11,7 +12,58 @@
     }
 
     @mixin atLarge {
-      font-size: 5rem;
+      font-size: 3.3rem;
     }
+  }
+
+  &__subtitle {
+    font-family: $label;
+    color: white;
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+
+  &__subtitle-brief {
+    font-family: $data;
+    color: gray;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    width: 70%;
+
+    &__left-block {
+      flex: 0.8;
+      border-right: 1px solid white;
+    }
+
+    &__right-block {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.hero-component-1 {
+  width: 80vw;
+  height: 600px;
+  display: flex;
+
+  &__left-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__right-block {
+    flex: 2;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @mixin atLargest {
+    width: 60vw;
   }
 }
