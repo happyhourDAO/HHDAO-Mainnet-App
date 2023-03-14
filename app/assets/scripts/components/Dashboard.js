@@ -271,6 +271,9 @@ function Dashboard(props) {
 
           <div className="dashboard__left-module">
             <section className="interface interface__top">
+              <div className="network-status">
+                mainnet &#91;eip155:1&#93;: <div className={"network-status__circle " + (appState.HOURnetwork.contractObject ? "network-status__circle--connected" : "network-status__circle--disconnected")}></div>
+              </div>
               <InterfaceTop />
             </section>
             <section className="interface interface__bottom">

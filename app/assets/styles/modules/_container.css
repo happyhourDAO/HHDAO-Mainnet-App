@@ -134,6 +134,43 @@
   }
 }
 
+.container__hero-component-last {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+  background-color: white;
+
+  &__content {
+    color: black;
+    width: 50vw;
+    display: flex;
+
+    &-text {
+      flex: 0.85;
+      font-family: $grafitti;
+      font-size: 1.6rem;
+      letter-spacing: 1.5px;
+      border-right: 1px solid rgb(182, 182, 182);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-button {
+      flex: 1;
+      font-family: $data;
+      font-size: 1.3rem;
+    }
+
+    @mixin atLargest {
+      width: 35vw;
+    }
+  }
+}
+
 .radial-gradient-background {
   width: 80vw;
   height: 90vh;
@@ -168,4 +205,12 @@
     cursor: pointer;
     border-radius: 0px;
   }
+}
+
+.gradient-text {
+  background-image: linear-gradient(45deg, #845ec2, #d65db1, #ff6f91, #ff9671, #ffc75f, #f9f871);
+  background-clip: text;
+  color: transparent;
+  background-size: 300%;
+  animation: bg-animation 2s infinite alternate;
 }
