@@ -45,6 +45,115 @@
   }
 }
 
+.container__hero-component-3 {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+
+  &__content {
+    padding: 3vh 7vw;
+    color: white;
+    font-size: 1.8rem;
+    text-align: justify;
+    background: rgba(165, 165, 165, 0.452);
+    backdrop-filter: blur(30px);
+  }
+}
+
+.container__hero-component-4 {
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: rgb(5, 5, 48);
+  overflow: hidden;
+}
+
+.container__hero-component-5 {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(5, 5, 48);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-family: $label;
+}
+
+.scroll {
+  white-space: nowrap;
+  margin: 0 2em;
+}
+
+.scroll div {
+  display: flex;
+  gap: 2em;
+}
+
+.scroll p {
+  font-size: 5em;
+  color: $mainColor;
+  font-weight: bold;
+  margin-bottom: 0;
+  line-height: 10px;
+}
+
+.RightToLeft {
+  animation: RightToLeft 10s infinite linear;
+}
+
+@keyframes RightToLeft {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-50.35%);
+  }
+}
+
+.LeftToRight {
+  animation: LeftToRight 10s infinite linear;
+}
+
+@keyframes LeftToRight {
+  from {
+    transform: translateX(-46.9%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.radial-gradient-background {
+  width: 80vw;
+  height: 90vh;
+  border-radius: 21px;
+  background: linear-gradient(360deg, #00c9ff 0%, #92fe9d 100%);
+  transform: translateY(8vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &--flipped {
+    width: 80vw;
+    height: 90vh;
+    border-radius: 21px;
+    background: linear-gradient(180deg, #00c9ff 0%, #92fe9d 100%);
+    transform: translateY(-8vh);
+  }
+}
+
 .gradient-hover {
   background-image: linear-gradient(45deg, #845ec2, #d65db1, #ff6f91, #ff9671, #ffc75f, #f9f871);
   background-size: 300%;
