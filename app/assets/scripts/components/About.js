@@ -32,11 +32,13 @@ function About() {
       <div className="container">
         <div className="hero-component-1">
           <div style={{ marginRight: "17px" }} className="hero-component-1__left-block">
-            <span className="left-block__title">Who Are We?</span>
+            <span className="left-block__title">Who We Are</span>
             <span className="left-block__subtitle">Just a bunch of anon degens 👋 that have identified a gap between the essence of good times and web3.</span>
-            <span className="left-block__subtitle">We're just here for good times. 🍹</span>
-            <a style={{ textDecoration: "none" }} href="https://twitter.com/happyhourDAO" target="_blank">
-              <button style={{ marginTop: "10px", width: "50%" }}>Follow Us</button>
+            <span style={{ color: "white", fontSize: "1.2rem" }} className="left-block__subtitle">
+              We're just here for good times. 🍹
+            </span>
+            <a style={{ textDecoration: "none", width: "50%" }} href="https://twitter.com/happyhourDAO" target="_blank">
+              <button style={{ marginTop: "10px" }}>Follow Us</button>
             </a>
           </div>
           <div style={{ marginLeft: "15px" }} className="hero-component-1__right-block">
