@@ -15,7 +15,7 @@ let arrayFAQ = [
     answer: "When enough $HOUR tokens have been accumulated, drinkers can then burn them in exchange for $DRNK, which is the governance token of the happyhourDAO. The governance token of $DRNK will enable voting rights, HHIP (happy hour improvement proposals) requests and approvals, premium access to other whitelist nightlife events, and other premium benefits. The larger amount of $DRNK governance tokens owned allows for a larger percentage of influence you can have on any happyhourDAO participation."
   },
   {
-    question: "Who can participate in the happyhourDAO ecosystem?",
+    question: "Who can participate in the ecosystem?",
     answer: "From the local bar, the city's premier club, the skyline lounge, the speakeasy, the hotel restaurant, and etc. to the local dive bar goer, the fist pumping clubber, the high class fancy rooftop lounger, or the occasional casual drinker… this is the DAO for you."
   }
 ]

@@ -1,6 +1,26 @@
 import React, { useContext } from "react"
 import Footer from "./Footer"
 import StateContext from "../StateContext"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { duotoneSea } from "react-syntax-highlighter/dist/esm/styles/prism"
+
+let codeString = `function startHOUR(uint _PDEid, uint _accessCode) public payable {
+
+  bool validPDE = false;
+
+  for (uint i = 0; i < pdes.length; i++) {
+      if (pdes[i]._PDEid == _PDEid && pdes[i]._accessCode == _accessCode) {
+          validPDE = true;
+      }
+  }
+
+  require(validPDE == true);
+  require(msg.value == happyHourFee * (10 ** 16), "Invalid Happy Hour Fee.");
+  givePoolDrinkingId();
+  drinkingIDtoPDEid[drinkingID[msg.sender]] = _PDEid;
+  happyHourFeePool += 1;
+  timeIN = block.timestamp;
+}`
 
 function Source() {
   const appState = useContext(StateContext)
@@ -29,7 +49,11 @@ function Source() {
               <button style={{ marginTop: "10px" }}>Our Github</button>
             </a>
           </div>
-          <div className="hero-component-1__right-block"></div>
+          <div className="hero-component-1__right-block">
+            <SyntaxHighlighter language="solidity" style={duotoneSea} showLineNumbers={true} customStyle={{ borderRadius: "7px" }}>
+              {codeString}
+            </SyntaxHighlighter>
+          </div>
         </div>
       </div>
       <Footer />
