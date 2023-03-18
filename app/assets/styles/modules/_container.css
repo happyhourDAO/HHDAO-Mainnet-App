@@ -57,12 +57,17 @@
   overflow: hidden;
 
   &__content {
+    width: 100%;
+    height: 100%;
     padding: 3vh 7vw;
     color: white;
     font-size: 1.8rem;
     text-align: justify;
     background: rgba(165, 165, 165, 0.452);
     backdrop-filter: blur(30px);
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 }
 
@@ -175,12 +180,9 @@
   width: 80vw;
   height: 90vh;
   border-radius: 21px;
-  background: linear-gradient(360deg, #00c9ff 0%, #92fe9d 100%);
+  background-image: linear-gradient(50deg, hsl(240deg 100% 20%) 0%, hsl(256deg 89% 25%) 4%, hsl(261deg 77% 31%) 7%, hsl(265deg 68% 37%) 11%, hsl(268deg 62% 44%) 16%, hsl(271deg 58% 50%) 20%, hsl(273deg 71% 57%) 25%, hsl(275deg 88% 64%) 31%, hsl(273deg 93% 68%) 38%, hsl(267deg 79% 70%) 45%, hsl(256deg 64% 71%) 53%, hsl(236deg 49% 71%) 61%, hsl(213deg 45% 66%) 70%, hsl(193deg 43% 59%) 80%, hsl(178deg 45% 52%) 90%, hsl(172deg 95% 40%) 100%);
   transform: translateY(8vh);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 
   &--flipped {
     width: 80vw;

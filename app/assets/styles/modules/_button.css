@@ -6,20 +6,31 @@ button {
   height: 40px;
   text-decoration: none;
   text-transform: uppercase;
-  background: #35486b;
-  border: none;
-  color: rgba(255, 255, 255, 0.401);
+  background: transparent;
+  border: 1px solid $mainColor;
+  color: $mainColor;
   border-radius: 20px;
   letter-spacing: 2px;
-  transition: 0.5s;
+  transition: 0.5s ease-in-out;
   overflow: hidden;
 }
 
 button:hover {
-  color: white;
-  border-radius: 13px;
+  color: rgb(6, 49, 42);
+  border: none;
+  border-radius: 1px;
+  background: $mainColor;
+  transition: 0.5s ease-in-out;
 }
 
 .button--disabled {
   background: #1d293f;
+  color: #204b47;
+
+  &:hover {
+    background: #1d293f;
+    color: #204b47;
+    border: 1px solid red;
+    border-radius: 20px;
+  }
 }
