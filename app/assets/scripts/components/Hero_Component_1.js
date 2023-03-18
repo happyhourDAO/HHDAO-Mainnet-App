@@ -39,7 +39,9 @@ function Hero_Component_1() {
                 <button>Go To Dashboard</button>
               </Link>
             </div>
-            <div className="hero-component-1__right-block"></div>
+            <div className="hero-component-1__right-block">
+              <img src="./assets/images/Logo-Icon-Animated.gif" alt="Animated Icon" />
+            </div>
           </div>
         </div>
       </div>
