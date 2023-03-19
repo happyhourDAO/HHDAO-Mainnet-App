@@ -34,3 +34,14 @@ button:hover {
     border-radius: 20px;
   }
 }
+
+.remove-default-color {
+  color: $mainColor;
+  text-decoration: none;
+  transition: 0.5s ease-in-out;
+
+  &:hover {
+    color: #204b47;
+    transition: 0.5s ease-in-out;
+  }
+}

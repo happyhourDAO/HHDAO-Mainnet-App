@@ -1,8 +1,14 @@
 import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
 import { SiTwitter, SiDiscord, SiGithub, SiGitbook } from "react-icons/si"
+import { useNavigate } from "react-router-dom"
 
 function Hero_Component_1() {
+  let navigate = useNavigate()
+
+  function handleClick() {
+    navigate("/dashboard")
+  }
+
   return (
     <>
       <div className="container">
@@ -35,9 +41,7 @@ function Hero_Component_1() {
                   </a>
                 </div>
               </div>
-              <Link to="/dashboard">
-                <button>Go To Dashboard</button>
-              </Link>
+              <button onClick={handleClick}>Go To Dashboard</button>
             </div>
             <div className="hero-component-1__right-block">
               <img src="./assets/images/Logo-Icon-Animated.gif" alt="Animated Icon" />

@@ -60,5 +60,10 @@
     color: rgb(190, 190, 190);
     font-family: $data;
     margin-bottom: 10px;
+    text-align: center;
+
+    @mixin atLarge {
+      text-align: left;
+    }
   }
 }

@@ -32,12 +32,20 @@
   background-image: linear-gradient(45deg, black, rgb(5, 5, 48));
   animation: bg-animation 30s infinite alternate;
   font-family: $data;
-  font-size: 3rem;
+  font-size: 1rem;
   padding-left: 7vw;
   color: white;
 
   &__line {
     margin-top: 4vh;
+  }
+
+  @mixin atMedium {
+    font-size: 4vw;
+  }
+
+  @mixin atLarge {
+    font-size: 3rem;
   }
 
   @mixin atLargest {
@@ -51,36 +59,44 @@
   justify-content: center;
   align-items: center;
   display: flex;
-  flex-direction: column;
-  position: relative;
   background-color: white;
-  overflow: hidden;
 
   &__content {
     width: 100%;
     height: 100%;
-    padding: 3vh 7vw;
+    padding: 0vh 7vw;
     color: white;
     font-size: 1.8rem;
     text-align: justify;
     background: rgba(165, 165, 165, 0.452);
     backdrop-filter: blur(30px);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    display: flex;
-  }
-}
+    position: relative;
 
-.container__hero-component-4 {
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  background-color: rgb(5, 5, 48);
-  overflow: hidden;
+    &__quote {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 15rem;
+    }
+
+    &__text {
+      font-size: 1.3rem;
+
+      @mixin atMedium {
+        font-size: 2vw;
+      }
+    }
+
+    &__citation {
+      font-family: $label;
+      font-size: 2vw;
+    }
+  }
 }
 
 .container__hero-component-5 {
@@ -150,24 +166,33 @@
 
   &__content {
     color: black;
-    width: 50vw;
+    width: 90vw;
     display: flex;
+    justify-content: center;
 
     &-text {
-      flex: 0.85;
-      font-family: $grafitti;
-      font-size: 1.6rem;
-      letter-spacing: 1.5px;
-      border-right: 1px solid rgb(182, 182, 182);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: none;
+
+      @mixin atLarge {
+        flex: 0.85;
+        font-family: $grafitti;
+        font-size: 1.6rem;
+        letter-spacing: 1.5px;
+        border-right: 1px solid rgb(182, 182, 182);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     &-button {
       flex: 1;
       font-family: $data;
       font-size: 1.3rem;
+    }
+
+    @mixin atMedium {
+      width: 50vw;
     }
 
     @mixin atLargest {
@@ -178,19 +203,12 @@
 
 .radial-gradient-background {
   width: 80vw;
-  height: 90vh;
+  height: 80vh;
   border-radius: 21px;
   background-image: linear-gradient(50deg, hsl(240deg 100% 20%) 0%, hsl(256deg 89% 25%) 4%, hsl(261deg 77% 31%) 7%, hsl(265deg 68% 37%) 11%, hsl(268deg 62% 44%) 16%, hsl(271deg 58% 50%) 20%, hsl(273deg 71% 57%) 25%, hsl(275deg 88% 64%) 31%, hsl(273deg 93% 68%) 38%, hsl(267deg 79% 70%) 45%, hsl(256deg 64% 71%) 53%, hsl(236deg 49% 71%) 61%, hsl(213deg 45% 66%) 70%, hsl(193deg 43% 59%) 80%, hsl(178deg 45% 52%) 90%, hsl(172deg 95% 40%) 100%);
-  transform: translateY(8vh);
+  background-size: 200%;
+  animation: bg-animation 7s infinite alternate;
   overflow: hidden;
-
-  &--flipped {
-    width: 80vw;
-    height: 90vh;
-    border-radius: 21px;
-    background: linear-gradient(180deg, #00c9ff 0%, #92fe9d 100%);
-    transform: translateY(-8vh);
-  }
 }
 
 .gradient-hover {

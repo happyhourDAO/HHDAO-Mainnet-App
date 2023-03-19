@@ -19,8 +19,14 @@
   &__subtitle {
     font-family: $label;
     color: white;
-    font-size: 2rem;
     margin-top: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+
+    @mixin atMedium {
+      font-size: 2rem;
+      text-align: left;
+    }
   }
 
   &__subtitle-brief {
@@ -32,15 +38,26 @@
     width: 70%;
 
     &__left-block {
-      flex: 0.8;
-      border-right: 1px solid white;
-    }
-
-    &__right-block {
       flex: 1;
       display: flex;
       justify-content: center;
-      align-items: center;
+
+      @mixin atMedium {
+        flex: 0.8;
+        justify-content: flex-start;
+      }
+    }
+
+    &__right-block {
+      display: none;
+
+      @mixin atMedium {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-left: 1px solid white;
+      }
     }
   }
 }
@@ -49,22 +66,36 @@
   width: 80vw;
   height: 600px;
   display: flex;
+  justify-content: center;
 
   &__left-block {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &__right-block {
-    flex: 2;
-    position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @mixin atMedium {
+      width: 60%;
+    }
+
+    @mixin atLarge {
+      flex: 1;
+      align-items: flex-start;
+    }
+  }
+
+  &__right-block {
+    display: none;
+
+    @mixin atLarge {
+      flex: 2;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   @mixin atLargest {

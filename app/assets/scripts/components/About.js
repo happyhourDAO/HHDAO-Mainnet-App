@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import Footer from "./Footer"
 
 let arrayFAQ = [
@@ -37,9 +37,11 @@ function About() {
             <span style={{ color: "white", fontSize: "1.2rem" }} className="left-block__subtitle">
               We're just here for good times. 🍹
             </span>
-            <a style={{ textDecoration: "none", width: "50%" }} href="https://twitter.com/happyhourDAO" target="_blank">
-              <button style={{ marginTop: "10px" }}>Follow Us</button>
-            </a>
+            <button style={{ marginTop: "10px" }}>
+              <a className="remove-default-color" href="https://twitter.com/happyhourDAO" target="_blank">
+                Follow Us
+              </a>
+            </button>
           </div>
           <div style={{ marginLeft: "15px" }} className="hero-component-1__right-block">
             {arrayFAQ.map((QA, i) => (

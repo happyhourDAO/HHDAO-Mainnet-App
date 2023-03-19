@@ -45,9 +45,11 @@ function Source() {
             <span style={{ color: "white", fontSize: "1.2rem" }} className="left-block__subtitle">
               Don't trust. 🔍 Verify.
             </span>
-            <a style={{ textDecoration: "none", width: "50%" }} href="https://github.com/happyhourDAO" target="_blank">
-              <button style={{ marginTop: "10px" }}>Our Github</button>
-            </a>
+            <button style={{ marginTop: "10px" }}>
+              <a className="remove-default-color" href="https://github.com/happyhourDAO" target="_blank">
+                Our Github
+              </a>
+            </button>
           </div>
           <div className="hero-component-1__right-block">
             <SyntaxHighlighter language="solidity" style={duotoneSea} showLineNumbers={true} customStyle={{ borderRadius: "7px" }}>

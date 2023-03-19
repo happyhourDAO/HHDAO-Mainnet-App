@@ -8,7 +8,7 @@ function Hero_Component_Last() {
       <div className="container__hero-component-last">
         <div className="container__hero-component-last__content">
           <span className="container__hero-component-last__content-text">
-            Get <div className="gradient-text">$DRNK</div> with us.
+            Get <div className="gradient-text"> $DRNK </div> with us.
           </span>
 
           <Link style={{ textDecoration: "none", color: "white", marginLeft: "40px" }} to="/dashboard">

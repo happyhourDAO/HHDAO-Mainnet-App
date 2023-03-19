@@ -27,12 +27,12 @@ header {
     transform: translateY(-7px);
 
     @mixin atSmall {
-      display: inline-block;
       margin-left: 5px;
       transform: translateY(-20px);
     }
 
     @mixin atMedium {
+      display: inline-block;
       margin-left: 5px;
       transform: translateY(-20px);
     }
