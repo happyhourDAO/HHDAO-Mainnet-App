@@ -1,24 +1,11 @@
+const currentTask = process.env.npm_lifecycle_event
+
 const path = require("path")
 
 const postCSSPlugins = [require("postcss-mixins"), require("postcss-import"), require("postcss-simple-vars"), require("postcss-nested"), require("autoprefixer")]
 
-module.exports = {
+let config = {
   entry: "./app/assets/scripts/app.js",
-  output: {
-    publicPath: "/",
-    filename: "bundled.js",
-    path: path.resolve(__dirname, "app")
-  },
-  devtool: "source-map",
-  devServer: {
-    watchFiles: ["./app/**/*.html"],
-    static: "app",
-    hot: true,
-    port: 3000,
-    host: "0.0.0.0",
-    historyApiFallback: { index: "index.html" }
-  },
-  mode: "development",
   module: {
     rules: [
       {
@@ -52,3 +39,32 @@ module.exports = {
     ]
   }
 }
+
+if (currentTask == "dev") {
+  config.output = {
+    publicPath: "/",
+    filename: "bundled.js",
+    path: path.resolve(__dirname, "app")
+  }
+  config.devtool = "source-map"
+  config.devServer = {
+    watchFiles: ["./app/**/*.html"],
+    static: "app",
+    hot: true,
+    port: 3000,
+    host: "0.0.0.0",
+    historyApiFallback: { index: "index.html" }
+  }
+  config.mode = "development"
+}
+
+if (currentTask == "build") {
+  config.output = {
+    publicPath: "/",
+    filename: "bundled.js",
+    path: path.resolve(__dirname, "dist")
+  }
+  config.mode = "production"
+}
+
+module.exports = config
