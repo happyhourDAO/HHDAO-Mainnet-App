@@ -4,6 +4,8 @@ const path = require("path")
 
 const postCSSPlugins = [require("postcss-mixins"), require("postcss-import"), require("postcss-simple-vars"), require("postcss-nested"), require("autoprefixer")]
 
+// Shared config value
+
 let config = {
   entry: "./app/assets/scripts/app.js",
   module: {
