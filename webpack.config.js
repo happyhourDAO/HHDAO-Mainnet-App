@@ -1,33 +1,47 @@
 const currentTask = process.env.npm_lifecycle_event
-
 const path = require("path")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const fse = require("fs-extra")
 
 const postCSSPlugins = [require("postcss-mixins"), require("postcss-import"), require("postcss-simple-vars"), require("postcss-nested"), require("autoprefixer")]
+
+class RunAfterCompile {
+  apply(compiler) {
+    compiler.hooks.done.tap("Copy Images", function () {
+      fse.copySync("./app/assets/images", "./dist/assets/images")
+    })
+  }
+}
+
+let cssConfig = {
+  test: /\.css$/i,
+  use: [
+    {
+      loader: "css-loader",
+      options: {
+        url: false
+      }
+    },
+    {
+      loader: "postcss-loader",
+      options: {
+        postcssOptions: { plugins: postCSSPlugins }
+      }
+    }
+  ]
+}
 
 // Shared config value
 
 let config = {
   entry: "./app/assets/scripts/app.js",
+  plugins: [new HtmlWebpackPlugin({ filename: "index.html", template: "./app/index.html" })],
   module: {
     rules: [
-      {
-        test: /\.css$/i,
-        use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              url: false
-            }
-          },
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: { plugins: postCSSPlugins }
-            }
-          }
-        ]
-      },
+      cssConfig,
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
@@ -43,6 +57,7 @@ let config = {
 }
 
 if (currentTask == "dev") {
+  cssConfig.use.unshift("style-loader")
   config.output = {
     publicPath: "/",
     filename: "bundled.js",
@@ -61,12 +76,20 @@ if (currentTask == "dev") {
 }
 
 if (currentTask == "build") {
+  cssConfig.use.unshift(MiniCssExtractPlugin.loader)
   config.output = {
     publicPath: "/",
-    filename: "bundled.js",
+    filename: "[name].[chunkhash].js",
+    chunkFilename: "[name].[chunkhash].js",
     path: path.resolve(__dirname, "dist")
   }
   config.mode = "production"
+  config.optimization = {
+    splitChunks: { chunks: "all" },
+    minimize: true,
+    minimizer: [`...`, new CssMinimizerPlugin()]
+  }
+  config.plugins.push(new CleanWebpackPlugin(), new MiniCssExtractPlugin({ filename: "styles.[chunkhash].css" }), new RunAfterCompile())
 }
 
 module.exports = config
