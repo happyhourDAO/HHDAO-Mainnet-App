@@ -1,5 +1,5 @@
 import React from "react"
-import { QrReader } from "react-qr-reader"
+// import { QrReader } from "react-qr-reader"
 
 function QRreaderPopup(props) {
   async function handleScannedResult(result, error) {
@@ -22,7 +22,7 @@ function QRreaderPopup(props) {
           <div></div>
         </div>
 
-        <QrReader onResult={(result, error) => handleScannedResult(result, error)} className="qr-code-reader" />
+        {/* <QrReader onResult={(result, error) => handleScannedResult(result, error)} className="qr-code-reader" /> */}
       </div>
     </>
   )
