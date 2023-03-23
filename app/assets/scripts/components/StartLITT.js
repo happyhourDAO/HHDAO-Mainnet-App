@@ -135,7 +135,7 @@ function StartLITT({ HOURabi }) {
             <input type="text" value={scannedValue ? scannedValue : undefined} onChange={e => setPDEid(e.target.value)} required />
             <span>ID of PDE</span>
             <div className="qr-code__wrapper">
-              <MdQrCodeScanner onClick={() => null} className={"icon icon-qrCode icon-qrCode-reader " + (openQRreader ? "icon-qrCode--open" : "")} />
+              <MdQrCodeScanner onClick={() => setOpenQRreader(!openQRreader)} className={"icon icon-qrCode icon-qrCode-reader " + (openQRreader ? "icon-qrCode--open" : "")} />
               {openQRreader ? <QRreaderPopup setPDEid={setPDEid} setScannedValue={setScannedValue} openQRreader={openQRreader} setOpenQRreader={setOpenQRreader} /> : ""}
             </div>
           </div>

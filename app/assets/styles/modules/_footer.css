@@ -6,7 +6,7 @@ footer {
   text-align: center;
 
   @mixin atLarge {
-    bottom: 40;
+    bottom: 27;
     left: 50%;
     transform: translateX(-50%);
   }
