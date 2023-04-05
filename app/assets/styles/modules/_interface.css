@@ -101,6 +101,22 @@
           overflow: hidden;
           text-overflow: ellipsis;
         }
+
+        &--loading {
+          color: rgb(100, 100, 100);
+          position: relative;
+
+          &:before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            color: white;
+            overflow: hidden;
+            animation: loading 1s linear infinite;
+          }
+        }
       }
 
       &:last-child {
@@ -187,5 +203,14 @@
     &--disconnected {
       background-color: red;
     }
+  }
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
   }
 }

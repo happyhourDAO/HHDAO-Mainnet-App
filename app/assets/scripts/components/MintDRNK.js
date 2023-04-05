@@ -66,7 +66,15 @@ function MintDRNK({ HOURabi }) {
                 </a>
               </div>
             </div>
-            <div className="interface__function-field__results-row-bottom">{HOURburned ? "You just burned " + HOURburned + " $HOUR." : "Burning..."}</div>
+            <div className="interface__function-field__results-row-bottom">
+              {HOURburned ? (
+                "You just burned " + HOURburned + " $HOUR."
+              ) : (
+                <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
+                  Confirming...
+                </div>
+              )}
+            </div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
@@ -75,7 +83,15 @@ function MintDRNK({ HOURabi }) {
                 <MdReadMore className="icon icon-read" />
               </a>
             </div>
-            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{DRNKminted ? "You just minted " + DRNKminted + " $DRNK." : "Minting..."}</div>
+            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">
+              {DRNKminted ? (
+                "You just minted " + DRNKminted + " $DRNK."
+              ) : (
+                <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
+                  Confirming...
+                </div>
+              )}
+            </div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">

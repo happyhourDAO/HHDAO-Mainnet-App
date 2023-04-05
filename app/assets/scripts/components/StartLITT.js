@@ -109,7 +109,15 @@ function StartLITT({ HOURabi }) {
                 <MdReadMore className="icon icon-read" />
               </a>
             </div>
-            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{appState.account.currentDrinkingID > 1 ? appState.account.currentDrinkingID : "Serving your Drinking ID..."}</div>
+            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">
+              {appState.account.currentDrinkingID > 1 ? (
+                appState.account.currentDrinkingID
+              ) : (
+                <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
+                  Confirming...
+                </div>
+              )}
+            </div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
