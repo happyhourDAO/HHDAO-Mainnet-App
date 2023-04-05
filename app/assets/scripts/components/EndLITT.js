@@ -66,7 +66,15 @@ function EndLITT({ HOURabi }) {
                 </a>
               </div>
             </div>
-            <div className="interface__function-field__results-row-bottom">{hoursSpentDrinking ? "You just spent " + hoursSpentDrinking + " hours getting LITT!" : "Loading..."}</div>
+            <div className="interface__function-field__results-row-bottom">
+              {hoursSpentDrinking ? (
+                "You just spent " + hoursSpentDrinking + " hours getting LITT!"
+              ) : (
+                <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
+                  Confirming...
+                </div>
+              )}
+            </div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">
@@ -75,7 +83,15 @@ function EndLITT({ HOURabi }) {
                 <MdReadMore className="icon icon-read" />
               </a>
             </div>
-            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{HOURearned ? "You just earned " + HOURearned + " $HOUR tokens." : "Loading..."}</div>
+            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">
+              {HOURearned ? (
+                "You just earned " + HOURearned + " $HOUR tokens."
+              ) : (
+                <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
+                  Confirming...
+                </div>
+              )}
+            </div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">

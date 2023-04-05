@@ -109,11 +109,27 @@ function OnboardPDE({ HOURabi }) {
                 <MdReadMore className="icon icon-read" />
               </a>
             </div>
-            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">{PDEid ? PDEid : "Generating PDE ID..."}</div>
+            <div className="interface__function-field__results-row-bottom interface__function-field__results-row-bottom--ellipsis">
+              {PDEid ? (
+                PDEid
+              ) : (
+                <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
+                  Confirming...
+                </div>
+              )}
+            </div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">PDE Index</div>
-            <div className="interface__function-field__results-row-bottom">{PDEindex ? PDEindex : "Indexing PDE..."}</div>
+            <div className="interface__function-field__results-row-bottom">
+              {PDEindex ? (
+                PDEindex
+              ) : (
+                <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
+                  Confirming...
+                </div>
+              )}
+            </div>
           </div>
           <div className="interface__function-field__results-row">
             <div className="interface__function-field__results-row-top">PDE Access Code</div>
