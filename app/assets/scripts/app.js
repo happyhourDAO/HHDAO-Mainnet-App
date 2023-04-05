@@ -18,6 +18,7 @@ import Hero from "./components/Hero"
 const Source = React.lazy(() => import("./components/Source"))
 const About = React.lazy(() => import("./components/About"))
 const Dashboard = React.lazy(() => import("./components/Dashboard"))
+import Fallback from "./components/Fallback"
 // import Source from "./components/Source"
 // import About from "./components/About"
 
@@ -136,7 +137,7 @@ function Main() {
           <DispatchContext.Provider value={dispatch}>
             <BrowserRouter>
               <Header />
-              <Suspense fallback="">
+              <Suspense fallback={<Fallback />}>
                 <Routes>
                   <Route path="/" element={<Hero />} />
                   <Route path="/dashboard" element={<Dashboard provider={wagmiClient.provider} />} />
