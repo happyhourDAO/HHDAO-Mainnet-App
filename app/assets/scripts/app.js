@@ -2,7 +2,7 @@ import "../styles/styles.css"
 
 // Import React dependecies
 
-import React from "react"
+import React, { Suspense } from "react"
 import ReactDOM from "react-dom/client"
 import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -12,12 +12,15 @@ import "react-tooltip/dist/react-tooltip.css"
 
 import StateContext from "./StateContext"
 import DispatchContext from "./DispatchContext"
-import Dashboard from "./components/Dashboard"
+// import Dashboard from "./components/Dashboard"
 import Header from "./components/Header"
-import Footer from "./components/Footer"
 import Hero from "./components/Hero"
-import Source from "./components/Source"
-import About from "./components/About"
+const Source = React.lazy(() => import("./components/Source"))
+const About = React.lazy(() => import("./components/About"))
+const Dashboard = React.lazy(() => import("./components/Dashboard"))
+import Fallback from "./components/Fallback"
+// import Source from "./components/Source"
+// import About from "./components/About"
 
 // WEB3MODAL & OTHER ETHEREUM LIBRARIES
 import { EthereumClient, modalConnectors, walletConnectProvider } from "@web3modal/ethereum"
@@ -134,12 +137,14 @@ function Main() {
           <DispatchContext.Provider value={dispatch}>
             <BrowserRouter>
               <Header />
-              <Routes>
-                <Route path="/" element={<Hero />} />
-                <Route path="/dashboard" element={<Dashboard provider={wagmiClient.provider} />} />
-                <Route path="/source" element={<Source />} />
-                <Route path="/about" element={<About />} />
-              </Routes>
+              <Suspense fallback={<Fallback />}>
+                <Routes>
+                  <Route path="/" element={<Hero />} />
+                  <Route path="/dashboard" element={<Dashboard provider={wagmiClient.provider} />} />
+                  <Route path="/source" element={<Source />} />
+                  <Route path="/about" element={<About />} />
+                </Routes>
+              </Suspense>
             </BrowserRouter>
           </DispatchContext.Provider>
         </StateContext.Provider>
