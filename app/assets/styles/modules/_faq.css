@@ -54,6 +54,11 @@
     font-family: $label;
     font-size: 3rem;
     margin-bottom: 15px;
+    text-align: center;
+
+    @mixin atLarge {
+      text-align: left;
+    }
   }
 
   &__subtitle {

@@ -11,7 +11,7 @@ header {
 }
 
 .logo {
-  transform: translateY(-15px);
+  transform: translateY(-27px) translateX(-20px);
 
   &-icon {
     &:hover {
@@ -41,6 +41,10 @@ header {
       margin-left: 5px;
       transform: translateY(-20px);
     }
+  }
+
+  @mixin atSmall {
+    transform: translateY(-27px) translateX(0);
   }
 
   @mixin atLarge {
