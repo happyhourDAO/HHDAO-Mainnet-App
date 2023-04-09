@@ -2,6 +2,7 @@
   width: 100vw;
   height: 570px;
   display: flex;
+  transform: translateY(5vh);
 
   &__left-module {
     width: 100%;
