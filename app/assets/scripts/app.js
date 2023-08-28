@@ -25,6 +25,7 @@ import { EthereumClient, w3mConnectors, w3mProvider } from "@web3modal/ethereum"
 import { Web3Modal } from "@web3modal/react"
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { mainnet } from "wagmi/chains"
+import { formatEther } from "viem"
 
 const chains = [mainnet]
 const projectId = "b611d14b3c75661ee3a2d0bd6fa02451"
@@ -33,7 +34,7 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({ projectId, chains }),
-  publicClient,
+  publicClient
 })
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
@@ -49,12 +50,12 @@ function Main() {
       amountDRNK: null,
       currentDrinkingID: 0,
       drinkingID_to_PDEid: 0,
-      isPDEowner: false,
+      isPDEowner: false
     },
     PDEownership: {
       indexArray: [],
       structArray: [],
-      commissionArray: [],
+      commissionArray: []
     },
     HOURnetwork: {
       contractAddress: "",
@@ -66,11 +67,11 @@ function Main() {
       HOURperhour: 100,
       HappyHourFee: 1 / 100,
       PDEcommission: 10 / 100,
-      HOUR2DRNKratio: 1 / 10,
+      HOUR2DRNKratio: 1 / 10
     },
     DRNKnetwork: {
-      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0",
-    },
+      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0"
+    }
   }
 
   function ourReducer(draft, action) {
@@ -118,9 +119,9 @@ function Main() {
         draft.HOURnetwork.contractAddress = action.data
         return
       case "setHOURnetworkStats":
-        draft.HOURnetwork.totalPDE = action.data[0].toNumber()
-        draft.HOURnetwork.totalCurrentDrinkers = action.data[1].toNumber()
-        draft.HOURnetwork.totalSupply = action.data[2] / 10 ** 18
+        draft.HOURnetwork.totalPDE = action.data[0].result.toString()
+        draft.HOURnetwork.totalCurrentDrinkers = action.data[1].result.toString()
+        draft.HOURnetwork.totalSupply = formatEther(action.data[2].result)
         return
     }
   }
@@ -136,7 +137,8 @@ function Main() {
               <Header />
               <Suspense fallback={<Fallback />}>
                 <Routes>
-                  <Route path="/" element={<Hero />} />
+                  {/* <Route path="/" element={<Hero />} /> */}
+                  <Route path="/" element={<Dashboard provider={wagmiConfig.publicClient} />} />
                   <Route path="/dashboard" element={<Dashboard provider={wagmiConfig.publicClient} />} />
                   <Route path="/source" element={<Source />} />
                   <Route path="/about" element={<About />} />
