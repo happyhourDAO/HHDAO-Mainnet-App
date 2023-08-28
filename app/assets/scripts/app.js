@@ -12,35 +12,32 @@ import "react-tooltip/dist/react-tooltip.css"
 
 import StateContext from "./StateContext"
 import DispatchContext from "./DispatchContext"
-// import Dashboard from "./components/Dashboard"
 import Header from "./components/Header"
 import Hero from "./components/Hero"
 const Source = React.lazy(() => import("./components/Source"))
 const About = React.lazy(() => import("./components/About"))
 const Dashboard = React.lazy(() => import("./components/Dashboard"))
 import Fallback from "./components/Fallback"
-// import Source from "./components/Source"
-// import About from "./components/About"
 
-// WEB3MODAL & OTHER ETHEREUM LIBRARIES
-import { EthereumClient, modalConnectors, walletConnectProvider } from "@web3modal/ethereum"
+// implementation of WalletConnect v2 with wagmi/viem
+
+import { EthereumClient, w3mConnectors, w3mProvider } from "@web3modal/ethereum"
 import { Web3Modal } from "@web3modal/react"
-import { configureChains, createClient, WagmiConfig } from "wagmi"
+import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { mainnet } from "wagmi/chains"
 
-// CONFIGURE WAGMI & WEB3MODAL
 const chains = [mainnet]
+const projectId = "b611d14b3c75661ee3a2d0bd6fa02451"
 
-// wagmi client
-const { provider } = configureChains(chains, [walletConnectProvider({ projectId: "b611d14b3c75661ee3a2d0bd6fa02451" })])
-const wagmiClient = createClient({
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: modalConnectors({ appName: "web3Modal", chains }),
-  provider
+  connectors: w3mConnectors({ projectId, chains }),
+  publicClient,
 })
+const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
-// web3Modal Ethereum Client
-const ethereumClient = new EthereumClient(wagmiClient, chains)
+console.log(wagmiConfig.publicClient)
 
 function Main() {
   const initialState = {
@@ -52,12 +49,12 @@ function Main() {
       amountDRNK: null,
       currentDrinkingID: 0,
       drinkingID_to_PDEid: 0,
-      isPDEowner: false
+      isPDEowner: false,
     },
     PDEownership: {
       indexArray: [],
       structArray: [],
-      commissionArray: []
+      commissionArray: [],
     },
     HOURnetwork: {
       contractAddress: "",
@@ -69,11 +66,11 @@ function Main() {
       HOURperhour: 100,
       HappyHourFee: 1 / 100,
       PDEcommission: 10 / 100,
-      HOUR2DRNKratio: 1 / 10
+      HOUR2DRNKratio: 1 / 10,
     },
     DRNKnetwork: {
-      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0"
-    }
+      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0",
+    },
   }
 
   function ourReducer(draft, action) {
@@ -132,7 +129,7 @@ function Main() {
 
   return (
     <>
-      <WagmiConfig client={wagmiClient}>
+      <WagmiConfig config={wagmiConfig}>
         <StateContext.Provider value={state}>
           <DispatchContext.Provider value={dispatch}>
             <BrowserRouter>
@@ -140,7 +137,7 @@ function Main() {
               <Suspense fallback={<Fallback />}>
                 <Routes>
                   <Route path="/" element={<Hero />} />
-                  <Route path="/dashboard" element={<Dashboard provider={wagmiClient.provider} />} />
+                  <Route path="/dashboard" element={<Dashboard provider={wagmiConfig.publicClient} />} />
                   <Route path="/source" element={<Source />} />
                   <Route path="/about" element={<About />} />
                 </Routes>
@@ -149,7 +146,7 @@ function Main() {
           </DispatchContext.Provider>
         </StateContext.Provider>
       </WagmiConfig>
-      <Web3Modal projectId="b611d14b3c75661ee3a2d0bd6fa02451" ethereumClient={ethereumClient} />
+      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </>
   )
 }
