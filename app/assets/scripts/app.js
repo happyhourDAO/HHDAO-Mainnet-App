@@ -148,7 +148,16 @@ function Main() {
           </DispatchContext.Provider>
         </StateContext.Provider>
       </WagmiConfig>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      <Web3Modal
+        themeMode="dark"
+        themeVariables={{
+          "--w3m-accent-color": "#2bf2cd",
+          "--w3m-background-color": "#2bf2cd",
+          "--w3m-accent-fill-color": "#131a2a"
+        }}
+        projectId={projectId}
+        ethereumClient={ethereumClient}
+      />
     </>
   )
 }
