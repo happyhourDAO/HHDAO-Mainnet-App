@@ -9,7 +9,7 @@ import QRreaderPopup from "./QRreaderPopup"
 // IMPORTING WAGMI REACT HOOKS
 import { usePrepareContractWrite } from "wagmi"
 import { useContractWrite } from "wagmi"
-import { ethers } from "ethers"
+import { ethers, utils } from "ethers"
 
 function StartLITT({ HOURabi }) {
   const appDispatch = useContext(DispatchContext)
@@ -30,13 +30,11 @@ function StartLITT({ HOURabi }) {
     abi: HOURabi,
     functionName: "startHOUR",
     args: [PDEid_debounced, accessCode_debounced],
-    overrides: {
-      value: ethers.utils.parseEther("0.01")
-    },
+    value: utils.parseEther("0.01"),
     enabled: Boolean(PDEid_debounced && accessCode_debounced),
     onSettled(data, error) {
       null
-    }
+    },
   })
 
   const { data, isLoading, isSuccess, writeAsync } = useContractWrite(config)
@@ -81,7 +79,7 @@ function StartLITT({ HOURabi }) {
         </form>
       ) : isSuccess || appState.account.currentDrinkingID.length > 1 ? (
         <form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault()
           }}
           className={"interface__function-field interface__function-field--overflow " + (appState.functionIndex == 2 ? "" : "non-visible")}
@@ -131,16 +129,16 @@ function StartLITT({ HOURabi }) {
         </form>
       ) : (
         <form
-          onSubmit={e => {
+          onSubmit={(e) => {
             e.preventDefault()
             writeAsync?.()
-              .then(txResponse => txResponse.wait().then(txReceipt => getEventResults(txReceipt)))
+              .then((txResponse) => txResponse.wait().then((txReceipt) => getEventResults(txReceipt)))
               .catch(console.error)
           }}
           className={"interface__function-field " + (appState.functionIndex == 2 ? "" : "non-visible")}
         >
           <div className="input-box">
-            <input type="text" value={scannedValue ? scannedValue : undefined} onChange={e => setPDEid(e.target.value)} required />
+            <input type="text" value={scannedValue ? scannedValue : undefined} onChange={(e) => setPDEid(e.target.value)} required />
             <span>ID of PDE</span>
             <div className="qr-code__wrapper">
               <MdQrCodeScanner onClick={() => setOpenQRreader(!openQRreader)} className={"icon icon-qrCode icon-qrCode-reader " + (openQRreader ? "icon-qrCode--open" : "")} />
@@ -148,7 +146,7 @@ function StartLITT({ HOURabi }) {
             </div>
           </div>
           <div className="input-box">
-            <input type="text" onChange={e => setAccessCode(e.target.value)} required />
+            <input type="text" onChange={(e) => setAccessCode(e.target.value)} required />
             <span>access code</span>
           </div>
           <div className="input-box">

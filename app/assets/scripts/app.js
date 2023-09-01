@@ -2,7 +2,7 @@ import "../styles/styles.css"
 
 // Import React dependecies
 
-import React, { Suspense } from "react"
+import React, { Suspense, useEffect } from "react"
 import ReactDOM from "react-dom/client"
 import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
@@ -19,12 +19,17 @@ const About = React.lazy(() => import("./components/About"))
 const Dashboard = React.lazy(() => import("./components/Dashboard"))
 import Fallback from "./components/Fallback"
 
-// implementation of WalletConnect v2 with wagmi/viem
+// IMPORTING ETHERSJS MODULES
+import { providers, Contract } from "ethers"
 
+// IMPORTING OF HOURv3 & DRNKv3 CONTRACT ABI
+const HOURabi = require("./contracts/HOURv3.json")
+
+// implementation of WalletConnect v2 with wagmi/viem
 import { EthereumClient, w3mConnectors, w3mProvider } from "@web3modal/ethereum"
 import { Web3Modal } from "@web3modal/react"
 import { configureChains, createConfig, WagmiConfig } from "wagmi"
-import { mainnet } from "wagmi/chains"
+import { mainnet, goerli } from "wagmi/chains"
 import { formatEther } from "viem"
 
 const chains = [mainnet]
@@ -34,7 +39,7 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({ projectId, chains }),
-  publicClient
+  publicClient,
 })
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
@@ -50,15 +55,15 @@ function Main() {
       amountDRNK: null,
       currentDrinkingID: 0,
       drinkingID_to_PDEid: 0,
-      isPDEowner: false
+      isPDEowner: false,
     },
     PDEownership: {
       indexArray: [],
       structArray: [],
-      commissionArray: []
+      commissionArray: [],
     },
     HOURnetwork: {
-      contractAddress: "",
+      contractAddress: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
       contractObject: null,
       totalPDE: null,
       totalCurrentDrinkers: null,
@@ -67,11 +72,16 @@ function Main() {
       HOURperhour: 100,
       HappyHourFee: 1 / 100,
       PDEcommission: 10 / 100,
-      HOUR2DRNKratio: 1 / 10
+      HOUR2DRNKratio: 1 / 10,
     },
     DRNKnetwork: {
-      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0"
-    }
+      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0",
+    },
+    ethers: {
+      provider: null,
+      signer: null,
+      contractHOUR: null,
+    },
   }
 
   function ourReducer(draft, action) {
@@ -123,10 +133,21 @@ function Main() {
         draft.HOURnetwork.totalCurrentDrinkers = action.data[1].result.toString()
         draft.HOURnetwork.totalSupply = formatEther(action.data[2].result)
         return
+      case "setEthersProvider":
+        draft.ethers.provider = new providers.InfuraProvider(1, "19e6398ef2ee4861bfa95987d08fbc50")
+        return
+      case "setEthersContractHOUR":
+        draft.ethers.contractHOUR = new Contract(draft.HOURnetwork.contractAddress, HOURabi, draft.ethers.provider)
+        return
     }
   }
 
   const [state, dispatch] = useImmerReducer(ourReducer, initialState)
+
+  useEffect(() => {
+    dispatch({ type: "setEthersProvider" })
+    dispatch({ type: "setEthersContractHOUR" })
+  }, [])
 
   return (
     <>
@@ -153,7 +174,7 @@ function Main() {
         themeVariables={{
           "--w3m-accent-color": "#2bf2cd",
           "--w3m-background-color": "#2bf2cd",
-          "--w3m-accent-fill-color": "#131a2a"
+          "--w3m-accent-fill-color": "#131a2a",
         }}
         projectId={projectId}
         ethereumClient={ethereumClient}
