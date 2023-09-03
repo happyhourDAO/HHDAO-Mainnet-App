@@ -6,19 +6,20 @@ import { MdReadMore, MdShare } from "react-icons/md"
 // IMPORTING WAGMI REACT HOOKS
 import { usePrepareContractWrite } from "wagmi"
 import { useContractWrite } from "wagmi"
-import { ethers } from "ethers"
+import { waitForTransaction } from "wagmi/actions"
+import { utils } from "ethers"
 
 function EndLITT({ HOURabi }) {
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
   const [hoursSpentDrinking, setHoursSpentDrinking] = useState()
-  const [HOURearned, setHOURearned] = useState()
+  const [HOURearned, setHOURearned] = useState(null)
 
-  const iface = new ethers.utils.Interface(HOURabi)
+  const iface = new utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
+    address: appState.HOURnetwork.contractAddress,
     abi: HOURabi,
     functionName: "endHOUR",
     args: [appState.account.address],
@@ -26,6 +27,13 @@ function EndLITT({ HOURabi }) {
   })
 
   const { data, isLoading, isSuccess, writeAsync } = useContractWrite(config)
+
+  async function getReceipt(hash) {
+    let receipt = await waitForTransaction({ hash })
+    console.log(receipt)
+
+    return receipt
+  }
 
   async function getEventResults(txReceipt) {
     const { data, topics } = await txReceipt.logs[2]
@@ -40,7 +48,9 @@ function EndLITT({ HOURabi }) {
   }
 
   useEffect(() => {
-    console.log("error from prepare", error)
+    if (error) {
+      console.log("error from prepare", error)
+    }
   }, [error])
 
   return (
@@ -67,8 +77,10 @@ function EndLITT({ HOURabi }) {
               </div>
             </div>
             <div className="interface__function-field__results-row-bottom">
-              {hoursSpentDrinking ? (
+              {hoursSpentDrinking > 0 ? (
                 "You just spent " + hoursSpentDrinking + " hours getting LITT!"
+              ) : hoursSpentDrinking === 0 ? (
+                "You just spent 0 hours getting LITT."
               ) : (
                 <div data-text="Confirming..." className="interface__function-field__results-row-bottom--loading">
                   Confirming...
@@ -108,7 +120,9 @@ function EndLITT({ HOURabi }) {
           onSubmit={e => {
             e.preventDefault()
             writeAsync?.()
-              .then(txResponse => txResponse.wait().then(txReceipt => getEventResults(txReceipt)))
+              .then(hash => {
+                getReceipt(hash.hash).then(txReceipt => getEventResults(txReceipt))
+              })
               .catch(console.error)
           }}
           className={"interface__function-field " + (appState.functionIndex == 3 ? "" : "non-visible")}

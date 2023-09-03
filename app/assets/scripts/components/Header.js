@@ -7,14 +7,10 @@ import StateContext from "../StateContext"
 import MobileMenu from "./MobileMenu"
 import { CSSTransition } from "react-transition-group"
 import { Web3Button } from "@web3modal/react"
-import { useWeb3ModalTheme } from "@web3modal/react"
 
 function Header() {
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
-
-  const { theme, setTheme } = useWeb3ModalTheme()
-  setTheme({ themeColor: "teal", themeMode: "dark", themeBackground: "gradient" })
 
   const [isOpen, setOpen] = useState(false)
   const menuIconRef = useRef()
@@ -32,6 +28,22 @@ function Header() {
     }
   }
 
+  function handlePageSelection(e) {
+    switch (e.target.id) {
+      case "Dashboard":
+        appDispatch({ type: "setOnDashboard" })
+        break
+      case "Source":
+        appDispatch({ type: "setOnSource" })
+        break
+      case "About":
+        appDispatch({ type: "setOnAbout" })
+        break
+      default:
+        appDispatch({ type: "setOnHero" })
+    }
+  }
+
   return (
     <>
       <header>
@@ -44,18 +56,18 @@ function Header() {
 
         <div className="menu-content">
           <nav ref={headerNavRef} className="header-nav">
-            <NavLink to="/" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+            <span id="Hero" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Hero" ? " header-nav__links--active" : "")}>
               Home
-            </NavLink>
-            <NavLink to="/dashboard" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+            </span>
+            <span id="Dashboard" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Dashboard" ? " header-nav__links--active" : "")}>
               App
-            </NavLink>
-            <NavLink to="/source" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+            </span>
+            <span id="Source" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Source" ? " header-nav__links--active" : "")}>
               Source
-            </NavLink>
-            <NavLink to="/about" className={({ isActive }) => "header-nav__links" + (isActive ? " header-nav__links--active" : "")}>
+            </span>
+            <span id="About" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "About" ? " header-nav__links--active" : "")}>
               About
-            </NavLink>
+            </span>
           </nav>
 
           <Web3Button />

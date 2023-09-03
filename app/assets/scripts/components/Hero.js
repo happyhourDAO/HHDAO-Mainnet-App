@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { IconContext } from "react-icons"
 import Hero_Component_1 from "./Hero_Component_1"
 import Hero_Component_2 from "./Hero_Component_2"

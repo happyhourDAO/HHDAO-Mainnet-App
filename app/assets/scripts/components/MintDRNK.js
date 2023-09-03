@@ -6,7 +6,8 @@ import { MdReadMore, MdShare } from "react-icons/md"
 // IMPORTING WAGMI REACT HOOKS
 import { usePrepareContractWrite } from "wagmi"
 import { useContractWrite } from "wagmi"
-import { ethers } from "ethers"
+import { waitForTransaction } from "wagmi/actions"
+import { utils } from "ethers"
 
 function MintDRNK({ HOURabi }) {
   const appState = useContext(StateContext)
@@ -17,7 +18,7 @@ function MintDRNK({ HOURabi }) {
   const [HOURburned, setHOURburned] = useState()
   const [DRNKminted, setDRNKminted] = useState()
 
-  const iface = new ethers.utils.Interface(HOURabi)
+  const iface = new utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
     address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
@@ -28,6 +29,13 @@ function MintDRNK({ HOURabi }) {
   })
 
   const { data, isLoading, isSuccess, writeAsync } = useContractWrite(config)
+
+  async function getReceipt(hash) {
+    let receipt = await waitForTransaction({ hash })
+    console.log(receipt)
+
+    return receipt
+  }
 
   async function getEventResults(txReceipt) {
     const { data, topics } = await txReceipt.logs[2]
@@ -41,7 +49,9 @@ function MintDRNK({ HOURabi }) {
   }
 
   useEffect(() => {
-    console.log("error from prepare", error)
+    if (error) {
+      console.log("error from prepare", error)
+    }
   }, [error])
 
   return (
@@ -108,7 +118,9 @@ function MintDRNK({ HOURabi }) {
           onSubmit={e => {
             e.preventDefault()
             writeAsync?.()
-              .then(txResponse => txResponse.wait().then(txReceipt => getEventResults(txReceipt)))
+              .then(hash => {
+                getReceipt(hash.hash).then(txReceipt => getEventResults(txReceipt))
+              })
               .catch(console.error)
           }}
           className={"interface__function-field " + (appState.functionIndex == 4 ? "" : "non-visible")}

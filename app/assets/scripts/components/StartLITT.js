@@ -9,7 +9,9 @@ import QRreaderPopup from "./QRreaderPopup"
 // IMPORTING WAGMI REACT HOOKS
 import { usePrepareContractWrite } from "wagmi"
 import { useContractWrite } from "wagmi"
-import { ethers, utils } from "ethers"
+import { waitForTransaction } from "wagmi/actions"
+import { utils } from "ethers"
+import { parseEther } from "viem"
 
 function StartLITT({ HOURabi }) {
   const appDispatch = useContext(DispatchContext)
@@ -23,21 +25,28 @@ function StartLITT({ HOURabi }) {
   const [PDEid_debounced] = useDebounce(PDEid, 2000)
   const [accessCode_debounced] = useDebounce(accessCode, 2000)
 
-  const iface = new ethers.utils.Interface(HOURabi)
+  const iface = new utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
+    address: appState.HOURnetwork.contractAddress,
     abi: HOURabi,
     functionName: "startHOUR",
     args: [PDEid_debounced, accessCode_debounced],
-    value: utils.parseEther("0.01"),
+    value: parseEther("0.01"),
     enabled: Boolean(PDEid_debounced && accessCode_debounced),
     onSettled(data, error) {
       null
-    },
+    }
   })
 
   const { data, isLoading, isSuccess, writeAsync } = useContractWrite(config)
+
+  async function getReceipt(hash) {
+    let receipt = await waitForTransaction({ hash })
+    console.log(receipt)
+
+    return receipt
+  }
 
   async function getEventResults(txReceipt) {
     const { data, topics } = await txReceipt.logs[0]
@@ -50,7 +59,9 @@ function StartLITT({ HOURabi }) {
   }
 
   useEffect(() => {
-    console.log("error from prepare", error)
+    if (error) {
+      console.log("error from prepare", error)
+    }
   }, [error])
 
   function copiedPopup() {
@@ -79,7 +90,7 @@ function StartLITT({ HOURabi }) {
         </form>
       ) : isSuccess || appState.account.currentDrinkingID.length > 1 ? (
         <form
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault()
           }}
           className={"interface__function-field interface__function-field--overflow " + (appState.functionIndex == 2 ? "" : "non-visible")}
@@ -129,16 +140,18 @@ function StartLITT({ HOURabi }) {
         </form>
       ) : (
         <form
-          onSubmit={(e) => {
+          onSubmit={e => {
             e.preventDefault()
             writeAsync?.()
-              .then((txResponse) => txResponse.wait().then((txReceipt) => getEventResults(txReceipt)))
+              .then(hash => {
+                getReceipt(hash.hash).then(txReceipt => getEventResults(txReceipt))
+              })
               .catch(console.error)
           }}
           className={"interface__function-field " + (appState.functionIndex == 2 ? "" : "non-visible")}
         >
           <div className="input-box">
-            <input type="text" value={scannedValue ? scannedValue : undefined} onChange={(e) => setPDEid(e.target.value)} required />
+            <input type="text" value={scannedValue ? scannedValue : undefined} onChange={e => setPDEid(e.target.value)} required />
             <span>ID of PDE</span>
             <div className="qr-code__wrapper">
               <MdQrCodeScanner onClick={() => setOpenQRreader(!openQRreader)} className={"icon icon-qrCode icon-qrCode-reader " + (openQRreader ? "icon-qrCode--open" : "")} />
@@ -146,7 +159,7 @@ function StartLITT({ HOURabi }) {
             </div>
           </div>
           <div className="input-box">
-            <input type="text" onChange={(e) => setAccessCode(e.target.value)} required />
+            <input type="text" onChange={e => setAccessCode(e.target.value)} required />
             <span>access code</span>
           </div>
           <div className="input-box">

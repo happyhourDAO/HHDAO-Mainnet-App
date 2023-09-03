@@ -10,29 +10,38 @@ function SideHooks() {
   const appState = useContext(StateContext)
 
   const getDrinkingId = useContractRead({
-    address: appState.HOURnetwork.contractObject.address,
-    abi: appState.HOURnetwork.contractObject.interface,
+    address: appState.HOURnetwork.contractAddress,
+    abi: appState.HOURnetwork.contractObject.abi,
     functionName: "drinkingID",
     args: [appState.account.address],
     watch: true,
     onSettled(data, error) {
-      console.log("getPoolDrinkingId hook RAN!", { data, error })
-      console.log(parseInt(data.toString().slice(-7)))
-      appDispatch({ type: "setDrinkingID", value: data.toString() })
+      if (data) {
+        // data returns as bigint
+        appDispatch({ type: "setDrinkingID", value: data.toString() })
+      }
+
+      if (error) {
+        console.error(error)
+      }
     }
   })
 
   const getDrinkingID_to_PDEid = useContractRead({
-    address: appState.HOURnetwork.contractObject.address,
-    abi: appState.HOURnetwork.contractObject.interface,
+    address: appState.HOURnetwork.contractAddress,
+    abi: appState.HOURnetwork.contractObject.abi,
     functionName: "drinkingIDtoPDEid",
     args: [appState.account.currentDrinkingID],
-    watch: true,
+    watch: appState.account.currentDrinkingID === 0 ? false : true,
     onSettled(data, error) {
-      console.log("getDrinkingID_to_PDEid hook RAN!", { data, error })
-      console.log(parseInt(data.toString().slice(-7)))
+      if (data) {
+        // data returns as bigint
+        appDispatch({ type: "setDrinkingID_to_PDEid", value: data.toString() })
+      }
 
-      appDispatch({ type: "setDrinkingID_to_PDEid", value: data.toString() })
+      if (error) {
+        console.error(error)
+      }
     }
   })
 

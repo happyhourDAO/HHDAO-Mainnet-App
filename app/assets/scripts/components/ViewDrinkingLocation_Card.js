@@ -17,7 +17,7 @@ function ViewDrinkingLocation_Card(props) {
   async function queryDrinkingLocation(toQuery_PDEid) {
     let queryArray = await appState.ethers.contractHOUR.queryFilter("newPDEonboarded", undefined, undefined).then().catch(console.error)
 
-    let filteredArray = await queryArray.filter((eventObject) => {
+    let filteredArray = await queryArray.filter(eventObject => {
       let eventObject_PDEid = eventObject.args[3].toString()
 
       return eventObject_PDEid == toQuery_PDEid
@@ -32,7 +32,7 @@ function ViewDrinkingLocation_Card(props) {
   async function queryLITTstart(toQuery_DrinkingID) {
     let queryArray = await appState.ethers.contractHOUR.queryFilter("createdDrinkingID").then().catch(console.error)
 
-    let filteredArray = await queryArray.filter((eventObject) => {
+    let filteredArray = await queryArray.filter(eventObject => {
       let eventObject_DrinkingID = eventObject.args[1].toString()
 
       return eventObject_DrinkingID == toQuery_DrinkingID
@@ -40,6 +40,7 @@ function ViewDrinkingLocation_Card(props) {
 
     if (filteredArray) {
       setLITTstart(filteredArray[0].blockNumber)
+      timeBetweenBlocks(filteredArray[0].blockNumber)
     }
   }
 
@@ -54,28 +55,26 @@ function ViewDrinkingLocation_Card(props) {
     let currentBlock = await props.provider.getBlockNumber().then().catch(console.error)
 
     let currentBlock_timestamp = await props.provider
-      .getBlock(currentBlock)
-      .then((block) => {
+      .getBlock({ blockNumber: currentBlock })
+      .then(block => {
         return block.timestamp
       })
       .catch(console.error)
     let startBlock_timestamp = await props.provider
-      .getBlock(startBlock)
-      .then((block) => {
+      .getBlock({ blockNumber: BigInt(startBlock) })
+      .then(block => {
         return block.timestamp
       })
       .catch(console.error)
 
-    let timeBetween = (currentBlock_timestamp - startBlock_timestamp) / 60 / 60
+    if (currentBlock_timestamp && startBlock_timestamp) {
+      let timeBetween = (Number(currentBlock_timestamp) - Number(startBlock_timestamp)) / 60 / 60
 
-    if (timeBetween) {
-      setLITTduration(timeBetween.toFixed(2))
+      if (timeBetween) {
+        setLITTduration(timeBetween.toFixed(2))
+      }
     }
   }
-
-  useEffect(() => {
-    timeBetweenBlocks(LITTstart)
-  }, [LITTstart])
 
   return (
     <>

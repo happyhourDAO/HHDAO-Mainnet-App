@@ -46,7 +46,7 @@ function About() {
           <div style={{ marginLeft: "15px" }} className="hero-component-1__right-block">
             {arrayFAQ.map((QA, i) => (
               <>
-                <div className={"qa-wrapper " + (display == i ? "qa-wrapper--display" : "")}>
+                <div key={i} className={"qa-wrapper " + (display == i ? "qa-wrapper--display" : "")}>
                   <div onClick={e => handleChangeQA(i)} className={"question " + (display == i ? "question--display" : "")}>
                     <span>{QA.question}</span>
                     <span>{display == i ? "-" : "+"}</span>
