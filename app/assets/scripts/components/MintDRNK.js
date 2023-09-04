@@ -21,10 +21,10 @@ function MintDRNK({ HOURabi }) {
   const iface = new utils.Interface(HOURabi)
 
   const { config, error } = usePrepareContractWrite({
-    address: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
+    address: appState.HOURnetwork.contractAddress,
     abi: HOURabi,
     functionName: "mintyDRNK",
-    args: ["0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0", appState.account.address, burnAmount_debounced],
+    args: [appState.DRNKnetwork.contractAddress, appState.account.address, burnAmount_debounced],
     enabled: burnAmount_debounced
   })
 

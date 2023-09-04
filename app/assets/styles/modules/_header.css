@@ -11,11 +11,17 @@ header {
 }
 
 .logo {
-  transform: translateY(-27px) translateX(-20px);
+  transform: translateY(-10px) translateX(-10px);
 
   &-icon {
+    width: 60px;
+
     &:hover {
       cursor: pointer;
+    }
+
+    @mixin atLarge {
+      width: 100px;
     }
   }
 
@@ -26,25 +32,15 @@ header {
     display: none;
     transform: translateY(-7px);
 
-    @mixin atSmall {
-      margin-left: 5px;
-      transform: translateY(-20px);
-    }
-
-    @mixin atMedium {
-      display: inline-block;
-      margin-left: 5px;
-      transform: translateY(-20px);
-    }
-
     @mixin atLarge {
+      display: inline-block;
       margin-left: 5px;
       transform: translateY(-20px);
     }
   }
 
   @mixin atSmall {
-    transform: translateY(-27px) translateX(0);
+    transform: translateY(-10px) translateX(0);
   }
 
   @mixin atLarge {

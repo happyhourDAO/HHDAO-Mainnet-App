@@ -67,6 +67,7 @@ function Main() {
       commissionArray: []
     },
     HOURnetwork: {
+      abi: HOURabi,
       contractAddress: "0x3807DAB03E8519F0F4f4c37568E27a71B138d47b",
       contractObject: null,
       totalPDE: null,
@@ -174,7 +175,6 @@ function Main() {
   }, [])
 
   useEffect(() => {
-    console.log("Checking for persisted page...")
     let persistedPage = sessionStorage.getItem("shouldPersistPage")
 
     if (persistedPage) {
@@ -206,11 +206,6 @@ function Main() {
               <Suspense fallback={<Fallback />}>
                 <Routes>
                   <Route path="/" element={state.onPage.component} />
-                  {/* <Route path="/" element={<Hero />} /> */}
-                  {/* <Route path="/" element={<Dashboard provider={wagmiConfig.publicClient} />} /> */}
-                  {/* <Route path="/dashboard" element={<Dashboard provider={wagmiConfig.publicClient} />} /> */}
-                  {/* <Route path="/source" element={<Source />} /> */}
-                  {/* <Route path="/about" element={<About />} /> */}
                 </Routes>
               </Suspense>
             </BrowserRouter>
@@ -238,6 +233,3 @@ root.render(<Main />)
 if (module.hot) {
   module.hot.accept()
 }
-
-// replace react-reveal
-// add testnet

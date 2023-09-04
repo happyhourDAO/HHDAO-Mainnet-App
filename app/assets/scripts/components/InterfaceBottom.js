@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useContext } from "react"
+import StateContext from "../StateContext"
 import { IconContext } from "react-icons"
 
 // IMPORTING REACT COMPONENTS
@@ -7,20 +8,19 @@ import StartLITT from "./StartLITT"
 import EndLITT from "./EndLITT"
 import MintDRNK from "./MintDRNK"
 
-// IMPORTING OF HOURv3 & DRNKv3 CONTRACT ABI
-const HOURabi = require("../contracts/HOURv3.json")
-
 function InterfaceBottom() {
+  const appState = useContext(StateContext)
+
   return (
     <>
       <IconContext.Provider value={{ size: "1.2em" }}>
-        <OnboardPDE HOURabi={HOURabi} />
+        <OnboardPDE HOURabi={appState.HOURnetwork.contractObject ? appState.HOURnetwork.contractObject.abi : appState.HOURnetwork.abi} />
 
-        <StartLITT HOURabi={HOURabi} />
+        <StartLITT HOURabi={appState.HOURnetwork.contractObject ? appState.HOURnetwork.contractObject.abi : appState.HOURnetwork.abi} />
 
-        <EndLITT HOURabi={HOURabi} />
+        <EndLITT HOURabi={appState.HOURnetwork.contractObject ? appState.HOURnetwork.contractObject.abi : appState.HOURnetwork.abi} />
 
-        <MintDRNK HOURabi={HOURabi} />
+        <MintDRNK HOURabi={appState.HOURnetwork.contractObject ? appState.HOURnetwork.contractObject.abi : appState.HOURnetwork.abi} />
       </IconContext.Provider>
     </>
   )
