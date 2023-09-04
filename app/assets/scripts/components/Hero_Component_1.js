@@ -1,12 +1,15 @@
-import React, { useEffect } from "react"
+import React, { useContext } from "react"
+import DispatchContext from "../DispatchContext"
 import { SiTwitter, SiDiscord, SiGithub, SiGitbook } from "react-icons/si"
 import { useNavigate } from "react-router-dom"
 
 function Hero_Component_1() {
+  const appDispatch = useContext(DispatchContext)
+
   let navigate = useNavigate()
 
   function handleClick() {
-    navigate("/dashboard")
+    appDispatch({ type: "setOnDashboard" })
   }
 
   return (

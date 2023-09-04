@@ -1,8 +1,11 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
+import DispatchContext from "../DispatchContext"
 import Footer from "./Footer"
 import { Link } from "react-router-dom"
 
 function Hero_Component_Last() {
+  const appDispatch = useContext(DispatchContext)
+
   return (
     <>
       <div className="container__hero-component-last">
@@ -11,9 +14,9 @@ function Hero_Component_Last() {
             Get <div className="gradient-text"> $DRNK </div> with us.
           </span>
 
-          <Link style={{ textDecoration: "none", color: "white", marginLeft: "40px" }} to="/dashboard">
+          <span onClick={(e) => appDispatch({ type: "setOnDashboard" })} style={{ textDecoration: "none", color: "white", marginLeft: "40px" }}>
             <span className="gradient-hover container__hero-component-last__content-button">Get #LITT with us.</span>
-          </Link>
+          </span>
         </div>
         <Footer />
       </div>

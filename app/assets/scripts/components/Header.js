@@ -48,24 +48,22 @@ function Header() {
     <>
       <header>
         <div className="logo">
-          <NavLink to="/">
-            <img src="./assets/images/happyhourDAO-logo-icon.svg" width="100" height="100" className="logo-icon" alt="Logo-Icon" />
-          </NavLink>
+          <img onClick={(e) => appDispatch({ type: "setOnHero" })} src="./assets/images/happyhourDAO-logo-icon.svg" width="100" height="100" className="logo-icon" alt="Logo-Icon" />
           <span className="logo__version-text">v3.</span>
         </div>
 
         <div className="menu-content">
           <nav ref={headerNavRef} className="header-nav">
-            <span id="Hero" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Hero" ? " header-nav__links--active" : "")}>
+            <span id="Hero" onClick={(e) => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Hero" ? " header-nav__links--active" : "")}>
               Home
             </span>
-            <span id="Dashboard" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Dashboard" ? " header-nav__links--active" : "")}>
+            <span id="Dashboard" onClick={(e) => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Dashboard" ? " header-nav__links--active" : "")}>
               App
             </span>
-            <span id="Source" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Source" ? " header-nav__links--active" : "")}>
+            <span id="Source" onClick={(e) => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Source" ? " header-nav__links--active" : "")}>
               Source
             </span>
-            <span id="About" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "About" ? " header-nav__links--active" : "")}>
+            <span id="About" onClick={(e) => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "About" ? " header-nav__links--active" : "")}>
               About
             </span>
           </nav>
