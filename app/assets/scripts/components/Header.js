@@ -7,6 +7,7 @@ import StateContext from "../StateContext"
 import MobileMenu from "./MobileMenu"
 import { CSSTransition } from "react-transition-group"
 import { Web3Button } from "@web3modal/react"
+import { mainnet } from "wagmi/chains"
 
 function Header() {
   const appDispatch = useContext(DispatchContext)
@@ -68,7 +69,7 @@ function Header() {
             </span>
           </nav>
 
-          <Web3Button />
+          <Web3Button defaultChain={mainnet} />
 
           <IconContext.Provider value={{ size: "2.5rem" }}>
             <div ref={menuIconRef} onClick={() => toggleMenu()} className="menu-content__menu-icon">

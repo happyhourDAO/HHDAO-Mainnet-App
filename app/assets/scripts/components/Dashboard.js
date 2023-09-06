@@ -31,7 +31,7 @@ function Dashboard(props) {
   const settingsModalRef = useRef()
 
   useEffect(() => {
-    let handler = (e) => {
+    let handler = e => {
       if (settingsModalRef.current) {
         if (!settingsModalRef.current.contains(e.target)) {
           toggleSettings()
@@ -51,7 +51,7 @@ function Dashboard(props) {
   const { address, connector, status } = useAccount({
     onConnect({ address }) {
       null
-    },
+    }
   })
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function Dashboard(props) {
     watch: true,
     onSettled(data, error) {
       appDispatch({ type: "setAmountHOUR", value: data.formatted })
-    },
+    }
   })
 
   const balanceDRNK = useBalance({
@@ -75,7 +75,7 @@ function Dashboard(props) {
     watch: true,
     onSettled(data, error) {
       appDispatch({ type: "setAmountDRNK", value: data.formatted })
-    },
+    }
   })
 
   // RETRIEVE CONTRACT DATA VIA WAGMI
@@ -83,7 +83,7 @@ function Dashboard(props) {
   const HOURcontract = getContract({
     address: appState.HOURnetwork.contractAddress,
     abi: appState.HOURnetwork.abi,
-    publicClient: props.provider,
+    publicClient: props.provider
   })
 
   useEffect(() => {
@@ -98,24 +98,28 @@ function Dashboard(props) {
       {
         address: appState.HOURnetwork.contractObject?.address,
         abi: appState.HOURnetwork.contractObject?.abi,
-        functionName: "totalPDE",
+        functionName: "totalPDE"
       },
       {
         address: appState.HOURnetwork.contractObject?.address,
         abi: appState.HOURnetwork.contractObject?.abi,
-        functionName: "getNumberOfCurrentDrinkers",
+        functionName: "getNumberOfCurrentDrinkers"
       },
       {
         address: appState.HOURnetwork.contractObject?.address,
         abi: appState.HOURnetwork.contractObject?.abi,
-        functionName: "totalSupply",
-      },
+        functionName: "totalSupply"
+      }
     ],
     allowFailure: true,
     watch: true,
     onSettled(data) {
-      appDispatch({ type: "setHOURnetworkStats", data: data })
-    },
+      if (data[0].status == "success" && data[1].status == "success" && data[2].status == "success") {
+        appDispatch({ type: "setHOURnetworkStats", data: data })
+      } else {
+        console.error(data)
+      }
+    }
   })
 
   // VERIFY PDE OWNERSHIP & INDEX ARRAY
@@ -124,7 +128,7 @@ function Dashboard(props) {
     let array = []
 
     for (let i = 0; i < appState.HOURnetwork.totalPDE; i++) {
-      await appState.HOURnetwork.contractObject?.read.PDEtoOwner([i]).then((res) => {
+      await appState.HOURnetwork.contractObject?.read.PDEtoOwner([i]).then(res => {
         if (res == appState.account.address) {
           array.push(i)
         }
@@ -137,7 +141,7 @@ function Dashboard(props) {
   useEffect(() => {
     if (appState.account.address) {
       verifyPDEownership()
-        .then((res) => {
+        .then(res => {
           if (!res.length) {
             null
           } else {
@@ -162,7 +166,7 @@ function Dashboard(props) {
         let retrieved_accessCode = null
         let retrieved_PDEid = null
 
-        await appState.HOURnetwork.contractObject?.read.pdes([index]).then((res) => {
+        await appState.HOURnetwork.contractObject?.read.pdes([index]).then(res => {
           retrieved_name = res[0]
           retrieved_location = res[1]
           retrieved_address = res[2]
@@ -175,7 +179,7 @@ function Dashboard(props) {
           PDElocation: retrieved_location,
           PDEaddress: retrieved_address,
           PDEaccessCode: retrieved_accessCode,
-          PDEid: retrieved_PDEid,
+          PDEid: retrieved_PDEid
         }
       })
 
@@ -190,26 +194,32 @@ function Dashboard(props) {
   async function retrieve_historical_PDE_commission(PDE_i) {
     let historical_HOUR_commission_earned = 0
 
-    let array = await appState.ethers.contractHOUR.queryFilter("endHOURresults", undefined, undefined).then().catch(console.error)
+    let array = await props.provider.getLogs({
+      address: appState.HOURnetwork.contractAddress,
+      // endHOURresults event
+      event: appState.HOURnetwork.abi[5],
+      fromBlock: 16783136n,
+      toBlock: "latest"
+    })
 
     let filteredArray = await array.filter(function (eventObject) {
-      let PDEindex = eventObject.args[3].toNumber()
+      let PDEindex = Number(eventObject.args.PDEindex)
 
       return PDEindex == PDE_i
     })
 
     let mappedArray = await filteredArray.map(function (filteredArrayObject) {
-      historical_HOUR_commission_earned += filteredArrayObject.args[2] / 10 ** 18
+      historical_HOUR_commission_earned += Number(filteredArrayObject.args.PDEcommissionEarned / 10n ** 18n)
 
       return {
-        blockNumber: filteredArrayObject.blockNumber,
-        HOURcommissionEarned: filteredArrayObject.args[2] / 10 ** 18,
+        blockNumber: Number(filteredArrayObject.blockNumber),
+        HOURcommissionEarned: Number(filteredArrayObject.args.PDEcommissionEarned / 10n ** 18n)
       }
     })
 
     return {
       a: mappedArray,
-      b: historical_HOUR_commission_earned,
+      b: historical_HOUR_commission_earned
     }
   }
 
@@ -221,7 +231,7 @@ function Dashboard(props) {
         let index_historical_commission
 
         await retrieve_historical_PDE_commission(i)
-          .then((res) => (index_historical_commission = res))
+          .then(res => (index_historical_commission = res))
           .catch(console.error)
 
         return index_historical_commission
@@ -236,14 +246,14 @@ function Dashboard(props) {
   useEffect(() => {
     if (appState.account.isPDEowner == true) {
       PDEdetails_mapping()
-        .then((res) => {
+        .then(res => {
           console.log("PDEownership.structArray", res)
           appDispatch({ type: "set_PDEownership_structArray", data: res })
         })
         .catch(console.error)
 
       retrieve_historical_PDE_commission_array()
-        .then((res) => {
+        .then(res => {
           console.log("PDEownership.commissionArray", res)
           appDispatch({ type: "set_PDEownership_commissionArray", data: res })
         })

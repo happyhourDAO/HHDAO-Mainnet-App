@@ -1,8 +1,8 @@
-import React, { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useEffect, useContext } from "react"
+import DispatchContext from "../DispatchContext"
 
 function MobileMenu(props) {
-  const navigate = useNavigate()
+  const appDispatch = useContext(DispatchContext)
 
   useEffect(() => {
     document.addEventListener("keyup", KeyPressHandler)
@@ -16,22 +16,22 @@ function MobileMenu(props) {
   }
 
   function goHome() {
-    navigate("/")
+    appDispatch({ type: "setOnHero" })
     props.toggleMenu()
   }
 
   function goApp() {
-    navigate("/dashboard")
+    appDispatch({ type: "setOnDashboard" })
     props.toggleMenu()
   }
 
   function goSource() {
-    navigate("/source")
+    appDispatch({ type: "setOnSource" })
     props.toggleMenu()
   }
 
   function goAbout() {
-    navigate("/about")
+    appDispatch({ type: "setOnAbout" })
     props.toggleMenu()
   }
 

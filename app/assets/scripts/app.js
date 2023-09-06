@@ -39,7 +39,7 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: w3mConnectors({ projectId, chains }),
-  publicClient,
+  publicClient
 })
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
@@ -47,7 +47,7 @@ function Main() {
   const initialState = {
     onPage: {
       title: "Fallback",
-      component: <Fallback />,
+      component: <Fallback />
     },
     functionIndex: 2,
     isMobileMenuOpen: false,
@@ -57,12 +57,12 @@ function Main() {
       amountDRNK: null,
       currentDrinkingID: 0,
       drinkingID_to_PDEid: 0,
-      isPDEowner: false,
+      isPDEowner: false
     },
     PDEownership: {
       indexArray: [],
       structArray: [],
-      commissionArray: [],
+      commissionArray: []
     },
     HOURnetwork: {
       abi: HOURabi,
@@ -75,16 +75,16 @@ function Main() {
       HOURperhour: 100,
       HappyHourFee: 1 / 100,
       PDEcommission: 10 / 100,
-      HOUR2DRNKratio: 1 / 10,
+      HOUR2DRNKratio: 1 / 10
     },
     DRNKnetwork: {
-      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0",
+      contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0"
     },
     ethers: {
       provider: null,
       signer: null,
-      contractHOUR: null,
-    },
+      contractHOUR: null
+    }
   }
 
   function ourReducer(draft, action) {
@@ -216,7 +216,7 @@ function Main() {
           "--w3m-accent-color": "#2bf2cd",
           "--w3m-background-color": "#2bf2cd",
           "--w3m-accent-fill-color": "#131a2a",
-          "--w3m-logo-image-url": "https://i.imgur.com/AzTQZkz.png",
+          "--w3m-logo-image-url": "https://i.imgur.com/AzTQZkz.png"
         }}
         projectId={projectId}
         ethereumClient={ethereumClient}

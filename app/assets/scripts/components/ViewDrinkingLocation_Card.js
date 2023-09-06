@@ -15,31 +15,43 @@ function ViewDrinkingLocation_Card(props) {
   // querying previous events for current Drinking location status
 
   async function queryDrinkingLocation(toQuery_PDEid) {
-    let queryArray = await appState.ethers.contractHOUR.queryFilter("newPDEonboarded", undefined, undefined).then().catch(console.error)
+    let queryArray = await props.provider.getLogs({
+      address: appState.HOURnetwork.contractAddress,
+      // newPDEonboarded event
+      event: appState.HOURnetwork.abi[7],
+      fromBlock: 16783136n,
+      toBlock: "latest"
+    })
 
     let filteredArray = await queryArray.filter(eventObject => {
-      let eventObject_PDEid = eventObject.args[3].toString()
+      let eventObject_PDEid = eventObject.args._PDEid.toString()
 
       return eventObject_PDEid == toQuery_PDEid
     })
 
     if (filteredArray) {
-      setPDEname(filteredArray[0].args[0])
-      setPDElocation(filteredArray[0].args[1])
+      setPDEname(filteredArray[0].args._name)
+      setPDElocation(filteredArray[0].args._location)
     }
   }
 
   async function queryLITTstart(toQuery_DrinkingID) {
-    let queryArray = await appState.ethers.contractHOUR.queryFilter("createdDrinkingID").then().catch(console.error)
+    let queryArray = await props.provider.getLogs({
+      address: appState.HOURnetwork.contractAddress,
+      // createdDrinkingID event
+      event: appState.HOURnetwork.abi[4],
+      fromBlock: 16783136n,
+      toBlock: "latest"
+    })
 
     let filteredArray = await queryArray.filter(eventObject => {
-      let eventObject_DrinkingID = eventObject.args[1].toString()
+      let eventObject_DrinkingID = eventObject.args.id.toString()
 
       return eventObject_DrinkingID == toQuery_DrinkingID
     })
 
     if (filteredArray) {
-      setLITTstart(filteredArray[0].blockNumber)
+      setLITTstart(Number(filteredArray[0].blockNumber))
       timeBetweenBlocks(filteredArray[0].blockNumber)
     }
   }
