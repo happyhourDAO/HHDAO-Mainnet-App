@@ -19,9 +19,6 @@ const About = React.lazy(() => import("./components/About"))
 const Dashboard = React.lazy(() => import("./components/Dashboard"))
 import Fallback from "./components/Fallback"
 
-// IMPORTING ETHERSJS MODULES
-import { providers, Contract } from "ethers"
-
 // IMPORTING OF HOURv3 & DRNKv3 CONTRACT ABI
 const HOURabi = require("./contracts/HOURv3.json")
 
@@ -32,8 +29,8 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { mainnet, goerli } from "wagmi/chains"
 import { formatEther } from "viem"
 
-const chains = [mainnet, goerli]
-const projectId = process.env.WALLETCONNECT_PROJECT_ID
+const chains = [mainnet]
+const projectId = "b611d14b3c75661ee3a2d0bd6fa02451"
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
@@ -79,11 +76,6 @@ function Main() {
     },
     DRNKnetwork: {
       contractAddress: "0xFB3fF47Ab7b5D4fc6fc39aEEE6ce84d0c1062dd0"
-    },
-    ethers: {
-      provider: null,
-      signer: null,
-      contractHOUR: null
     }
   }
 
@@ -136,12 +128,6 @@ function Main() {
         draft.HOURnetwork.totalCurrentDrinkers = action.data[1].result.toString()
         draft.HOURnetwork.totalSupply = formatEther(action.data[2].result)
         return
-      case "setEthersProvider":
-        draft.ethers.provider = new providers.InfuraProvider(1, process.env.INFURA_PROVIDER_API_KEY)
-        return
-      case "setEthersContractHOUR":
-        draft.ethers.contractHOUR = new Contract(draft.HOURnetwork.contractAddress, HOURabi, draft.ethers.provider)
-        return
       case "setOnHero":
         draft.onPage.title = "Hero"
         draft.onPage.component = <Hero />
@@ -166,11 +152,6 @@ function Main() {
   }
 
   const [state, dispatch] = useImmerReducer(ourReducer, initialState)
-
-  useEffect(() => {
-    dispatch({ type: "setEthersProvider" })
-    dispatch({ type: "setEthersContractHOUR" })
-  }, [])
 
   useEffect(() => {
     let persistedPage = sessionStorage.getItem("shouldPersistPage")

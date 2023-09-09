@@ -1,5 +1,4 @@
 const currentTask = process.env.npm_lifecycle_event
-const Dotenv = require("dotenv-webpack")
 const path = require("path")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
@@ -39,7 +38,7 @@ let cssConfig = {
 
 let config = {
   entry: "./app/assets/scripts/app.js",
-  plugins: [new Dotenv(), new HtmlWebpackPlugin({ filename: "index.html", template: "./app/index.html" })],
+  plugins: [new HtmlWebpackPlugin({ filename: "index.html", template: "./app/index.html" })],
   module: {
     rules: [
       cssConfig,
