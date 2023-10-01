@@ -1,5 +1,5 @@
 import React, { useRef, useState, useContext } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { FaBars, FaTimes } from "react-icons/fa"
 import { IconContext } from "react-icons"
 import DispatchContext from "../DispatchContext"
@@ -10,6 +10,8 @@ import { Web3Button } from "@web3modal/react"
 import { mainnet } from "wagmi/chains"
 
 function Header() {
+  let navigate = useNavigate()
+
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
@@ -58,7 +60,7 @@ function Header() {
             <span id="Hero" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Hero" ? " header-nav__links--active" : "")}>
               Home
             </span>
-            <span id="Dashboard" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Dashboard" ? " header-nav__links--active" : "")}>
+            <span id="Dashboard" onClick={e => navigate("/dashboard")} className={"header-nav__links" + (appState.onPage.title == "Dashboard" ? " header-nav__links--active" : "")}>
               App
             </span>
             <span id="Source" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Source" ? " header-nav__links--active" : "")}>

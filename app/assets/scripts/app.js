@@ -185,6 +185,7 @@ function Main() {
               <Suspense fallback={<Fallback />}>
                 <Routes>
                   <Route path="/" element={state.onPage.component} />
+                  <Route path="/dashboard" element={<Dashboard provider={wagmiConfig.publicClient} />} />
                 </Routes>
               </Suspense>
             </BrowserRouter>
