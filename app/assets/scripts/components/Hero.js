@@ -10,10 +10,10 @@ function Hero() {
   return (
     <IconContext.Provider value={{ size: "1.2em" }}>
       <Hero_Component_1 />
-      <Hero_Component_2 />
+      {/* <Hero_Component_2 />
       <Hero_Component_3 />
       <Hero_Component_5 />
-      <Hero_Component_Last />
+      <Hero_Component_Last /> */}
     </IconContext.Provider>
   )
 }
