@@ -43,8 +43,7 @@ const ethereumClient = new EthereumClient(wagmiConfig, chains)
 function Main() {
   const initialState = {
     onPage: {
-      title: "Fallback",
-      component: <Fallback />
+      title: "Fallback"
     },
     functionIndex: 2,
     isMobileMenuOpen: false,
@@ -130,22 +129,18 @@ function Main() {
         return
       case "setOnHero":
         draft.onPage.title = "Hero"
-        draft.onPage.component = <Hero />
         sessionStorage.removeItem("shouldPersistPage")
         return
       case "setOnDashboard":
         draft.onPage.title = "Dashboard"
-        // draft.onPage.component = <Dashboard provider={wagmiConfig.publicClient} />
         sessionStorage.setItem("shouldPersistPage", "Dashboard")
         return
       case "setOnSource":
         draft.onPage.title = "Source"
-        draft.onPage.component = <Source />
         sessionStorage.setItem("shouldPersistPage", "Source")
         return
       case "setOnAbout":
         draft.onPage.title = "About"
-        draft.onPage.component = <About />
         sessionStorage.setItem("shouldPersistPage", "About")
         return
     }
@@ -184,8 +179,7 @@ function Main() {
               <Header />
               <Suspense fallback={<Fallback />}>
                 <Routes>
-                  <Route path="/" element={state.onPage.component} />
-                  <Route path="/dashboard" element={<Dashboard provider={wagmiConfig.publicClient} />} />
+                  <Route path="/" element={state.onPage.title == "About" ? <About /> : state.onPage.title == "Source" ? <Source /> : state.onPage.title == "Dashboard" ? <Dashboard provider={wagmiConfig.publicClient} /> : state.onPage.title == "Hero" ? <Hero /> : <Fallback />} />
                 </Routes>
               </Suspense>
             </BrowserRouter>
