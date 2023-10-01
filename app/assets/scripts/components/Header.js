@@ -60,7 +60,7 @@ function Header() {
             <span id="Hero" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Hero" ? " header-nav__links--active" : "")}>
               Home
             </span>
-            <span id="Dashboard" onClick={e => navigate("/dashboard")} className={"header-nav__links" + (appState.onPage.title == "Dashboard" ? " header-nav__links--active" : "")}>
+            <span id="Dashboard" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Dashboard" ? " header-nav__links--active" : "")}>
               App
             </span>
             <span id="Source" onClick={e => handlePageSelection(e)} className={"header-nav__links" + (appState.onPage.title == "Source" ? " header-nav__links--active" : "")}>

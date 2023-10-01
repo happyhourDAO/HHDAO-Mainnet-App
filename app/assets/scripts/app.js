@@ -135,7 +135,7 @@ function Main() {
         return
       case "setOnDashboard":
         draft.onPage.title = "Dashboard"
-        draft.onPage.component = <Dashboard provider={wagmiConfig.publicClient} />
+        // draft.onPage.component = <Dashboard provider={wagmiConfig.publicClient} />
         sessionStorage.setItem("shouldPersistPage", "Dashboard")
         return
       case "setOnSource":
