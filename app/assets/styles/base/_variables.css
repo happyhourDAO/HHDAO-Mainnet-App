@@ -4,3 +4,7 @@ $label: "Russo One", sans-serif;
 $data: "Michroma", sans-serif;
 $smooch: "Smooch", cursive;
 $grafitti: "Sedgwick Ave", cursive;
+
+.main-color {
+  color: #2bf2cd;
+}
