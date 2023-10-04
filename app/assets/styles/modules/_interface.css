@@ -11,6 +11,11 @@
     flex-direction: column;
     padding: 10px;
     position: relative;
+    order: 2;
+
+    @mixin atSmall {
+      order: initial;
+    }
   }
 
   &__bottom {
@@ -187,7 +192,11 @@
   font-size: 0.5rem;
   font-family: $data;
   color: rgb(175, 175, 175);
-  transform: translateX(7px) translateY(-27px);
+  transform: translateX(7px) translateY(-391px);
+
+  @mixin atSmall {
+    transform: translateX(7px) translateY(-27px);
+  }
 
   &__circle {
     width: 10px;

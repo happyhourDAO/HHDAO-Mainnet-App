@@ -22,11 +22,15 @@
     width: 345px;
     height: 270px;
     background-color: #d9d9d98f;
-    transform: translateX(70px) translateY(-280px);
+    transform: translateX(0px) translateY(-277px);
     border-radius: 21px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @mixin atMedium {
+      transform: translateX(70px) translateY(-280px);
+    }
   }
 }
 
