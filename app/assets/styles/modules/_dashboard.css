@@ -2,7 +2,7 @@
   width: 100vw;
   height: 570px;
   display: flex;
-  transform: translateY(5vh);
+  margin-top: 104px;
 
   &__left-module {
     width: 100%;
@@ -47,6 +47,7 @@
 
   @mixin atLarge {
     width: 700px;
+    margin-top: 0px;
     transform: translateX(5vw) translateY(5vh);
   }
 }
