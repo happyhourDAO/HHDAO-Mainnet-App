@@ -33,7 +33,9 @@ function About() {
         <div className="hero-component-1">
           <div style={{ marginRight: "17px" }} className="hero-component-1__left-block">
             <span className="left-block__title">Who We Are</span>
-            <span className="left-block__subtitle">Just a bunch of anon degens 👋 that have identified a gap between the essence of good times and web3.</span>
+            <span style={{ textAlign: "justify", color: "lightslategray", fontSize: ".9rem" }} className="left-block__subtitle">
+              👋Just a bunch of anon degens that have identified a opportunistic gap between the essence of good times and web3.
+            </span>
             <span style={{ color: "white", fontSize: "1.2rem" }} className="left-block__subtitle">
               We're just here for good times. 🍹
             </span>

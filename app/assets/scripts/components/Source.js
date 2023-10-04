@@ -31,7 +31,7 @@ function Source() {
         <div className="hero-component-1">
           <div style={{ marginRight: "17px" }} className="hero-component-1__left-block">
             <span className="left-block__title">Open-Sourced</span>
-            <span className="left-block__subtitle">
+            <span style={{ textAlign: "justify", color: "lightslategray", fontSize: ".9rem" }} className="left-block__subtitle">
               The Happy Hour Protocol Engine consists of 2 smart contracts 📖, including{" "}
               <a href={"https://etherscan.io/address/0x3807dab03e8519f0f4f4c37568e27a71b138d47b"} target="_blank" className="code code__source-link">
                 ./HappyHourProtocolv3

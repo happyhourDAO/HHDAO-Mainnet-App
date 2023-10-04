@@ -1,7 +1,7 @@
 .hero {
   &__title {
     font-family: $data;
-    font-size: 1rem;
+    font-size: 1.5rem;
 
     @mixin atSmall {
       font-size: 2rem;
@@ -24,8 +24,12 @@
     text-align: center;
 
     @mixin atMedium {
-      font-size: 2rem;
+      font-size: 3.5vw;
+    }
+
+    @mixin atLarge {
       text-align: left;
+      font-size: 2rem;
     }
   }
 
@@ -37,14 +41,28 @@
     display: flex;
     width: 70%;
 
+    @mixin atMedium {
+      width: 90%;
+    }
+
+    @mixin atLarge {
+      width: 70%;
+    }
+
     &__left-block {
       flex: 1;
       display: flex;
       justify-content: center;
 
       @mixin atMedium {
+        flex: 1;
+        font-size: 2vw;
+      }
+
+      @mixin atLarge {
         flex: 0.8;
         justify-content: flex-start;
+        font-size: 1rem;
       }
     }
 

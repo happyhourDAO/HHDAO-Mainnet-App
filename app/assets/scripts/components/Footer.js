@@ -6,7 +6,7 @@ function Footer() {
   return (
     <>
       <footer>
-        <div>happyhourDAO.v3.</div>
+        <div>happyhourDAO.v4.</div>
         <IconContext.Provider value={{ size: "1.2em" }}>
           <div className="social-media-icons">
             <a href="https://twitter.com/happyhourDAO" target="_blank">
