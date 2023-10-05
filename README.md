@@ -3,7 +3,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![Twitter Follow](https://img.shields.io/twitter/follow/happyhourDAO?style=social)](https://twitter.com/happyhourDAO)
 
-A community owned _Drink-To-Earn_\*\* decentralized network for web3
+A community owned **_Drink-To-Earn_** decentralized network for web3
 
 > Because every web2 bar needs itself a web3 bar
 
@@ -138,6 +138,14 @@ The solidity source code for onboarding a PDE functionality can be found [here](
 
 - [WalletConnect's web3modal](https://docs.walletconnect.com/web3modal/react/about)
 - [wagmi/viem](https://wagmi.sh/)
+
+### Contributing
+
+Anyone, anywhere can contribute to this project. It's all open-source.
+
+For direct investment into the happyhourDAO VC arm, please continue to wait as we build out its structure & terms.
+
+For monetary contributions to the team working diligently behind the scenes to sustain this community and ecosystem, you can directly send ETH or other crypto to the ENS address: **happyhourLabs.eth**
 
 ### Follow us
 
