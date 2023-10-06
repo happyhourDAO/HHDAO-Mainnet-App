@@ -12,7 +12,9 @@ function Hero_5() {
             </div>
             <div className="interior-container__text__description">We envision the novel Drink-To-Earn model as an infinite positive feedback loop. As drinkers earn $HOUR by the hour, drinking establishments can earn a commission of the $HOUR earned by drinkers. Freshly earned $HOUR tokens can then be used at other participating drinking establishments in purchasing deeply discounted cocktails or to be burned to earn the happyhourDAO’s governance token, $DRNK.</div>
           </div>
-          <div className="interior-container__image"></div>
+          <div className="interior-container__image">
+            <img src="./assets/images/glass.png" alt="glass" />
+          </div>
         </div>
       </div>
     </>
