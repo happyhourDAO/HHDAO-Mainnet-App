@@ -45,6 +45,9 @@ function Hero_Component_1() {
                 </div>
               </div>
               <button onClick={handleClick}>Go To Dashboard</button>
+              <a style={{ color: "lightgray", marginTop: "10px" }} href="https://drive.google.com/file/d/1u68BTH5Hx1sXBIglYcRtpedAYcFtnXgX/view?usp=sharing" target="_blank">
+                View Whitepaper
+              </a>
             </div>
             <div className="hero-component-1__right-block">
               <img src="./assets/images/Logo-Icon-Animated.gif" alt="Animated Icon" />

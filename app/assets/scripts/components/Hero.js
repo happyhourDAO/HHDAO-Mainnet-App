@@ -8,10 +8,6 @@ import Hero_5 from "./Hero_5"
 import Hero_6 from "./Hero_6"
 import Hero_7 from "./Hero_7"
 import Hero_8 from "./Hero_8"
-import Hero_Component_2 from "./Hero_Component_2"
-import Hero_Component_3 from "./Hero_Component_3"
-import Hero_Component_5 from "./Hero_Component_5"
-import Hero_Component_Last from "./Hero_Component_Last"
 
 function Hero() {
   return (
@@ -24,10 +20,6 @@ function Hero() {
       <Hero_6 />
       <Hero_7 />
       <Hero_8 />
-      {/* <Hero_Component_2 />
-      <Hero_Component_3 />
-      <Hero_Component_5 />
-      <Hero_Component_Last /> */}
     </IconContext.Provider>
   )
 }
