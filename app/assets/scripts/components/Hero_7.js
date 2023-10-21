@@ -12,7 +12,9 @@ function Hero_7() {
             </div>
             <div className="interior-container__text__description">The $DRNK governance token is the official membership token of the happyhourDAO VC venture. An open, organic DAO community for web3 natives interested in raising strategic investments/funding for their local F&B merchants. Giving millennials and web3 natives more of a say in what they want to see in the F&B scene.</div>
           </div>
-          <div className="interior-container__image"></div>
+          <div className="interior-container__image">
+            <img src="./assets/images/Metaverse.png" alt="metaverse" />
+          </div>
         </div>
       </div>
     </>

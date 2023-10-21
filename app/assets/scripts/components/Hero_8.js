@@ -5,7 +5,9 @@ function Hero_8() {
     <>
       <div style={{ backgroundColor: "#030321" }} className="container-alt">
         <div className="interior-container">
-          <div className="interior-container__image"></div>
+          <div className="interior-container__image">
+            <img src="./assets/images/follower-new.png" alt="follower" />
+          </div>
           <div className="interior-container__text">
             <div className="interior-container__text__label">The Progress</div>
             <div className="interior-container__text__title">

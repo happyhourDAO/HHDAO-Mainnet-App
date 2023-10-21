@@ -5,7 +5,9 @@ function Hero_2() {
     <>
       <div style={{ backgroundColor: "#05052C" }} className="container-alt">
         <div className="interior-container">
-          <div className="interior-container__image"></div>
+          <div className="interior-container__image">
+            <img src="./assets/images/Ravaged-Bar.png" alt="ravaged-bar" />
+          </div>
           <div className="interior-container__text">
             <div className="interior-container__text__label">The Problem</div>
             <div className="interior-container__text__title">

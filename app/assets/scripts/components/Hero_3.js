@@ -17,7 +17,9 @@ function Hero_3() {
               <br /> The new modern happy hour goers need the incentive to hit the bars again…
             </div>
           </div>
-          <div className="interior-container__image"></div>
+          <div className="interior-container__image">
+            <img src="./assets/images/fusion-new.png" alt="fusion" />
+          </div>
         </div>
       </div>
     </>
