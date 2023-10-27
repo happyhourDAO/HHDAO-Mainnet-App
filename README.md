@@ -11,6 +11,8 @@ The happyhourDAO aims to provide an open, web3 community connecting the post-pan
 
 ### Purpose
 
+> Check out the official whitepaper [here](https://drive.google.com/file/d/1u68BTH5Hx1sXBIglYcRtpedAYcFtnXgX/view?usp=sharing)
+
 The global F&B industry has traditionally been a fragmented market for obvious purposes. Brick and mortar bars, clubs, and restaurants only serve their local markets. But what if these same businesses can conduct transactions with other customers not served in their local markets? Could there be an incentive system devised so that the same local F&B merchants can sell their specialty tastes as a white label to other F&B merchants located across the globe from them? Could there be a payment network allowing drifters and travelers to still be able to buy a drink at spot in a foreign country without having to exchange for the local fiat currency? Could there be a method to get on a premier whitelist for a new club opening party just by depositing a certain amount of tokens to an address instantly? Could there be a way for you and your friends to reserve your favorite table at the city's hottest rooftop lounge without the uncertainty of a no show for the lounge?
 
 The architecture of the $HOUR token was designed and engineered to fill those needs posed above in a seamless, efficient, web3 manner. Whether it be used for loyalty tokens, membership tokens, reservations, payments, bottle deposits, or etc., $HOUR is represented to allow all F&B merchants to speak the same language, regardless of geographic region/culture.
@@ -58,6 +60,10 @@ const { data, isLoading, isSuccess, writeAsync } = useContractWrite(config)
 The solidity source code for the Start LITT functionality can be found [here](https://github.com/happyhourDAO/Happy-Hour-Protocol-Engine/blob/8a96f5d4b9df604c18af6c6f935a1ef9b49bfb98/contracts/HOURv3.sol#L135)
 
 ## Ending a LITT session
+
+##### Demo
+
+- [Demo video of ending a LITT session](https://twitter.com/happyhourDAO/status/1711282891404046502)
 
 A LITT session is only valid for 8 hours in order to earn the standard $HOUR per hour rate of 100 $HOUR. If a Drinker ends their LITT session before 8 hours, they will receive the normal rate. If a Drinker leaves their session open for more than 8 hours, they will be “penalized” by only earning a flat amount of 100 $HOUR. Again, the network needs a penalty system in place to prevent Drinkers from gaming the system and earning unfair amount of $HOUR. A Drinker can only ever open one LITT session at a time. If for example, a Drinker wants to leave PDE A and bar hop to PDE B, the Drinker will need to end their LITT session at PDE A first in order to start a new LITT session at PDE B. This is logical and also fair play for the PDE. A Drinker shouldn’t be earning commission for PDE A if they are having a ball at PDE B.
 
@@ -111,6 +117,10 @@ const { data, isLoading, isSuccess, writeAsync } = useContractWrite(config)
 The solidity source code for the minting $DRNK functionality can be found [here](https://github.com/happyhourDAO/Happy-Hour-Protocol-Engine/blob/8a96f5d4b9df604c18af6c6f935a1ef9b49bfb98/contracts/HOURv3.sol#L80)
 
 ## Onboarding PDE
+
+##### Demo
+
+- [Demo video of onboarding a PDE](https://twitter.com/ARTSNL/status/1717743872032301406)
 
 Participating Drinking Establishments (PDE): These are the F&B merchants and businesses hosting drinkers. The local bar, the city’s premier club, the skyline lounge, the speakeasy, the hotel restaurant, and etc. All these F&B merchants would be considered a PDE in the happyhourDAO ecosystem.
 
