@@ -149,6 +149,10 @@ The solidity source code for onboarding a PDE functionality can be found [here](
 - [WalletConnect's web3modal](https://docs.walletconnect.com/web3modal/react/about)
 - [wagmi/viem](https://wagmi.sh/)
 
+### Design
+
+- For the original custom design drafts on Figma, check it out [here](https://www.figma.com/file/1sIlMleje1sR9PIZmpVlda/happyhourDAO?type=design&node-id=0%3A1&mode=design&t=0wG70wLeVPzzb99o-1).
+
 ### Contributing
 
 Anyone, anywhere can contribute to this project. It's all open-source.
